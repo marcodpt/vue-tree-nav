@@ -84,26 +84,23 @@
     display: table-cell;
     vertical-align: middle;
     padding: 0 15px;
-    height:100%;
-
+    margin: 0;
   }
 
   .tree_nav_bar a {
     color: #4a4a4a;
     text-decoration:none;
     padding: 0 10px;
-    height:100%;
   }
   .tree_nav_bar a:hover, .tree_nav_bar a:focus {
-    background-color: #616161;
-    color: #fff;
+    color: #42b983;
     cursor: pointer;
     text-decoration:none;
   }
 
   .tree_nav_sidebar {
     height: 100%;
-    width: 300px;
+    min-width: 300px;
     top: 0;
     left: 0;
     background-color: #eee;

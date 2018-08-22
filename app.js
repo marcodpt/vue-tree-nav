@@ -21197,7 +21197,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   }
 })()}
 },{"../node_modules/vue/dist/vue.js":6,"./index.vue":12,"./routes.js":13,"vue":7,"vue-hot-reload-api":3,"vue-router":5}],10:[function(require,module,exports){
-var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".tree_nav_bar {\n  display: table; \n  background-color:#eee;\n  position: relative;\n  width: 100%;\n  color: #4a4a4a;\n  margin: 0 0 20px 0;\n}\n\n.tree_nav_subbar {\n  display: table-cell;\n  vertical-align: middle;\n  padding: 0 15px;\n  height:100%;\n\n}\n\n.tree_nav_bar a {\n  color: #4a4a4a;\n  text-decoration:none;\n  padding: 0 10px;\n  height:100%;\n}\n.tree_nav_bar a:hover, .tree_nav_bar a:focus {\n  background-color: #616161;\n  color: #fff;\n  cursor: pointer;\n  text-decoration:none;\n}\n\n.tree_nav_sidebar {\n  height: 100%;\n  width: 300px;\n  top: 0;\n  left: 0;\n  background-color: #eee;\n  position:absolute;\n}")
+var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".tree_nav_bar {\n  display: table; \n  background-color:#eee;\n  position: relative;\n  width: 100%;\n  color: #4a4a4a;\n  margin: 0 0 20px 0;\n}\n\n.tree_nav_subbar {\n  display: table-cell;\n  vertical-align: middle;\n  padding: 0 15px;\n  margin: 0;\n}\n\n.tree_nav_bar a {\n  color: #4a4a4a;\n  text-decoration:none;\n  padding: 0 10px;\n}\n.tree_nav_bar a:hover, .tree_nav_bar a:focus {\n  color: #42b983;\n  cursor: pointer;\n  text-decoration:none;\n}\n\n.tree_nav_sidebar {\n  height: 100%;\n  min-width: 300px;\n  top: 0;\n  left: 0;\n  background-color: #eee;\n  position:absolute;\n}")
 ;(function(){
 'use strict';
 
