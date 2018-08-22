@@ -21176,23 +21176,11 @@ var router = new _vueRouter2.default({
 
 new _vue2.default({
   router: router,
-  components: {
-    'bar': _index2.default
-  },
   data: {
-    bar: {
-      routes: _routes2.default,
-      label: 'Vue Tree Nav',
-      sublabel: 'marcodpt',
-      icon: 'user',
-      actions: [{
-        icon: "power-off",
-        label: "github",
-        onClick: function onClick() {
-          window.location.href = "https://github.com/marcodpt/vue-tree-nav";
-        }
-      }]
-    }
+    routes: _routes2.default
+  },
+  components: {
+    'vue-tree-nav': _index2.default
   }
 }).$mount('#app');
 })()
@@ -21209,7 +21197,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   }
 })()}
 },{"../node_modules/vue/dist/vue.js":6,"./index.vue":12,"./routes.js":13,"vue":7,"vue-hot-reload-api":3,"vue-router":5}],10:[function(require,module,exports){
-var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".bar {\n  display: table; \n  background-color:#f8f8f8;\n  position: relative;\n  width: 100%;\n  margin-bottom: 20px;\n  color: #777;\n}\n\n.subbar {\n  display: table-cell;\n  vertical-align: middle;\n  padding: 5px 15px;\n}\n\n.bar a {\n  color: #777;\n}\n.bar a:hover, .bar a:focus {\n  color: #333;\n  text-decoration:none;\n}\n\n.sidebar {\n  height: 100%;\n  width: 300px;\n  top: 0;\n  left: 0;\n  background-color:#f8f8f8;\n}")
+var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".tree_nav_bar {\n  display: table; \n  background-color:#eee;\n  position: relative;\n  width: 100%;\n  color: #4a4a4a;\n  margin: 0 0 20px 0;\n}\n\n.tree_nav_subbar {\n  display: table-cell;\n  vertical-align: middle;\n  padding: 0 15px;\n  height:100%;\n\n}\n\n.tree_nav_bar a {\n  color: #4a4a4a;\n  text-decoration:none;\n  padding: 10px;\n  height:100%;\n}\n.tree_nav_bar a:hover, .tree_nav_bar a:focus {\n  background-color: #616161;\n  color: #fff;\n  cursor: pointer;\n  text-decoration:none;\n}\n\n.tree_nav_sidebar {\n  height: 100%;\n  width: 300px;\n  top: 0;\n  left: 0;\n  background-color: #eee;\n  position:absolute;\n}")
 ;(function(){
 'use strict';
 
@@ -21224,6 +21212,7 @@ var _vueOverBody2 = _interopRequireDefault(_vueOverBody);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 module.exports = {
+  name: 'vue-tree-nav',
   components: {
     'tree': _tree2.default,
     'vue-over-body': _vueOverBody2.default
@@ -21234,24 +21223,6 @@ module.exports = {
       default: function _default() {
         return [];
       }
-    },
-    change: {
-      type: Number,
-      default: 0
-    },
-    actions: {
-      type: Array,
-      default: function _default() {
-        return [];
-      }
-    },
-    label: {
-      type: String,
-      default: ''
-    },
-    sublabel: {
-      type: String,
-      default: ''
     }
   },
   data: function data() {
@@ -21259,12 +21230,25 @@ module.exports = {
       sideBar: 0
     };
   },
+  mounted: function mounted() {
+    this.build();
+  },
   methods: {
     open: function open() {
       this.$data.sideBar += 1;
     },
     close: function close() {
       this.$data.sideBar = 0;
+    },
+    build: function build() {
+      console.log('route: ' + this.$route.fullPath);
+      console.log(this.$router.options.routes);
+    }
+  },
+  watch: {
+    '$route.fullPath': function $routeFullPath() {
+      this.build();
+      this.close();
     }
   }
 };
@@ -21272,8 +21256,8 @@ module.exports = {
 if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('div',{staticClass:"bar"},[_c('div',{staticClass:"subbar",staticStyle:{"text-align":"left"}},[_c('a',{staticStyle:{"font-size":"36px"},on:{"click":_vm.open}},[_vm._v("≡")])]),_vm._v(" "),_vm._m(0),_vm._v(" "),_c('div',{staticClass:"subbar",staticStyle:{"text-align":"right"}},_vm._l((_vm.actions),function(action){return _c('a',{on:{"click":action.onClick}},[_vm._v("\n        "+_vm._s(action.label)+"\n      ")])}))]),_vm._v(" "),_c('vue-over-body',{attrs:{"open":_vm.sideBar,"dialogClass":"sidebar"}},[_c('tree',{attrs:{"data":_vm.routes,"close":{click: _vm.close}}})],1)],1)}
-__vue__options__.staticRenderFns = [function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"subbar",staticStyle:{"text-align":"center"}},[_c('h4',[_vm._v("\n        Vue Tree Nav\n      ")])])}]
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('div',{staticClass:"tree_nav_bar"},[_c('div',{staticClass:"tree_nav_subbar",staticStyle:{"text-align":"left"}},[(_vm.routes.length)?_c('a',{staticStyle:{"font-size":"36px"},on:{"click":_vm.open}},[_vm._v("≡")]):_vm._e(),_vm._v(" "),_vm._t("left")],2),_vm._v(" "),_c('div',{staticClass:"tree_nav_subbar",staticStyle:{"text-align":"center"}},[_vm._t("default")],2),_vm._v(" "),_c('div',{staticClass:"tree_nav_subbar",staticStyle:{"text-align":"right"}},[_vm._t("right")],2)]),_vm._v(" "),(_vm.routes.length)?_c('vue-over-body',{attrs:{"open":_vm.sideBar,"dialogClass":"tree_nav_sidebar"}},[_c('tree',{attrs:{"close":_vm.close}}),_vm._v(" "),_vm._l((_vm.routes),function(route){return _c('tree',_vm._b({},'tree',route,false))})],2):_vm._e()],1)}
+__vue__options__.staticRenderFns = []
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
@@ -21286,20 +21270,29 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   }
 })()}
 },{"./tree.vue":11,"vue":7,"vue-hot-reload-api":3,"vue-over-body":4,"vueify/lib/insert-css":8}],11:[function(require,module,exports){
-var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".accordion {\n  background-color: #eee;\n  color: #444;\n  cursor: pointer;\n  width: 100%;\n  text-align: left;\n  border: none;\n  outline: none;\n  transition: 0.4s;\n  display:block;\n  padding: 10px;\n}\n\n.accordion:hover {\n  background-color: #ccc;\n  text-decoration: none;\n}")
+var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".tree_nav_parent {\n  color: #4a4a4a;\n}\n\n.tree_nav_child {\n  color: #2a2a2a;\n  font-size: 110%;\n}\n\n.tree_nav_link {\n  background-color: #eee;\n  cursor: pointer;\n  text-align: left;\n  border: none;\n  outline: none;\n  transition: 0.4s;\n  display:block;\n  padding: 10px;\n  text-decoration: none;\n}\n\n.tree_nav_link:hover {\n  background-color: #ccc;\n  text-decoration: none;\n}\n\n.tree_nav_active {\n  background-color: #616161;\n  color: #fff;\n}")
 ;(function(){
 'use strict';
 
 module.exports = {
   name: 'tree',
   props: {
-    data: {
+    children: {
       type: Array,
-      required: true
+      default: function _default() {
+        return [];
+      }
+    },
+    label: {
+      type: String,
+      default: ''
+    },
+    href: {
+      type: String,
+      default: ''
     },
     close: {
-      type: Object,
-      default: null
+      type: Function
     },
     step: {
       type: Number,
@@ -21314,18 +21307,17 @@ module.exports = {
       default: 'px'
     }
   },
+  data: function data() {
+    return {
+      open: false
+    };
+  },
   methods: {
-    toogle: function toogle(item) {
-      if (item.children) {
-        this.$set(item, 'open', item.open ? false : true);
-      }
-      if (typeof item.click === 'function') {
-        item.click();
-      }
+    toogle: function toogle() {
+      this.$data.open = !this.$data.open;
     },
-    style: function style(item) {
+    style: function style() {
       return {
-        'font-weight': item.children ? 'bold' : '',
         'padding-left': '' + (this.total + this.step) + this.unit
       };
     }
@@ -21335,7 +21327,7 @@ module.exports = {
 if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[(_vm.close)?_c('div',[_c('a',{staticClass:"accordion",staticStyle:{"text-align":"right","font-size":"22px"},on:{"click":function($event){_vm.toogle(_vm.close)}}},[_vm._v("×")])]):_vm._e(),_vm._v(" "),_vm._l((_vm.data),function(item){return _c('div',[_c('a',{staticClass:"accordion",style:(_vm.style(item)),on:{"click":function($event){_vm.toogle(item)}}},[_vm._v("\n      "+_vm._s(item.label)+"\n      "),(item.children)?_c('span',[_vm._v("["+_vm._s(item.open ? '-' : '+')+"]")]):_vm._e()]),_vm._v(" "),(item.children && item.open)?_c('tree',{attrs:{"data":item.children,"step":_vm.step,"total":_vm.total + _vm.step,"unit":_vm.unit}}):_vm._e()],1)})],2)}
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[(_vm.close)?_c('a',{staticClass:"tree_nav_link tree_nav_child",staticStyle:{"text-align":"right"},on:{"click":_vm.close}},[_vm._v("\n    ✖\n  ")]):_vm._e(),_vm._v(" "),(_vm.children.length)?_c('a',{staticClass:"tree_nav_link tree_nav_parent",style:(_vm.style()),on:{"click":function($event){_vm.toogle()}}},[_vm._v("\n    "+_vm._s(_vm.label)+"\n    "),_c('span',{staticStyle:{"float":"right"}},[_vm._v(_vm._s(_vm.open ? '▲' : ' ▼'))])]):(_vm.href)?_c('router-link',{staticClass:"tree_nav_link tree_nav_child",style:(_vm.style()),attrs:{"active-class":"tree_nav_active","to":_vm.href}},[_vm._v("\n    "+_vm._s(_vm.label)+"\n  ")]):_vm._e(),_vm._v(" "),_vm._l((_vm.children),function(child){return (child.label)?_c('tree',_vm._b({directives:[{name:"show",rawName:"v-show",value:(_vm.open),expression:"open"}],attrs:{"step":_vm.step,"total":_vm.total + _vm.step,"unit":_vm.unit}},'tree',child,false)):_vm._e()})],2)}
 __vue__options__.staticRenderFns = []
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
@@ -21377,31 +21369,70 @@ module.exports = [{
   label: 'Colors',
   path: '/colors',
   component: {
-    template: '<h1>Color</h1><router-view></router-view>'
+    template: '<div><h1>Color</h1><router-view></router-view></div>'
   },
   children: [{
     label: 'Blue',
     path: 'blue',
+    href: '/colors/blue',
     component: {
       template: '<h3>Blue</h3>'
     }
   }, {
     label: 'Yellow',
     path: 'yellow',
+    href: '/colors/yellow',
     component: {
       template: '<h3>Yellow</h3>'
     }
   }, {
     label: 'Red',
     path: 'red',
+    href: '/colors/red',
     component: {
       template: '<h3>Red</h3>'
     }
   }, {
     label: 'Green',
     path: 'green',
+    href: '/colors/green',
     component: {
       template: '<h3>Green</h3>'
+    }
+  }]
+}, {
+  label: 'Pets',
+  path: '/pets',
+  component: {
+    template: '<div><h1>Pet</h1><router-view></router-view></div>'
+  },
+  children: [{
+    label: 'Dog',
+    path: 'dog',
+    href: '/pets/dog',
+    component: {
+      template: '<h3>Dog</h3>'
+    }
+  }, {
+    label: 'Cat',
+    path: 'cat',
+    href: '/pets/cat',
+    component: {
+      template: '<h3>Cat</h3>'
+    }
+  }, {
+    label: 'Bird',
+    path: 'bird',
+    href: '/pets/bird',
+    component: {
+      template: '<h3>Bird</h3>'
+    }
+  }, {
+    label: 'Horse',
+    path: 'horse',
+    href: '/pets/horse',
+    component: {
+      template: '<h3>Horse</h3>'
     }
   }]
 }, {

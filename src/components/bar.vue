@@ -3,6 +3,7 @@
   import overBody from 'vue-over-body'
 
   module.exports = {
+    name: 'vue-tree-nav',
     components: {
       'tree': tree,
       'vue-over-body': overBody
@@ -10,27 +11,7 @@
     props: {
       routes: {
         type: Array,
-        default: function () {
-          return []
-        }
-      },
-      change: {
-        type: Number,
-        default: 0
-      },
-      actions: {
-        type: Array,
-        default: function () {
-          return []
-        }
-      },
-      label: {
-        type: String,
-        default: ''
-      },
-      sublabel: {
-        type: String,
-        default: ''
+        default: () => []
       }
     },
     data: function () {
@@ -38,12 +19,25 @@
         sideBar: 0
       }
     },
+    mounted: function () {
+      this.build()
+    },
     methods: {
       open: function () {
         this.$data.sideBar += 1;
       },
       close: function () {
         this.$data.sideBar = 0;
+      },
+      build: function () {
+        console.log('route: ' + this.$route.fullPath)
+        console.log(this.$router.options.routes)
+      }
+    },
+    watch: {
+      '$route.fullPath': function () {
+        this.build()
+        this.close()
       }
     }
   }
@@ -51,56 +45,62 @@
 
 <template>
   <div>
-    <div class="bar">
-      <div class="subbar" style="text-align:left;">
-        <a @click="open" style="font-size:36px;">&#8801;</a>
+    <div class="tree_nav_bar">
+      <div class="tree_nav_subbar" style="text-align:left;">
+        <a v-if="routes.length" @click="open" style="font-size:36px;">&#8801;</a>
+        <slot name="left"></slot>
       </div>
-      <div class="subbar" style="text-align:center;">
-        <h4>
-          Vue Tree Nav
-        </h4>
+      <div class="tree_nav_subbar" style="text-align:center;">
+        <slot></slot>
       </div>
-      <div class="subbar" style="text-align:right;">
-        <a v-for="action in actions" @click="action.onClick">
-          {{action.label}}
-        </a>
+      <div class="tree_nav_subbar" style="text-align:right;">
+        <slot name="right"></slot>
       </div>
     </div>
-    <vue-over-body :open="sideBar" dialogClass="sidebar">
-      <tree :data="routes" :close="{click: close}"/>
+    <vue-over-body v-if="routes.length" :open="sideBar" dialogClass="tree_nav_sidebar">
+      <tree :close="close"/>
+      <tree v-for="route in routes" v-bind="route"/>
     </vue-over-body>
   </div>
 </template>
 
 <style>
-  .bar {
+  .tree_nav_bar {
     display: table; 
-    background-color:#f8f8f8;
+    background-color:#eee;
     position: relative;
     width: 100%;
-    margin-bottom: 20px;
-    color: #777;
+    color: #4a4a4a;
+    margin: 0 0 20px 0;
   }
 
-  .subbar {
+  .tree_nav_subbar {
     display: table-cell;
     vertical-align: middle;
-    padding: 5px 15px;
+    padding: 0 15px;
+    height:100%;
+
   }
 
-  .bar a {
-    color: #777;
+  .tree_nav_bar a {
+    color: #4a4a4a;
+    text-decoration:none;
+    padding: 10px;
+    height:100%;
   }
-  .bar a:hover, .bar a:focus {
-    color: #333;
+  .tree_nav_bar a:hover, .tree_nav_bar a:focus {
+    background-color: #616161;
+    color: #fff;
+    cursor: pointer;
     text-decoration:none;
   }
 
-  .sidebar {
+  .tree_nav_sidebar {
     height: 100%;
     width: 300px;
     top: 0;
     left: 0;
-    background-color:#f8f8f8;
+    background-color: #eee;
+    position:absolute;
   }
 </style>

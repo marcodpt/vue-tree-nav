@@ -8,7 +8,19 @@
 </head>
 <body>
   <div id="app">
-    <bar v-bind="bar"></bar>
+    <vue-tree-nav :routes="routes">
+      <h4>
+        Vue Tree Nav
+      </h4>
+      <template slot="right">
+        <a href="https://github.com/marcodpt/vue-tree-nav">
+          GitHub
+        </a>
+      </template>
+    </vue-tree-nav>
+    <div style="text-align:center">
+      <router-view></router-view>
+    </div>
   </div>
   <script src="app.js"></script>
 </body>
