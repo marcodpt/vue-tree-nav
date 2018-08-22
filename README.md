@@ -1,7 +1,7 @@
 # vue-tree-nav
 Navigation menu with tree support build with vuejs
 
-### [Live Demo](http://marcodpt.github.io/vue-over-body)
+### [Live Demo](http://marcodpt.github.io/vue-tree-nav)
 
 ### Install
 ```
