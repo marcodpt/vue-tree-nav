@@ -9,6 +9,65 @@ npm install --save vue-tree-nav
 ```
 
 ### Usage
+```javascript
+  import Vue from 'vue'
+  import VueRouter from 'vue-router'
+
+  import treeNav from 'vue-tree-nav'
+
+  Vue.use(VueRouter)
+
+  const router = new VueRouter({
+    routes: routes
+  })
+
+  new Vue({
+    router: router,
+    components: {
+      'vue-tree-nav': treeNav
+    },
+    data: {
+      routes: [
+        {
+          label: 'Colors',
+          children: [
+            {
+              label: 'Blue',
+              href: '/colors/blue'
+            }, {
+              label: 'Yellow',
+              href: '/colors/yellow'
+            }, {
+              label: 'Red',
+              href: '/colors/red',
+            }, {
+              label: 'Green',
+              href: '/colors/green'
+            }
+          ]
+        }, {
+          label: 'Pets',
+          children: [
+            {
+              label: 'Dog',
+              href: '/pets/dog'
+            }, {
+              label: 'Cat',
+              href: '/pets/cat'
+            }, {
+              label: 'Bird',
+              href: '/pets/bird'
+            }, {
+              label: 'Horse',
+              href: '/pets/horse'
+            }
+          ]
+        }
+      ] 
+    }
+  }).$mount('#app')
+```
+
 ```html
   <vue-tree-nav :routes="routes">
     <h4>
@@ -20,45 +79,6 @@ npm install --save vue-tree-nav
       </a>
     </template>
   </vue-tree-nav>
-```
-```javascript
-var routes = [
-  {
-    label: 'Colors',
-    children: [
-      {
-        label: 'Blue',
-        href: '/colors/blue'
-      }, {
-        label: 'Yellow',
-        href: '/colors/yellow'
-      }, {
-        label: 'Red',
-        href: '/colors/red',
-      }, {
-        label: 'Green',
-        href: '/colors/green'
-      }
-    ]
-  }, {
-    label: 'Pets',
-    children: [
-      {
-        label: 'Dog',
-        href: '/pets/dog'
-      }, {
-        label: 'Cat',
-        href: '/pets/cat'
-      }, {
-        label: 'Bird',
-        href: '/pets/bird'
-      }, {
-        label: 'Horse',
-        href: '/pets/horse'
-      }
-    ]
-  }
-]
 ```
 
 ### Slots
