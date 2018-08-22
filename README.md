@@ -29,36 +29,36 @@ npm install --save vue-tree-nav
     data: {
       routes: [
         {
-          label: 'Colors',
+          name: 'Colors',
           children: [
             {
-              label: 'Blue',
+              name: 'Blue',
               href: '/colors/blue'
             }, {
-              label: 'Yellow',
+              name: 'Yellow',
               href: '/colors/yellow'
             }, {
-              label: 'Red',
+              name: 'Red',
               href: '/colors/red',
             }, {
-              label: 'Green',
+              name: 'Green',
               href: '/colors/green'
             }
           ]
         }, {
-          label: 'Pets',
+          name: 'Pets',
           children: [
             {
-              label: 'Dog',
+              name: 'Dog',
               href: '/pets/dog'
             }, {
-              label: 'Cat',
+              name: 'Cat',
               href: '/pets/cat'
             }, {
-              label: 'Bird',
+              name: 'Bird',
               href: '/pets/bird'
             }, {
-              label: 'Horse',
+              name: 'Horse',
               href: '/pets/horse'
             }
           ]
@@ -94,7 +94,7 @@ routes
    - children
      - type: Array
      - default: []
-   - label
+   - name
      - type: String
      - default: ""
    - href

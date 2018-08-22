@@ -21197,7 +21197,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   }
 })()}
 },{"../node_modules/vue/dist/vue.js":6,"./index.vue":12,"./routes.js":13,"vue":7,"vue-hot-reload-api":3,"vue-router":5}],10:[function(require,module,exports){
-var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".tree_nav_bar {\n  display: table; \n  background-color:#eee;\n  position: relative;\n  width: 100%;\n  color: #4a4a4a;\n  margin: 0 0 20px 0;\n}\n\n.tree_nav_subbar {\n  display: table-cell;\n  vertical-align: middle;\n  padding: 0 15px;\n  height:100%;\n\n}\n\n.tree_nav_bar a {\n  color: #4a4a4a;\n  text-decoration:none;\n  padding: 10px;\n  height:100%;\n}\n.tree_nav_bar a:hover, .tree_nav_bar a:focus {\n  background-color: #616161;\n  color: #fff;\n  cursor: pointer;\n  text-decoration:none;\n}\n\n.tree_nav_sidebar {\n  height: 100%;\n  width: 300px;\n  top: 0;\n  left: 0;\n  background-color: #eee;\n  position:absolute;\n}")
+var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".tree_nav_bar {\n  display: table; \n  background-color:#eee;\n  position: relative;\n  width: 100%;\n  color: #4a4a4a;\n  margin: 0 0 20px 0;\n}\n\n.tree_nav_subbar {\n  display: table-cell;\n  vertical-align: middle;\n  padding: 0 15px;\n  height:100%;\n\n}\n\n.tree_nav_bar a {\n  color: #4a4a4a;\n  text-decoration:none;\n  padding: 0 10px;\n  height:100%;\n}\n.tree_nav_bar a:hover, .tree_nav_bar a:focus {\n  background-color: #616161;\n  color: #fff;\n  cursor: pointer;\n  text-decoration:none;\n}\n\n.tree_nav_sidebar {\n  height: 100%;\n  width: 300px;\n  top: 0;\n  left: 0;\n  background-color: #eee;\n  position:absolute;\n}")
 ;(function(){
 'use strict';
 
@@ -21227,7 +21227,8 @@ module.exports = {
   },
   data: function data() {
     return {
-      sideBar: 0
+      sideBar: 0,
+      path: ''
     };
   },
   mounted: function mounted() {
@@ -21241,8 +21242,17 @@ module.exports = {
       this.$data.sideBar = 0;
     },
     build: function build() {
-      console.log('route: ' + this.$route.fullPath);
-      console.log(this.$router.options.routes);
+      var _this = this;
+
+      this.$data.path = '';
+      this.$route.matched.forEach(function (match) {
+        if (_this.$data.path) {
+          _this.$data.path += ' / ';
+        }
+        _this.$data.path += match.name;
+      });
+
+      console.log(this.$data.path);
     }
   },
   watch: {
@@ -21256,7 +21266,7 @@ module.exports = {
 if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('div',{staticClass:"tree_nav_bar"},[_c('div',{staticClass:"tree_nav_subbar",staticStyle:{"text-align":"left"}},[(_vm.routes.length)?_c('a',{staticStyle:{"font-size":"36px"},on:{"click":_vm.open}},[_vm._v("≡")]):_vm._e(),_vm._v(" "),_vm._t("left")],2),_vm._v(" "),_c('div',{staticClass:"tree_nav_subbar",staticStyle:{"text-align":"center"}},[_vm._t("default")],2),_vm._v(" "),_c('div',{staticClass:"tree_nav_subbar",staticStyle:{"text-align":"right"}},[_vm._t("right")],2)]),_vm._v(" "),(_vm.routes.length)?_c('vue-over-body',{attrs:{"open":_vm.sideBar,"dialogClass":"tree_nav_sidebar"}},[_c('tree',{attrs:{"close":_vm.close}}),_vm._v(" "),_vm._l((_vm.routes),function(route){return _c('tree',_vm._b({},'tree',route,false))})],2):_vm._e()],1)}
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('div',{staticClass:"tree_nav_bar"},[_c('div',{staticClass:"tree_nav_subbar",staticStyle:{"text-align":"left"}},[(_vm.routes.length)?_c('a',{staticStyle:{"font-size":"250%"},on:{"click":_vm.open}},[_vm._v("≡")]):_vm._e(),_vm._v(" "),_vm._t("left",null,{path:_vm.path})],2),_vm._v(" "),_c('div',{staticClass:"tree_nav_subbar",staticStyle:{"text-align":"center"}},[_vm._t("default",null,{path:_vm.path})],2),_vm._v(" "),_c('div',{staticClass:"tree_nav_subbar",staticStyle:{"text-align":"right"}},[_vm._t("right",null,{path:_vm.path})],2)]),_vm._v(" "),(_vm.routes.length)?_c('vue-over-body',{attrs:{"open":_vm.sideBar,"dialogClass":"tree_nav_sidebar"}},[_c('tree',{attrs:{"close":_vm.close}}),_vm._v(" "),_vm._l((_vm.routes),function(route){return _c('tree',_vm._b({},'tree',route,false))})],2):_vm._e()],1)}
 __vue__options__.staticRenderFns = []
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
@@ -21283,7 +21293,7 @@ module.exports = {
         return [];
       }
     },
-    label: {
+    name: {
       type: String,
       default: ''
     },
@@ -21327,7 +21337,7 @@ module.exports = {
 if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[(_vm.close)?_c('a',{staticClass:"tree_nav_link tree_nav_child",staticStyle:{"text-align":"right"},on:{"click":_vm.close}},[_vm._v("\n    ✖\n  ")]):_vm._e(),_vm._v(" "),(_vm.children.length)?_c('a',{staticClass:"tree_nav_link tree_nav_parent",style:(_vm.style()),on:{"click":function($event){_vm.toogle()}}},[_vm._v("\n    "+_vm._s(_vm.label)+"\n    "),_c('span',{staticStyle:{"float":"right"}},[_vm._v(_vm._s(_vm.open ? '▲' : ' ▼'))])]):(_vm.href)?_c('router-link',{staticClass:"tree_nav_link tree_nav_child",style:(_vm.style()),attrs:{"active-class":"tree_nav_active","to":_vm.href}},[_vm._v("\n    "+_vm._s(_vm.label)+"\n  ")]):_vm._e(),_vm._v(" "),_vm._l((_vm.children),function(child){return (child.label)?_c('tree',_vm._b({directives:[{name:"show",rawName:"v-show",value:(_vm.open),expression:"open"}],attrs:{"step":_vm.step,"total":_vm.total + _vm.step,"unit":_vm.unit}},'tree',child,false)):_vm._e()})],2)}
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[(_vm.close)?_c('a',{staticClass:"tree_nav_link tree_nav_child",staticStyle:{"text-align":"right"},on:{"click":_vm.close}},[_vm._v("\n    ✖\n  ")]):_vm._e(),_vm._v(" "),(_vm.children.length)?_c('a',{staticClass:"tree_nav_link tree_nav_parent",style:(_vm.style()),on:{"click":function($event){_vm.toogle()}}},[_vm._v("\n    "+_vm._s(_vm.name)+"\n    "),_c('span',{staticStyle:{"float":"right"}},[_vm._v(_vm._s(_vm.open ? '▲' : ' ▼'))])]):(_vm.href)?_c('router-link',{staticClass:"tree_nav_link tree_nav_child",style:(_vm.style()),attrs:{"active-class":"tree_nav_active","to":_vm.href}},[_vm._v("\n    "+_vm._s(_vm.name)+"\n  ")]):_vm._e(),_vm._v(" "),_vm._l((_vm.children),function(child){return (child.name)?_c('tree',_vm._b({directives:[{name:"show",rawName:"v-show",value:(_vm.open),expression:"open"}],attrs:{"step":_vm.step,"total":_vm.total + _vm.step,"unit":_vm.unit}},'tree',child,false)):_vm._e()})],2)}
 __vue__options__.staticRenderFns = []
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
@@ -21366,34 +21376,34 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
 })()}
 },{"./components/bar.vue":10,"vue":7,"vue-hot-reload-api":3}],13:[function(require,module,exports){
 module.exports = [{
-  label: 'Colors',
+  name: 'Colors',
   path: '/colors',
   component: {
     template: '<div><h1>Color</h1><router-view></router-view></div>'
   },
   children: [{
-    label: 'Blue',
+    name: 'Blue',
     path: 'blue',
     href: '/colors/blue',
     component: {
       template: '<h3>Blue</h3>'
     }
   }, {
-    label: 'Yellow',
+    name: 'Yellow',
     path: 'yellow',
     href: '/colors/yellow',
     component: {
       template: '<h3>Yellow</h3>'
     }
   }, {
-    label: 'Red',
+    name: 'Red',
     path: 'red',
     href: '/colors/red',
     component: {
       template: '<h3>Red</h3>'
     }
   }, {
-    label: 'Green',
+    name: 'Green',
     path: 'green',
     href: '/colors/green',
     component: {
@@ -21401,34 +21411,34 @@ module.exports = [{
     }
   }]
 }, {
-  label: 'Pets',
+  name: 'Pets',
   path: '/pets',
   component: {
     template: '<div><h1>Pet</h1><router-view></router-view></div>'
   },
   children: [{
-    label: 'Dog',
+    name: 'Dog',
     path: 'dog',
     href: '/pets/dog',
     component: {
       template: '<h3>Dog</h3>'
     }
   }, {
-    label: 'Cat',
+    name: 'Cat',
     path: 'cat',
     href: '/pets/cat',
     component: {
       template: '<h3>Cat</h3>'
     }
   }, {
-    label: 'Bird',
+    name: 'Bird',
     path: 'bird',
     href: '/pets/bird',
     component: {
       template: '<h3>Bird</h3>'
     }
   }, {
-    label: 'Horse',
+    name: 'Horse',
     path: 'horse',
     href: '/pets/horse',
     component: {

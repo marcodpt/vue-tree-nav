@@ -9,9 +9,9 @@
 <body>
   <div id="app">
     <vue-tree-nav :routes="routes">
-      <h4>
-        Vue Tree Nav
-      </h4>
+      <h3 slot-scope="scope">
+        Vue Tree Nav <small>{{scope.path}}</small>
+      </h3>
       <template slot="right">
         <a href="https://github.com/marcodpt/vue-tree-nav">
           GitHub

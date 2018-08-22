@@ -1,34 +1,34 @@
 module.exports = [
   {
-    label: 'Colors',
+    name: 'Colors',
     path: '/colors',
     component: {
       template: '<div><h1>Color</h1><router-view></router-view></div>'
     },
     children: [
       {
-        label: 'Blue',
+        name: 'Blue',
         path: 'blue',
         href: '/colors/blue',
         component: {
           template: '<h3>Blue</h3>'
         }
       }, {
-        label: 'Yellow',
+        name: 'Yellow',
         path: 'yellow',
         href: '/colors/yellow',
         component: {
           template: '<h3>Yellow</h3>'
         }
       }, {
-        label: 'Red',
+        name: 'Red',
         path: 'red',
         href: '/colors/red',
         component: {
           template: '<h3>Red</h3>'
         }
       }, {
-        label: 'Green',
+        name: 'Green',
         path: 'green',
         href: '/colors/green',
         component: {
@@ -37,35 +37,35 @@ module.exports = [
       }
     ]
   }, {
-    label: 'Pets',
+    name: 'Pets',
     path: '/pets',
     component: {
       template: '<div><h1>Pet</h1><router-view></router-view></div>'
     },
     children: [
       {
-        label: 'Dog',
+        name: 'Dog',
         path: 'dog',
         href: '/pets/dog',
         component: {
           template: '<h3>Dog</h3>'
         }
       }, {
-        label: 'Cat',
+        name: 'Cat',
         path: 'cat',
         href: '/pets/cat',
         component: {
           template: '<h3>Cat</h3>'
         }
       }, {
-        label: 'Bird',
+        name: 'Bird',
         path: 'bird',
         href: '/pets/bird',
         component: {
           template: '<h3>Bird</h3>'
         }
       }, {
-        label: 'Horse',
+        name: 'Horse',
         path: 'horse',
         href: '/pets/horse',
         component: {

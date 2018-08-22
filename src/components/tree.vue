@@ -6,7 +6,7 @@
         type: Array,
         default: () => []
       },
-      label: {
+      name: {
         type: String,
         default: ''
       },
@@ -64,7 +64,7 @@
       class="tree_nav_link tree_nav_parent"
       @click="toogle()"
     >
-      {{label}}
+      {{name}}
       <span style="float:right;">{{open ? '&#9650;' : ' &#9660;' }}</span>
     </a>
     <router-link
@@ -74,11 +74,11 @@
       active-class="tree_nav_active"
       :to="href"
     >
-      {{label}}
+      {{name}}
     </router-link>
     <tree
       v-for="child in children"
-      v-if="child.label"
+      v-if="child.name"
       v-show="open"
       v-bind="child"
       :step="step"

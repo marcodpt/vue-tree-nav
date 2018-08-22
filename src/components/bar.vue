@@ -16,7 +16,8 @@
     },
     data: function () {
       return {
-        sideBar: 0
+        sideBar: 0,
+        path: ''
       }
     },
     mounted: function () {
@@ -30,8 +31,15 @@
         this.$data.sideBar = 0;
       },
       build: function () {
-        console.log('route: ' + this.$route.fullPath)
-        console.log(this.$router.options.routes)
+        this.$data.path = ''
+        this.$route.matched.forEach(match => {
+          if (this.$data.path) {
+            this.$data.path += ' / '
+          }
+          this.$data.path += match.name
+        })
+
+        console.log(this.$data.path)
       }
     },
     watch: {
@@ -47,14 +55,14 @@
   <div>
     <div class="tree_nav_bar">
       <div class="tree_nav_subbar" style="text-align:left;">
-        <a v-if="routes.length" @click="open" style="font-size:36px;">&#8801;</a>
-        <slot name="left"></slot>
+        <a v-if="routes.length" @click="open" style="font-size:250%">&#8801;</a>
+        <slot name="left" :path="path"></slot>
       </div>
       <div class="tree_nav_subbar" style="text-align:center;">
-        <slot></slot>
+        <slot :path="path"></slot>
       </div>
       <div class="tree_nav_subbar" style="text-align:right;">
-        <slot name="right"></slot>
+        <slot name="right" :path="path"></slot>
       </div>
     </div>
     <vue-over-body v-if="routes.length" :open="sideBar" dialogClass="tree_nav_sidebar">
@@ -85,7 +93,7 @@
   .tree_nav_bar a {
     color: #4a4a4a;
     text-decoration:none;
-    padding: 10px;
+    padding: 0 10px;
     height:100%;
   }
   .tree_nav_bar a:hover, .tree_nav_bar a:focus {
