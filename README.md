@@ -70,9 +70,9 @@ npm install --save vue-tree-nav
 
 ```html
   <vue-tree-nav :routes="routes">
-    <h4>
-      Vue Tree Nav
-    </h4>
+    <h3 slot-scope="{path}">
+      Vue Tree Nav <small>{{path}}</small>
+    </h3>
     <template slot="right">
       <a href="https://github.com/marcodpt/vue-tree-nav">
         GitHub
