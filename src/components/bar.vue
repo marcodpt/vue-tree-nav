@@ -38,8 +38,6 @@
           }
           this.$data.path += match.name
         })
-
-        console.log(this.$data.path)
       }
     },
     watch: {
