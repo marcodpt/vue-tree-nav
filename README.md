@@ -86,6 +86,11 @@ npm install --save vue-tree-nav
  - right
  - default (center)
 
+### Slot scope
+ - path
+   - type: String
+   - description: Path of the current state name based
+
 ### Props
 routes
  - type: Array
