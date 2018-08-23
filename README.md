@@ -173,7 +173,7 @@ routes
    - children
      - type: Array
      - default: []
-   - name
+   - label
      - type: String
      - default: ""
    - href
