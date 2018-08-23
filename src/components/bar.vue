@@ -103,6 +103,7 @@
     <vue-over-body v-if="tree.length" :open="sideBar" dialogClass="tree_nav_sidebar">
       <tree :close="close"/>
       <tree v-for="leaf in tree" v-bind="leaf" :location="location"/>
+      <div style="height:20px"></div>
     </vue-over-body>
   </div>
 </template>
