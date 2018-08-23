@@ -31,8 +31,7 @@
     "build": "browserify -e src/app.vue -o app.js"
   },
   "dependencies": {
-    "vue-over-body": "0.0.0",
-    "vue-router": "^3.0.1"
+    "vue-over-body": "0.0.1"
   },
   "browserify": {
     "transform": [
@@ -51,6 +50,7 @@
     "browserify": "^15.2.0",
     "http-server": "^0.11.1",
     "vue": "^2.4.1",
-    "vueify": "^9.4.1"
+    "vueify": "^9.4.1",
+    "vue-router": "^3.0.1"
   }
 }

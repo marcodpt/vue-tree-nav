@@ -890,41 +890,63 @@ exports.reload = tryWrap(function (id, options) {
 })
 
 },{}],40:[function(require,module,exports){
-var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".mask {\n  top:0; \n  left:0; \n  width:100%; \n  height:100%; \n  position:fixed; \n  background-color:rgba(0, 0, 0, 0.5); \n}\n\n.dialog {\n  position:absolute; \n}")
+var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".over_body_mask {\n  top:0; \n  left:0; \n  width:100%; \n  height:100%; \n  position:fixed; \n}\n\n.over_body_mask_after {\n  background-color:rgba(0, 0, 0, 0.5); \n}\n\n.over_body_dialog {\n  position:absolute; \n}")
 ;(function(){
 'use strict';
 
 module.exports = {
-  name: 'vue-up',
+  name: 'vue-over-body',
   props: {
     open: {
       type: Number,
       default: 0
     },
-    dialogClass: {
+    transition: {
+      type: Number,
+      default: 0.3
+    },
+    before: {
+      type: String,
+      default: ''
+    },
+    after: {
       type: String,
       default: ''
     }
   },
   data: function data() {
     return {
-      show: false
+      start: false,
+      finish: false
     };
   },
   mounted: function mounted() {
-    this.build();
+    this.toogle(this.open);
   },
   watch: {
     open: function open() {
-      this.build();
+      this.toogle(this.open);
     }
   },
   methods: {
     close: function close() {
-      this.$data.show = false;
+      this.toogle(false);
     },
-    build: function build() {
-      this.$data.show = this.open ? true : false;
+    toogle: function toogle(open) {
+      var _this = this;
+
+      var t = 50;
+      if (open) {
+        this.$data.start = true;
+        setTimeout(function () {
+          return _this.$data.finish = true;
+        }, t);
+      } else {
+        this.$data.finish = false;
+        setTimeout(function () {
+          return _this.$data.start = false;
+        }, this.transition * 1000 + t);
+      }
     }
   }
 };
@@ -932,10 +954,19 @@ module.exports = {
 if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"mask",style:({
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return (_vm.start)?_c('div',{class:['over_body_mask', _vm.finish ? 'over_body_mask_after' : ''],style:({
     'z-index': _vm.open,
-    'display': _vm.show ? 'block' : 'none'
-  }),on:{"click":_vm.close}},[_c('div',{class:['dialog', _vm.dialogClass],style:({'z-index': _vm.open + 1}),on:{"click":function($event){$event.stopPropagation();}}},[_vm._t("default")],2)])}
+    '-webkit-transition': 'all ' + _vm.transition + 's',
+    '-moz-transition': 'all ' + _vm.transition + 's',
+    '-o-transition': 'all ' + _vm.transition + 's',
+    'transition': 'all ' + _vm.transition + 's'
+  }),on:{"click":_vm.close}},[_c('div',{class:['over_body_dialog', _vm.before, _vm.finish ? _vm.after : ''],style:({
+      'z-index': _vm.open + 1,
+      '-webkit-transition': 'all ' + _vm.transition + 's',
+      '-moz-transition': 'all ' + _vm.transition + 's',
+      '-o-transition': 'all ' + _vm.transition + 's',
+      'transition': 'all ' + _vm.transition + 's'
+    }),on:{"click":function($event){$event.stopPropagation();}}},[_vm._t("default")],2)]):_vm._e()}
 __vue__options__.staticRenderFns = []
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
@@ -21602,7 +21633,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   }
 })()}
 },{"../node_modules/vue/dist/vue.js":42,"./index.vue":48,"./routes.js":49,"vue":43,"vue-hot-reload-api":39,"vue-router":41}],46:[function(require,module,exports){
-var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".tree_nav_bar {\n  display: table; \n  background-color:#eee;\n  position: relative;\n  width: 100%;\n  color: #4a4a4a;\n  margin: 0 0 20px 0;\n}\n\n.tree_nav_subbar {\n  display: table-cell;\n  vertical-align: middle;\n  padding: 0 15px;\n  margin: 0;\n}\n\n.tree_nav_bar a {\n  color: #4a4a4a;\n  text-decoration:none;\n  padding: 0 10px;\n}\n.tree_nav_bar a:hover, .tree_nav_bar a:focus {\n  color: #42b983;\n  cursor: pointer;\n  text-decoration:none;\n}\n\n.tree_nav_sidebar {\n  height: 100%;\n  min-width: 300px;\n  top: 0;\n  left: 0;\n  background-color: #eee;\n  position:absolute;\n  overflow-y:auto;\n}")
+var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".tree_nav_bar {\n  display: table; \n  background-color:#eee;\n  position: relative;\n  width: 100%;\n  color: #4a4a4a;\n  margin: 0 0 20px 0;\n}\n\n.tree_nav_subbar {\n  display: table-cell;\n  vertical-align: middle;\n  padding: 0 15px;\n  margin: 0;\n}\n\n.tree_nav_bar a {\n  color: #4a4a4a;\n  text-decoration:none;\n  padding: 0 10px;\n}\n.tree_nav_bar a:hover, .tree_nav_bar a:focus {\n  color: #42b983;\n  cursor: pointer;\n  text-decoration:none;\n}\n\n.tree_nav_before {\n  height: 100%;\n  min-width: 300px;\n  top: 0;\n  left: -300px;\n  background-color: #eee;\n  position:absolute;\n  overflow-y:auto;\n}\n\n.tree_nav_after {\n  left: 0;\n}")
 ;(function(){
 'use strict';
 
@@ -21712,7 +21743,7 @@ module.exports = {
 if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('div',{staticClass:"tree_nav_bar"},[_c('div',{staticClass:"tree_nav_subbar",staticStyle:{"text-align":"left"}},[(_vm.tree.length)?_c('a',{staticStyle:{"font-size":"250%"},on:{"click":_vm.open}},[_vm._v("≡")]):_vm._e(),_vm._v(" "),_vm._t("left",null,{path:_vm.path})],2),_vm._v(" "),_c('div',{staticClass:"tree_nav_subbar",staticStyle:{"text-align":"center"}},[_vm._t("default",null,{path:_vm.path})],2),_vm._v(" "),_c('div',{staticClass:"tree_nav_subbar",staticStyle:{"text-align":"right"}},[_vm._t("right",null,{path:_vm.path})],2)]),_vm._v(" "),(_vm.tree.length)?_c('vue-over-body',{attrs:{"open":_vm.sideBar,"dialogClass":"tree_nav_sidebar"}},[_c('tree',{attrs:{"close":_vm.close}}),_vm._v(" "),_vm._l((_vm.tree),function(leaf){return _c('tree',_vm._b({attrs:{"location":_vm.location}},'tree',leaf,false))})],2):_vm._e()],1)}
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('div',{staticClass:"tree_nav_bar"},[_c('div',{staticClass:"tree_nav_subbar",staticStyle:{"text-align":"left"}},[(_vm.tree.length)?_c('a',{staticStyle:{"font-size":"250%"},on:{"click":_vm.open}},[_vm._v("≡")]):_vm._e(),_vm._v(" "),_vm._t("left",null,{path:_vm.path})],2),_vm._v(" "),_c('div',{staticClass:"tree_nav_subbar",staticStyle:{"text-align":"center"}},[_vm._t("default",null,{path:_vm.path})],2),_vm._v(" "),_c('div',{staticClass:"tree_nav_subbar",staticStyle:{"text-align":"right"}},[_vm._t("right",null,{path:_vm.path})],2)]),_vm._v(" "),(_vm.tree.length)?_c('vue-over-body',{attrs:{"open":_vm.sideBar,"before":"tree_nav_before","after":"tree_nav_after"}},[_c('tree',{attrs:{"close":_vm.close}}),_vm._v(" "),_vm._l((_vm.tree),function(leaf){return _c('tree',_vm._b({attrs:{"location":_vm.location}},'tree',leaf,false))}),_vm._v(" "),_c('div',{staticStyle:{"height":"20px"}})],2):_vm._e()],1)}
 __vue__options__.staticRenderFns = []
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)

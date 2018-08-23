@@ -100,7 +100,7 @@
         <slot name="right" :path="path"></slot>
       </div>
     </div>
-    <vue-over-body v-if="tree.length" :open="sideBar" dialogClass="tree_nav_sidebar">
+    <vue-over-body v-if="tree.length" :open="sideBar" before="tree_nav_before" after="tree_nav_after">
       <tree :close="close"/>
       <tree v-for="leaf in tree" v-bind="leaf" :location="location"/>
       <div style="height:20px"></div>
@@ -136,13 +136,17 @@
     text-decoration:none;
   }
 
-  .tree_nav_sidebar {
+  .tree_nav_before {
     height: 100%;
     min-width: 300px;
     top: 0;
-    left: 0;
+    left: -300px;
     background-color: #eee;
     position:absolute;
     overflow-y:auto;
+  }
+
+  .tree_nav_after {
+    left: 0;
   }
 </style>
