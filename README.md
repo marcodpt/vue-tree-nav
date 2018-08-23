@@ -1,5 +1,6 @@
 # vue-tree-nav
-Navigation tree menu component with nice integration with vue-router 
+ Navigation tree menu component with nice integration with vue-router 
+ - Ready out of the box! 
 
 ### [Live Demo](http://marcodpt.github.io/vue-tree-nav)
 
