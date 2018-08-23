@@ -8,7 +8,7 @@
 </head>
 <body style="margin:0px">
   <div id="app">
-    <vue-tree-nav :routes="routes">
+    <vue-tree-nav :routes="routes" :location="$route.fullPath">
       <h3 slot-scope="{path}">
         Vue Tree Nav <small>{{path}}</small>
       </h3>

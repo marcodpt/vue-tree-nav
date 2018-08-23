@@ -1,7 +1,7 @@
 {
   "name": "vue-tree-nav",
   "version": "0.0.1",
-  "description": "Navigation menu with tree support build with vuejs",
+  "description": "Navigation tree menu component with nice integration with vue-router",
   "main": "src/index.vue",
   "repository": {
     "type": "git",
@@ -17,7 +17,8 @@
     "vue",
     "sidebar",
     "sidemenu",
-    "component"
+    "component",
+    "vue-router"
   ],
   "author": "Marco Di Pillo Tomic",
   "license": "MIT",

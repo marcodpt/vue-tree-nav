@@ -1,5 +1,5 @@
 # vue-tree-nav
-Navigation menu with tree support build with vuejs
+Navigation tree menu component with nice integration with vue-router 
 
 ### [Live Demo](http://marcodpt.github.io/vue-tree-nav)
 
@@ -8,7 +8,53 @@ Navigation menu with tree support build with vuejs
 npm install --save vue-tree-nav
 ```
 
-### Usage
+### Usage 
+
+##### without vue router
+```javascript
+  import Vue from 'vue'
+  import treeNav from 'vue-tree-nav'
+
+  new Vue({
+    components: {
+      'vue-tree-nav': treeNav
+    },
+    data: {
+      routes: [
+        {
+          label: 'pi',
+          href: '#/numbers/3/14'
+        }, {
+          label: 'e',
+          href: '#/numbers/2/7'
+        }, {
+          label: 'integer',
+          children: [
+            {
+              label: 'natural',
+              children: [
+                {
+                  label: 'even',
+                  href: '#/numbers/4/6'
+                }, {
+                  label: 'prime',
+                  href: '#/numbers/5/7'
+                }
+              ]
+            }, {
+              label: 'minus three',
+              href: '#/numbers/_/3'
+            }
+          ]
+        }
+      ]
+    }
+  }).$mount('#app')
+```
+
+##### with vue router
+  It will do some magic but will ignore routes with :variable or with redirect for obvious reasons
+
 ```javascript
   import Vue from 'vue'
   import VueRouter from 'vue-router'
@@ -16,6 +62,66 @@ npm install --save vue-tree-nav
   import treeNav from 'vue-tree-nav'
 
   Vue.use(VueRouter)
+
+  var routes = [
+    {
+      path: '/colors',
+      component: {
+        template: '<div><h1>Color</h1><router-view></router-view></div>'
+      },
+      children: [
+        {
+          path: 'blue',
+          component: {
+            template: '<h3>Blue</h3>'
+          }
+        }, {
+          path: 'yellow',
+          component: {
+            template: '<h3>Yellow</h3>'
+          }
+        }, {
+          path: 'red',
+          component: {
+            template: '<h3>Red</h3>'
+          }
+        }, {
+          path: 'green',
+          component: {
+            template: '<h3>Green</h3>'
+          }
+        }
+      ]
+    }, {
+      path: '/pets',
+      component: {
+        template: '<div><h1>Pet</h1><router-view></router-view></div>'
+      },
+      children: [
+        {
+          path: 'dog',
+          component: {
+            template: '<h3>Dog</h3>'
+          }
+        }, {
+          path: 'cat',
+          component: {
+            template: '<h3>Cat</h3>'
+          }
+        }, {
+          path: 'bird',
+          component: {
+            template: '<h3>Bird</h3>'
+          }
+        }, {
+          path: 'horse',
+          component: {
+            template: '<h3>Horse</h3>'
+          }
+        }
+      ]
+    }
+  ]
 
   const router = new VueRouter({
     routes: routes
@@ -27,49 +133,17 @@ npm install --save vue-tree-nav
       'vue-tree-nav': treeNav
     },
     data: {
-      routes: [
-        {
-          name: 'Colors',
-          children: [
-            {
-              name: 'Blue',
-              href: '/colors/blue'
-            }, {
-              name: 'Yellow',
-              href: '/colors/yellow'
-            }, {
-              name: 'Red',
-              href: '/colors/red',
-            }, {
-              name: 'Green',
-              href: '/colors/green'
-            }
-          ]
-        }, {
-          name: 'Pets',
-          children: [
-            {
-              name: 'Dog',
-              href: '/pets/dog'
-            }, {
-              name: 'Cat',
-              href: '/pets/cat'
-            }, {
-              name: 'Bird',
-              href: '/pets/bird'
-            }, {
-              name: 'Horse',
-              href: '/pets/horse'
-            }
-          ]
-        }
-      ] 
+      routes: routes 
     }
   }).$mount('#app')
 ```
 
+##### HTML usage
+  If you are not using vue router you should pass a string with the current location
+  maybe window.location.href do the job
+  
 ```html
-  <vue-tree-nav :routes="routes">
+  <vue-tree-nav :routes="routes" :location="$route.fullPath">
     <h3 slot-scope="{path}">
       Vue Tree Nav <small>{{path}}</small>
     </h3>

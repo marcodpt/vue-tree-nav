@@ -14,7 +14,34 @@
   new Vue({
     router: router,
     data: {
-      routes: routes
+      routes: routes.concat([
+        {
+          label: 'pi',
+          href: '#/numbers/3/14'
+        }, {
+          label: 'e',
+          href: '#/numbers/2/7'
+        }, {
+          label: 'integer',
+          children: [
+            {
+              label: 'natural',
+              children: [
+                {
+                  label: 'even',
+                  href: '#/numbers/4/6'
+                }, {
+                  label: 'prime',
+                  href: '#/numbers/5/7'
+                }
+              ]
+            }, {
+              label: 'minus three',
+              href: '#/numbers/_/3'
+            }
+          ]
+        }
+      ])
     },
     components: {
       'vue-tree-nav': treeNav

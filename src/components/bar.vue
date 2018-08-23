@@ -12,16 +12,22 @@
       routes: {
         type: Array,
         default: () => []
+      },
+      location: {
+        type: String,
+        default: ''
       }
     },
     data: function () {
       return {
         sideBar: 0,
-        path: ''
+        path: '',
+        tree: [],
+        links: {},
       }
     },
     mounted: function () {
-      this.build()
+      this.setRoutes()
     },
     methods: {
       open: function () {
@@ -30,20 +36,51 @@
       close: function () {
         this.$data.sideBar = 0;
       },
-      build: function () {
+      setLocation: function () {
         this.$data.path = ''
-        this.$route.matched.forEach(match => {
-          if (this.$data.path) {
-            this.$data.path += ' / '
+        Object.keys(this.$data.links).sort().forEach(key => {
+          if (`#${this.location}`.indexOf(key) !== -1) {
+            this.$data.path = this.$data.links[key]
           }
-          this.$data.path += match.name
+        })
+        this.close()
+      },
+      setRoutes: function () {
+        this.$data.tree = []
+        this.$data.links = {}
+        this.transverse(this.routes, this.$data.tree, '', '#')
+        this.setLocation ()
+      },
+      transverse: function (Input, Output, label, path) {
+        Input.forEach(input => {
+          var abs = input.path && input.path.substr(0, 1) === '/'
+
+          var newLabel = input.label || input.name || (abs ? input.path.substr(1) : input.path)
+          if (newLabel && (input.path || '').indexOf(':') === -1 && !input.redirect) {
+            Output.push({})
+            var i = Output.length - 1
+
+            Output[i].label = newLabel
+            newLabel = (label ? `${label} / ` : '') + newLabel
+
+            var newPath = abs ? `#${input.path}` : `${path || ''}/${input.path}`
+            if (input.children) {
+              Output[i].children = []
+              this.transverse(input.children, Output[i].children, newLabel, newPath)
+            } else {
+              Output[i].href = input.href || newPath
+              this.$data.links[input.href || newPath] = newLabel
+            }
+          }
         })
       }
     },
     watch: {
-      '$route.fullPath': function () {
-        this.build()
-        this.close()
+      location: function () {
+        this.setLocation()
+      },
+      routes: function () {
+        this.setRoutes()
       }
     }
   }
@@ -53,7 +90,7 @@
   <div>
     <div class="tree_nav_bar">
       <div class="tree_nav_subbar" style="text-align:left;">
-        <a v-if="routes.length" @click="open" style="font-size:250%">&#8801;</a>
+        <a v-if="tree.length" @click="open" style="font-size:250%">&#8801;</a>
         <slot name="left" :path="path"></slot>
       </div>
       <div class="tree_nav_subbar" style="text-align:center;">
@@ -63,9 +100,9 @@
         <slot name="right" :path="path"></slot>
       </div>
     </div>
-    <vue-over-body v-if="routes.length" :open="sideBar" dialogClass="tree_nav_sidebar">
+    <vue-over-body v-if="tree.length" :open="sideBar" dialogClass="tree_nav_sidebar">
       <tree :close="close"/>
-      <tree v-for="route in routes" v-bind="route"/>
+      <tree v-for="leaf in tree" v-bind="leaf" :location="location"/>
     </vue-over-body>
   </div>
 </template>
@@ -105,5 +142,6 @@
     left: 0;
     background-color: #eee;
     position:absolute;
+    overflow-y:auto;
   }
 </style>

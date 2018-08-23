@@ -6,11 +6,15 @@
         type: Array,
         default: () => []
       },
-      name: {
+      label: {
         type: String,
         default: ''
       },
       href: {
+        type: String,
+        default: ''
+      },
+      location: {
         type: String,
         default: ''
       },
@@ -43,6 +47,9 @@
         return {
           'padding-left': `${this.total + this.step}${this.unit}`
         }
+      },
+      isActive: function () {
+        return `#${this.location}`.indexOf(this.href) !== -1
       }
     }
   }
@@ -59,31 +66,31 @@
       &#10006;
     </a>
     <a
-      v-if="children.length"
+      v-else-if="children.length"
       :style="style()"
       class="tree_nav_link tree_nav_parent"
       @click="toogle()"
     >
-      {{name}}
+      {{label}}
       <span style="float:right;">{{open ? '&#9650;' : ' &#9660;' }}</span>
     </a>
-    <router-link
-      v-else-if="href"
+    <a
+      v-else
       :style="style()"
-      class="tree_nav_link tree_nav_child"
-      active-class="tree_nav_active"
-      :to="href"
+      :class="['tree_nav_link', 'tree_nav_child', isActive() ? 'tree_nav_active' : '']"
+      :href="href"
     >
-      {{name}}
-    </router-link>
+      {{label}}
+    </a>
     <tree
       v-for="child in children"
-      v-if="child.name"
+      v-if="child.label"
       v-show="open"
       v-bind="child"
       :step="step"
       :total="total + step"
       :unit="unit"
+      :location="location"
     />
   </div>
 </template>
