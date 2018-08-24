@@ -164,22 +164,26 @@ npm install --save vue-tree-nav
 ### Slot scope
  - path
    - type: String
-   - description: Path of the current state name based
+   - description: Path of the current state based on label of the state
 
 ### Props
-routes
- - type: Array
- - default: []
- - items (Object):
-   - children
-     - type: Array
-     - default: []
-   - label
-     - type: String
-     - default: ""
-   - href
-     - type: String
-     - default: ""
+ - routes
+   - type: Array
+   - default: []
+   - items (Object):
+     - children
+       - type: Array
+       - default: []
+     - label
+       - type: String
+       - default: ""
+     - href
+       - type: String
+       - default: ""
+ - location
+   - type: String
+   - default: ""
+   - description: Current location use $route.fullPath with vue-router or window.location.href without, it is useful for highlight current state in the menu side bar and create current path variable for slot
 
 ### Contribute
 We need help! Our goals are:
