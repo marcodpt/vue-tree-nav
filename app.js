@@ -21633,7 +21633,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   }
 })()}
 },{"../node_modules/vue/dist/vue.js":42,"./index.vue":48,"./routes.js":49,"vue":43,"vue-hot-reload-api":39,"vue-router":41}],46:[function(require,module,exports){
-var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".tree_nav_bar {\n  display: table; \n  background-color:#eee;\n  position: relative;\n  width: 100%;\n  color: #4a4a4a;\n  margin: 0 0 20px 0;\n}\n\n.tree_nav_subbar {\n  display: table-cell;\n  vertical-align: middle;\n  padding: 0 15px;\n  margin: 0;\n}\n\n.tree_nav_bar a {\n  color: #4a4a4a;\n  text-decoration:none;\n  padding: 0 10px;\n}\n.tree_nav_bar a:hover, .tree_nav_bar a:focus {\n  color: #42b983;\n  cursor: pointer;\n  text-decoration:none;\n}\n\n.tree_nav_before {\n  height: 100%;\n  min-width: 300px;\n  top: 0;\n  left: -300px;\n  background-color: #eee;\n  position:absolute;\n  overflow-y:auto;\n}\n\n.tree_nav_after {\n  left: 0;\n}")
+var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".tree_nav_main {\n  border: 1px solid #e7e7e7;\n  background-color: #f3f3f3;\n}\n\n.tree_nav_section {\n  border-left: 3px solid #e7e7e7;\n  padding-left: 5px;\n  margin-left: 5px;\n}\n\n.tree_nav_main, .tree_nav_main a {\n  color: #666;\n}\n\n.tree_nav_main a {\n  text-decoration: none;\n  padding: 0 10px;\n  transition: 0.3s;\n}\n\n.tree_nav_main a:hover {\n  text-decoration: none;\n  cursor: pointer;\n}\n\n.tree_nav_bar {\n  display: table; \n  position: relative;\n  width: 100%;\n  margin: 0 0 20px 0;\n}\n\n.tree_nav_bar a:hover {\n  color: black;\n}\n\n.tree_nav_subbar {\n  display: table-cell;\n  vertical-align: middle;\n  padding: 0 15px;\n  margin: 0;\n}\n\n.tree_nav_before {\n  height: 100%;\n  min-width: 300px;\n  top: 0;\n  left: -300px;\n  overflow-y:auto;\n}\n\n.tree_nav_before a {\n  display:block;\n}\n\n.tree_nav_before a:hover {\n  display:block;\n  background-color: #ccc;\n}\n\n.tree_nav_before a > div {\n  padding-top:10px;\n  padding-bottom:10px;\n}\n\n.tree_nav_after {\n  left: 0;\n}")
 ;(function(){
 'use strict';
 
@@ -21743,7 +21743,7 @@ module.exports = {
 if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('div',{staticClass:"tree_nav_bar"},[_c('div',{staticClass:"tree_nav_subbar",staticStyle:{"text-align":"left"}},[(_vm.tree.length)?_c('a',{staticStyle:{"font-size":"250%"},on:{"click":_vm.open}},[_vm._v("≡")]):_vm._e(),_vm._v(" "),_vm._t("left",null,{path:_vm.path})],2),_vm._v(" "),_c('div',{staticClass:"tree_nav_subbar",staticStyle:{"text-align":"center"}},[_vm._t("default",null,{path:_vm.path})],2),_vm._v(" "),_c('div',{staticClass:"tree_nav_subbar",staticStyle:{"text-align":"right"}},[_vm._t("right",null,{path:_vm.path})],2)]),_vm._v(" "),(_vm.tree.length)?_c('vue-over-body',{attrs:{"open":_vm.sideBar,"before":"tree_nav_before","after":"tree_nav_after"}},[_c('tree',{attrs:{"close":_vm.close}}),_vm._v(" "),_vm._l((_vm.tree),function(leaf){return _c('tree',_vm._b({attrs:{"location":_vm.location}},'tree',leaf,false))}),_vm._v(" "),_c('div',{staticStyle:{"height":"20px"}})],2):_vm._e()],1)}
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('div',{staticClass:"tree_nav_main tree_nav_bar"},[_c('div',{staticClass:"tree_nav_subbar",staticStyle:{"text-align":"left"}},[(_vm.tree.length)?_c('a',{staticStyle:{"font-size":"250%"},on:{"click":_vm.open}},[_vm._v("≡")]):_vm._e(),_vm._v(" "),_vm._t("left",null,{path:_vm.path})],2),_vm._v(" "),_c('div',{staticClass:"tree_nav_subbar",staticStyle:{"text-align":"center"}},[_vm._t("default",null,{path:_vm.path})],2),_vm._v(" "),_c('div',{staticClass:"tree_nav_subbar",staticStyle:{"text-align":"right"}},[_vm._t("right",null,{path:_vm.path})],2)]),_vm._v(" "),(_vm.tree.length)?_c('vue-over-body',{attrs:{"open":_vm.sideBar,"before":"tree_nav_main tree_nav_before","after":"tree_nav_after"}},[_c('tree',{attrs:{"close":_vm.close}}),_vm._v(" "),_vm._l((_vm.tree),function(leaf){return _c('tree',_vm._b({attrs:{"location":_vm.location}},'tree',leaf,false))}),_vm._v(" "),_c('div',{staticStyle:{"height":"20px"}})],2):_vm._e()],1)}
 __vue__options__.staticRenderFns = []
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
@@ -21757,7 +21757,6 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   }
 })()}
 },{"./tree.vue":47,"babel-runtime/core-js/object/keys":1,"vue":43,"vue-hot-reload-api":39,"vue-over-body":40,"vueify/lib/insert-css":44}],47:[function(require,module,exports){
-var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".tree_nav_parent {\n  color: #4a4a4a;\n}\n\n.tree_nav_child {\n  color: #2a2a2a;\n  font-size: 110%;\n}\n\n.tree_nav_link {\n  background-color: #eee;\n  cursor: pointer;\n  text-align: left;\n  border: none;\n  outline: none;\n  transition: 0.4s;\n  display:block;\n  padding: 10px;\n  text-decoration: none;\n}\n\n.tree_nav_link:hover {\n  background-color: #ccc;\n  text-decoration: none;\n}\n\n.tree_nav_active {\n  background-color: #616161;\n  color: #fff;\n}")
 ;(function(){
 'use strict';
 
@@ -21808,12 +21807,12 @@ module.exports = {
       this.$data.open = !this.$data.open;
     },
     style: function style() {
+      var isActive = this.href && ('#' + this.location).indexOf(this.href) !== -1;
       return {
-        'padding-left': '' + (this.total + this.step) + this.unit
+        'padding-left': '' + (this.total + this.step) + this.unit,
+        'color': isActive ? 'black' : null,
+        'font-weight': isActive ? 'bold' : null
       };
-    },
-    isActive: function isActive() {
-      return ('#' + this.location).indexOf(this.href) !== -1;
     }
   }
 };
@@ -21821,20 +21820,19 @@ module.exports = {
 if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[(_vm.close)?_c('a',{staticClass:"tree_nav_link tree_nav_child",staticStyle:{"text-align":"right"},on:{"click":_vm.close}},[_vm._v("\n    ✖\n  ")]):(_vm.children.length)?_c('a',{staticClass:"tree_nav_link tree_nav_parent",style:(_vm.style()),on:{"click":function($event){_vm.toogle()}}},[_vm._v("\n    "+_vm._s(_vm.label)+"\n    "),_c('span',{staticStyle:{"float":"right"}},[_vm._v(_vm._s(_vm.open ? '▲' : ' ▼'))])]):_c('a',{class:['tree_nav_link', 'tree_nav_child', _vm.isActive() ? 'tree_nav_active' : ''],style:(_vm.style()),attrs:{"href":_vm.href}},[_vm._v("\n    "+_vm._s(_vm.label)+"\n  ")]),_vm._v(" "),_vm._l((_vm.children),function(child){return (child.label)?_c('tree',_vm._b({directives:[{name:"show",rawName:"v-show",value:(_vm.open),expression:"open"}],attrs:{"step":_vm.step,"total":_vm.total + _vm.step,"unit":_vm.unit,"location":_vm.location}},'tree',child,false)):_vm._e()})],2)}
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[(_vm.close)?_c('a',{staticStyle:{"text-align":"right"},on:{"click":_vm.close}},[_c('div',[_vm._v("\n      ✖\n    ")])]):(_vm.children.length)?_c('a',{style:(_vm.style()),on:{"click":function($event){_vm.toogle()}}},[_c('div',{class:_vm.total ? 'tree_nav_section' : ''},[_vm._v("\n      "+_vm._s(_vm.label)+"\n      "),_c('span',{staticStyle:{"float":"right"}},[_vm._v(_vm._s(_vm.open ? '▲' : ' ▼'))])])]):_c('a',{style:(_vm.style()),attrs:{"href":_vm.href}},[_c('div',{class:_vm.total ? 'tree_nav_section' : ''},[_vm._v(_vm._s(_vm.label))])]),_vm._v(" "),_vm._l((_vm.children),function(child){return (child.label)?_c('tree',_vm._b({directives:[{name:"show",rawName:"v-show",value:(_vm.open),expression:"open"}],attrs:{"step":_vm.step,"total":_vm.total + _vm.step,"unit":_vm.unit,"location":_vm.location}},'tree',child,false)):_vm._e()})],2)}
 __vue__options__.staticRenderFns = []
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
   if (!hotAPI.compatible) return
   module.hot.accept()
-  module.hot.dispose(__vueify_style_dispose__)
   if (!module.hot.data) {
     hotAPI.createRecord("data-v-2c7d7a69", __vue__options__)
   } else {
     hotAPI.reload("data-v-2c7d7a69", __vue__options__)
   }
 })()}
-},{"vue":43,"vue-hot-reload-api":39,"vueify/lib/insert-css":44}],48:[function(require,module,exports){
+},{"vue":43,"vue-hot-reload-api":39}],48:[function(require,module,exports){
 ;(function(){
 'use strict';
 

@@ -44,12 +44,12 @@
         this.$data.open = !this.$data.open
       },
       style: function () {
+        var isActive = this.href && `#${this.location}`.indexOf(this.href) !== -1
         return {
-          'padding-left': `${this.total + this.step}${this.unit}`
+          'padding-left': `${this.total + this.step}${this.unit}`,
+          'color': isActive ? 'black' : null,
+          'font-weight': isActive ? 'bold' : null
         }
-      },
-      isActive: function () {
-        return `#${this.location}`.indexOf(this.href) !== -1
       }
     }
   }
@@ -59,28 +59,29 @@
   <div>
     <a
       v-if="close"
-      class="tree_nav_link tree_nav_child"
       @click="close"
       style="text-align:right;"
     >
-      &#10006;
+      <div>
+        &#10006;
+      </div>
     </a>
     <a
       v-else-if="children.length"
       :style="style()"
-      class="tree_nav_link tree_nav_parent"
       @click="toogle()"
     >
-      {{label}}
-      <span style="float:right;">{{open ? '&#9650;' : ' &#9660;' }}</span>
+      <div :class="total ? 'tree_nav_section' : ''">
+        {{label}}
+        <span style="float:right;">{{open ? '&#9650;' : ' &#9660;' }}</span>
+      </div>
     </a>
     <a
       v-else
       :style="style()"
-      :class="['tree_nav_link', 'tree_nav_child', isActive() ? 'tree_nav_active' : '']"
       :href="href"
     >
-      {{label}}
+      <div :class="total ? 'tree_nav_section' : ''">{{label}}</div>
     </a>
     <tree
       v-for="child in children"
@@ -94,36 +95,3 @@
     />
   </div>
 </template>
-
-<style>
-  .tree_nav_parent {
-    color: #4a4a4a;
-  }
-
-  .tree_nav_child {
-    color: #2a2a2a;
-    font-size: 110%;
-  }
-
-  .tree_nav_link {
-    background-color: #eee;
-    cursor: pointer;
-    text-align: left;
-    border: none;
-    outline: none;
-    transition: 0.4s;
-    display:block;
-    padding: 10px;
-    text-decoration: none;
-  }
-
-  .tree_nav_link:hover {
-    background-color: #ccc;
-    text-decoration: none;
-  }
-
-  .tree_nav_active {
-    background-color: #616161;
-    color: #fff;
-  }
-</style>

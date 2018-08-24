@@ -88,7 +88,7 @@
 
 <template>
   <div>
-    <div class="tree_nav_bar">
+    <div class="tree_nav_main tree_nav_bar">
       <div class="tree_nav_subbar" style="text-align:left;">
         <a v-if="tree.length" @click="open" style="font-size:250%">&#8801;</a>
         <slot name="left" :path="path"></slot>
@@ -100,7 +100,7 @@
         <slot name="right" :path="path"></slot>
       </div>
     </div>
-    <vue-over-body v-if="tree.length" :open="sideBar" before="tree_nav_before" after="tree_nav_after">
+    <vue-over-body v-if="tree.length" :open="sideBar" before="tree_nav_main tree_nav_before" after="tree_nav_after">
       <tree :close="close"/>
       <tree v-for="leaf in tree" v-bind="leaf" :location="location"/>
       <div style="height:20px"></div>
@@ -109,13 +109,41 @@
 </template>
 
 <style>
+  .tree_nav_main {
+    border: 1px solid #e7e7e7;
+    background-color: #f3f3f3;
+  }
+
+  .tree_nav_section {
+    border-left: 3px solid #e7e7e7;
+    padding-left: 5px;
+    margin-left: 5px;
+  }
+
+  .tree_nav_main, .tree_nav_main a {
+    color: #666;
+  }
+
+  .tree_nav_main a {
+    text-decoration: none;
+    padding: 0 10px;
+    transition: 0.3s;
+  }
+
+  .tree_nav_main a:hover {
+    text-decoration: none;
+    cursor: pointer;
+  }
+
   .tree_nav_bar {
     display: table; 
-    background-color:#eee;
     position: relative;
     width: 100%;
-    color: #4a4a4a;
     margin: 0 0 20px 0;
+  }
+
+  .tree_nav_bar a:hover {
+    color: black;
   }
 
   .tree_nav_subbar {
@@ -125,25 +153,26 @@
     margin: 0;
   }
 
-  .tree_nav_bar a {
-    color: #4a4a4a;
-    text-decoration:none;
-    padding: 0 10px;
-  }
-  .tree_nav_bar a:hover, .tree_nav_bar a:focus {
-    color: #42b983;
-    cursor: pointer;
-    text-decoration:none;
-  }
-
   .tree_nav_before {
     height: 100%;
     min-width: 300px;
     top: 0;
     left: -300px;
-    background-color: #eee;
-    position:absolute;
     overflow-y:auto;
+  }
+
+  .tree_nav_before a {
+    display:block;
+  }
+
+  .tree_nav_before a:hover {
+    display:block;
+    background-color: #ccc;
+  }
+
+  .tree_nav_before a > div {
+    padding-top:10px;
+    padding-bottom:10px;
   }
 
   .tree_nav_after {
