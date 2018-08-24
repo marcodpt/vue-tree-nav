@@ -117,7 +117,6 @@
   .tree_nav_section {
     border-left: 3px solid #e7e7e7;
     padding-left: 5px;
-    margin-left: 5px;
   }
 
   .tree_nav_main, .tree_nav_main a {

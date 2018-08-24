@@ -63,7 +63,7 @@
       style="text-align:right;"
     >
       <div>
-        &#10006;
+        &times;
       </div>
     </a>
     <a
@@ -71,9 +71,8 @@
       :style="style()"
       @click="toogle()"
     >
-      <div :class="total ? 'tree_nav_section' : ''">
+      <div style="font-style: italic;">
         {{label}}
-        <span style="float:right;">{{open ? '&#9650;' : ' &#9660;' }}</span>
       </div>
     </a>
     <a
