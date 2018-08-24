@@ -193,5 +193,5 @@ We need help! Our goals are:
  - More usage examples and better home page
  - Add support to most browsers and devices
 
-What is outside of the scope of this project
+What is outside of the scope of this project:
  - Use any css framework! Althought we want themes compatible!
