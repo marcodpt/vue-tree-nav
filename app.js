@@ -21674,7 +21674,8 @@ module.exports = {
       sideBar: 0,
       path: '',
       tree: [],
-      links: {}
+      links: {},
+      Path: null
     };
   },
   mounted: function mounted() {
@@ -21696,6 +21697,7 @@ module.exports = {
           _this.$data.path = _this.$data.links[key];
         }
       });
+      this.$data.Path = this.$data.path.split(' / ');
       this.close();
     },
     setRoutes: function setRoutes() {
@@ -21743,7 +21745,7 @@ module.exports = {
 if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('div',{staticClass:"tree_nav_main tree_nav_bar"},[_c('div',{staticClass:"tree_nav_subbar",staticStyle:{"text-align":"left"}},[(_vm.tree.length)?_c('a',{staticStyle:{"font-size":"250%"},on:{"click":_vm.open}},[_vm._v("≡")]):_vm._e(),_vm._v(" "),_vm._t("left",null,{path:_vm.path})],2),_vm._v(" "),_c('div',{staticClass:"tree_nav_subbar",staticStyle:{"text-align":"center"}},[_vm._t("default",null,{path:_vm.path})],2),_vm._v(" "),_c('div',{staticClass:"tree_nav_subbar",staticStyle:{"text-align":"right"}},[_vm._t("right",null,{path:_vm.path})],2)]),_vm._v(" "),(_vm.tree.length)?_c('vue-over-body',{attrs:{"open":_vm.sideBar,"before":"tree_nav_main tree_nav_before","after":"tree_nav_after"}},[_c('tree',{attrs:{"close":_vm.close}}),_vm._v(" "),_vm._l((_vm.tree),function(leaf){return _c('tree',_vm._b({attrs:{"location":_vm.location}},'tree',leaf,false))}),_vm._v(" "),_c('div',{staticStyle:{"height":"20px"}})],2):_vm._e()],1)}
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('div',{staticClass:"tree_nav_main tree_nav_bar"},[_c('div',{staticClass:"tree_nav_subbar",staticStyle:{"text-align":"left"}},[(_vm.tree.length)?_c('a',{staticStyle:{"font-size":"250%"},on:{"click":_vm.open}},[_vm._v("≡")]):_vm._e(),_vm._v(" "),_vm._t("left",null,{path:_vm.path})],2),_vm._v(" "),_c('div',{staticClass:"tree_nav_subbar",staticStyle:{"text-align":"center"}},[_vm._t("default",null,{path:_vm.path})],2),_vm._v(" "),_c('div',{staticClass:"tree_nav_subbar",staticStyle:{"text-align":"right"}},[_vm._t("right",null,{path:_vm.path})],2)]),_vm._v(" "),(_vm.tree.length)?_c('vue-over-body',{attrs:{"open":_vm.sideBar,"before":"tree_nav_main tree_nav_before","after":"tree_nav_after"}},[_c('tree',{attrs:{"close":_vm.close}}),_vm._v(" "),_vm._l((_vm.tree),function(leaf){return _c('tree',_vm._b({attrs:{"path":_vm.Path}},'tree',leaf,false))}),_vm._v(" "),_c('div',{staticStyle:{"height":"20px"}})],2):_vm._e()],1)}
 __vue__options__.staticRenderFns = []
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
@@ -21777,9 +21779,11 @@ module.exports = {
       type: String,
       default: ''
     },
-    location: {
-      type: String,
-      default: ''
+    path: {
+      type: Array,
+      default: function _default() {
+        return [];
+      }
     },
     close: {
       type: Function
@@ -21799,7 +21803,7 @@ module.exports = {
   },
   data: function data() {
     return {
-      open: false
+      open: this.isActive()
     };
   },
   methods: {
@@ -21807,12 +21811,14 @@ module.exports = {
       this.$data.open = !this.$data.open;
     },
     style: function style() {
-      var isActive = this.href && ('#' + this.location).indexOf(this.href) !== -1;
       return {
         'padding-left': '' + (this.total + this.step) + this.unit,
-        'color': isActive ? 'black' : null,
-        'font-weight': isActive ? 'bold' : null
+        'color': this.isActive() ? 'black' : null,
+        'font-weight': this.isActive() ? 'bold' : null
       };
+    },
+    isActive: function isActive() {
+      return this.path[this.total / this.step] === this.label;
     }
   }
 };
@@ -21820,7 +21826,7 @@ module.exports = {
 if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[(_vm.close)?_c('a',{staticStyle:{"text-align":"right"},on:{"click":_vm.close}},[_c('div',[_vm._v("\n      ×\n    ")])]):(_vm.children.length)?_c('a',{style:(_vm.style()),on:{"click":function($event){_vm.toogle()}}},[_c('div',{staticStyle:{"font-style":"italic"}},[_vm._v("\n      "+_vm._s(_vm.label)+"\n    ")])]):_c('a',{style:(_vm.style()),attrs:{"href":_vm.href}},[_c('div',{class:_vm.total ? 'tree_nav_section' : ''},[_vm._v(_vm._s(_vm.label))])]),_vm._v(" "),_vm._l((_vm.children),function(child){return (child.label)?_c('tree',_vm._b({directives:[{name:"show",rawName:"v-show",value:(_vm.open),expression:"open"}],attrs:{"step":_vm.step,"total":_vm.total + _vm.step,"unit":_vm.unit,"location":_vm.location}},'tree',child,false)):_vm._e()})],2)}
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[(_vm.close)?_c('a',{staticStyle:{"text-align":"right"},on:{"click":_vm.close}},[_c('div',[_vm._v("\n      ×\n    ")])]):(_vm.children.length)?_c('a',{style:(_vm.style()),on:{"click":function($event){_vm.toogle()}}},[_c('div',{staticStyle:{"font-style":"italic"}},[_vm._v("\n      "+_vm._s(_vm.label)+"\n    ")])]):_c('a',{style:(_vm.style()),attrs:{"href":_vm.href}},[_c('div',{class:_vm.total ? 'tree_nav_section' : ''},[_vm._v(_vm._s(_vm.label))])]),_vm._v(" "),_vm._l((_vm.children),function(child){return (child.label)?_c('tree',_vm._b({directives:[{name:"show",rawName:"v-show",value:(_vm.open),expression:"open"}],attrs:{"step":_vm.step,"total":_vm.total + _vm.step,"unit":_vm.unit,"path":_vm.path}},'tree',child,false)):_vm._e()})],2)}
 __vue__options__.staticRenderFns = []
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)

@@ -24,6 +24,7 @@
         path: '',
         tree: [],
         links: {},
+        Path: null
       }
     },
     mounted: function () {
@@ -43,6 +44,7 @@
             this.$data.path = this.$data.links[key]
           }
         })
+        this.$data.Path = this.$data.path.split(' / ')
         this.close()
       },
       setRoutes: function () {
@@ -102,7 +104,7 @@
     </div>
     <vue-over-body v-if="tree.length" :open="sideBar" before="tree_nav_main tree_nav_before" after="tree_nav_after">
       <tree :close="close"/>
-      <tree v-for="leaf in tree" v-bind="leaf" :location="location"/>
+      <tree v-for="leaf in tree" v-bind="leaf" :path="Path"/>
       <div style="height:20px"></div>
     </vue-over-body>
   </div>

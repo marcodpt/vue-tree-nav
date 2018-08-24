@@ -14,9 +14,9 @@
         type: String,
         default: ''
       },
-      location: {
-        type: String,
-        default: ''
+      path: {
+        type: Array,
+        default: () => []
       },
       close: {
         type: Function
@@ -36,7 +36,7 @@
     },
     data: function () {
       return {
-        open: false
+        open: this.isActive() 
       }
     },
     methods: {
@@ -44,12 +44,14 @@
         this.$data.open = !this.$data.open
       },
       style: function () {
-        var isActive = this.href && `#${this.location}`.indexOf(this.href) !== -1
         return {
           'padding-left': `${this.total + this.step}${this.unit}`,
-          'color': isActive ? 'black' : null,
-          'font-weight': isActive ? 'bold' : null
+          'color': this.isActive() ? 'black' : null,
+          'font-weight': this.isActive() ? 'bold' : null
         }
+      },
+      isActive: function () {
+        return this.path[this.total / this.step] === this.label
       }
     }
   }
@@ -90,7 +92,7 @@
       :step="step"
       :total="total + step"
       :unit="unit"
-      :location="location"
+      :path="path"
     />
   </div>
 </template>
