@@ -21689,7 +21689,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   }
 })()}
 },{"../node_modules/vue/dist/vue.js":45,"./index.vue":51,"./routes.js":52,"babel-runtime/core-js/json/stringify":1,"vue":46,"vue-hot-reload-api":42,"vue-router":44}],49:[function(require,module,exports){
-var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".tree_nav_bar ul {\n  list-style-type: none;\n  margin: 0;\n  padding: 0;\n  overflow: hidden;\n}\n\n.tree_nav_before {\n  height: 100%;\n  top: 0;\n  left: -300px;\n}\n\n.tree_nav_after {\n  left: 0;\n}")
+var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".tree_nav_bar {\n   margin-bottom:20px;\n}\n\n.tree_nav_bar ul {\n  list-style-type: none;\n  margin: 0;\n  padding: 0;\n  overflow: hidden;\n}\n\n.tree_nav_before {\n  height: 100%;\n  top: 0;\n  left: -300px;\n}\n\n.tree_nav_after {\n  left: 0;\n}")
 ;(function(){
 'use strict';
 

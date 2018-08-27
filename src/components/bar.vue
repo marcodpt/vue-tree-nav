@@ -215,6 +215,10 @@
 </template>
 
 <style>
+  .tree_nav_bar {
+     margin-bottom:20px;
+  }
+
   .tree_nav_bar ul {
     list-style-type: none;
     margin: 0;
