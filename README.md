@@ -71,7 +71,6 @@ npm install --save vue-tree-nav
     :side="side"
     :left="left"
     :right="right"
-    :location="$route.fullPath"
   ></vue-tree-nav>
 ```
    - If you pass directly your vue-router routes in **side**, **left** or **right** prop it will do some magic, ignoring routes with :variable and redirect for obvious reasons
@@ -92,7 +91,7 @@ npm install --save vue-tree-nav
  - location
    - type: String
    - default: ""
-   - description: Current location use $route.fullPath with vue-router or window.location.href without, it is useful for highlight current state in the menu side bar and create current path variable for slot
+   - description: Current location use $route.fullPath with vue-router or window.location.href without
  - showPath
    - type: Boolean
    - default: true
