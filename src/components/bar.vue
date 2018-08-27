@@ -1,10 +1,14 @@
 <script type="text/babel">
   import tree from './tree.vue'
+  import item from './item.vue'
   import overBody from 'vue-over-body'
+  import icon from 'vue-awesome'
 
   module.exports = {
     name: 'vue-tree-nav',
     components: {
+      'icon': icon,
+      'item': item,
       'tree': tree,
       'vue-over-body': overBody
     },
@@ -12,6 +16,26 @@
       routes: {
         type: Array,
         default: () => []
+      },
+      left: {
+        type: Array,
+        default: () => []
+      },
+      right: {
+        type: Array,
+        default: () => []
+      },
+      label: {
+        type: String,
+        default: ''
+      },
+      showPath: {
+        type: Boolean,
+        default: true
+      },
+      offset: {
+        type: String,
+        default: '95px'
       },
       location: {
         type: String,
@@ -89,69 +113,47 @@
 </script>
 
 <template>
-  <div>
-    <div class="tree_nav_main tree_nav_bar">
-      <div class="tree_nav_subbar" style="text-align:left;">
-        <a v-if="tree.length" @click="open" style="font-size:250%">&#8801;</a>
-        <slot name="left" :path="path"></slot>
-      </div>
-      <div class="tree_nav_subbar" style="text-align:center;">
-        <slot :path="path"></slot>
-      </div>
-      <div class="tree_nav_subbar" style="text-align:right;">
-        <slot name="right" :path="path"></slot>
-      </div>
-    </div>
-    <vue-over-body v-if="tree.length" :open="sideBar" before="tree_nav_main tree_nav_before" after="tree_nav_after">
-      <tree :close="close"/>
-      <tree v-for="leaf in tree" v-bind="leaf" :path="Path"/>
+  <div class="tree_nav_bar">
+    <ul class="tree_nav_ul">
+      <item icon="bars" :href="open" style="float:left"></item>
+      <item
+        v-for="item in left"
+        v-bind="item"
+        style="float:left"
+      />
+      <li class="tree_nav_item">
+        <a class="tree_nav_label">
+          <b v-if="label">{{label}}</b>
+          <span v-if="showPath">{{path}}</span>
+        </a>
+      </li>
+      <item
+        v-for="item in right"
+        v-bind="item"
+        style="float:right"
+      />
+    </ul>
+    <vue-over-body v-if="tree.length" :open="sideBar" before="tree_nav_before" after="tree_nav_after">
+      <ul>
+        <tree :close="close"/>
+        <tree v-for="leaf in tree" v-bind="leaf" :path="Path"/>
+      </ul>
       <div style="height:20px"></div>
     </vue-over-body>
   </div>
 </template>
 
 <style>
-  .tree_nav_main {
-    border: 1px solid #e7e7e7;
+  .tree_nav_bar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
     background-color: #f3f3f3;
   }
 
-  .tree_nav_section {
-    border-left: 3px solid #e7e7e7;
-    padding-left: 5px;
-  }
-
-  .tree_nav_main, .tree_nav_main a {
-    color: #666;
-  }
-
-  .tree_nav_main a {
-    text-decoration: none;
-    padding: 0 10px;
-    transition: 0.3s;
-  }
-
-  .tree_nav_main a:hover {
-    text-decoration: none;
-    cursor: pointer;
-  }
-
-  .tree_nav_bar {
-    display: table; 
-    position: relative;
-    width: 100%;
-    margin: 0 0 20px 0;
-  }
-
-  .tree_nav_bar a:hover {
-    color: black;
-  }
-
-  .tree_nav_subbar {
-    display: table-cell;
-    vertical-align: middle;
-    padding: 0 15px;
-    margin: 0;
+  .tree_nav_ul {
+    border: 1px solid #e7e7e7;
   }
 
   .tree_nav_before {
@@ -160,23 +162,16 @@
     top: 0;
     left: -300px;
     overflow-y:auto;
-  }
-
-  .tree_nav_before a {
-    display:block;
-  }
-
-  .tree_nav_before a:hover {
-    display:block;
-    background-color: #ccc;
-  }
-
-  .tree_nav_before a > div {
-    padding-top:10px;
-    padding-bottom:10px;
+    background-color: #f3f3f3;
   }
 
   .tree_nav_after {
     left: 0;
+  }
+
+  .tree_nav_label {
+    position: absolute;
+    left: 40%;
+    margin-left: -95px !important;
   }
 </style>

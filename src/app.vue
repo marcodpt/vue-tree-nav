@@ -41,7 +41,26 @@
             }
           ]
         }
-      ])
+      ]),
+      left: [
+        {
+          label: 'Home',
+          icon: 'home',
+          href: '#/home'
+        }, {
+          label: 'News',
+          href: '#/news'
+        }, {
+          label: 'Contact',
+          href: '#/contact'
+        }
+      ],
+      right: [
+        {
+          href: 'https://github.com/marcodpt/vue-tree-nav',
+          icon: 'brands/github'
+        }
+      ]
     },
     components: {
       'vue-tree-nav': treeNav

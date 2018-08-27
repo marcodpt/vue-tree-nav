@@ -1,5 +1,12 @@
 <script type="text/babel">
+  import icon from 'vue-awesome'
+  import item from './item.vue'
+
   module.exports = {
+    components: {
+      'icon': icon,
+      'item': item
+    },
     name: 'tree',
     props: {
       children: {
@@ -21,17 +28,9 @@
       close: {
         type: Function
       },
-      step: {
-        type: Number,
-        default: 10
-      },
-      total: {
+      level: {
         type: Number,
         default: 0
-      },
-      unit: {
-        type: String,
-        default: 'px'
       }
     },
     data: function () {
@@ -43,56 +42,39 @@
       toogle: function () {
         this.$data.open = !this.$data.open
       },
+      isActive: function () {
+        return this.path[this.level] === this.label
+      },
       style: function () {
         return {
-          'padding-left': `${this.total + this.step}${this.unit}`,
-          'color': this.isActive() ? 'black' : null,
-          'font-weight': this.isActive() ? 'bold' : null
+          'border-left': '3px solid #e7e7e7',
+          'margin-left': `${(this.level + 1) * 10}px`
         }
-      },
-      isActive: function () {
-        return this.path[this.total / this.step] === this.label
       }
     }
   }
 </script>
 
 <template>
-  <div>
-    <a
-      v-if="close"
-      @click="close"
-      style="text-align:right;"
-    >
-      <div>
-        &times;
-      </div>
-    </a>
-    <a
-      v-else-if="children.length"
-      :style="style()"
-      @click="toogle()"
-    >
-      <div style="font-style: italic;">
-        {{label}}
-      </div>
-    </a>
-    <a
-      v-else
-      :style="style()"
-      :href="href"
-    >
-      <div :class="total ? 'tree_nav_section' : ''">{{label}}</div>
-    </a>
-    <tree
-      v-for="child in children"
-      v-if="child.label"
-      v-show="open"
-      v-bind="child"
-      :step="step"
-      :total="total + step"
-      :unit="unit"
-      :path="path"
-    />
-  </div>
+  <item v-if="close" icon="times" :href="close" style="text-align:right;"/>
+  <item
+    v-else
+    :children="children"
+    :label="label"
+    :icon="icon"
+    :href="children.length ? toogle : href"
+    :active="isActive()"
+    :level="level"
+  >
+    <ul v-if="children.length" :style="style()">
+      <tree
+        v-for="child in children"
+        v-if="child.label"
+        v-show="open"
+        v-bind="child"
+        :level="level + 1"
+        :path="path"
+      />
+    </ul>
+  </item>
 </template>
