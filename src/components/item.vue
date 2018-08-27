@@ -11,6 +11,10 @@
         type: Array,
         default: () => []
       },
+      path: {
+        type: Array,
+        default: () => []
+      },
       label: {
         type: String,
         default: ''
@@ -20,32 +24,66 @@
         default: ''
       },
       href: {
-        type: [String, Function],
-        default: ''
-      },
-      active: {
-        type: Boolean,
-        default: false
+        type: [String, Function]
       },
       level: {
         type: Number,
         default: 0
+      },
+      scale: {
+        type: Number,
+        required: true
+      },
+      fontColor: {
+        type: String,
+        required: true
+      },
+      borderColor: {
+        type: String,
+        required: true
+      },
+      hoverColor: {
+        type: String,
+        required: true
+      },
+      activeColor: {
+        type: String,
+        required: true
+      }
+    },
+    data: function () {
+      return {
+        open: this.isActive() && this.children.length,
+        hover: false
       }
     },
     methods: {
       run: function () {
         if (typeof this.href === 'function') {
           this.href()
+        } else if (this.children.length){
+          this.$data.open = !this.$data.open
         }
       },
       url: function () {
         return typeof this.href === 'string' ? this.href : null
       },
-      style: function () {
+      isActive: function () {
+        return this.path[this.level] === this.label
+      },
+      aStyle: function () {
         return {
-          'font-weight': this.active ? 'bold' : null,
+          'font-weight': this.isActive() ? 'bold' : null,
           'font-style': this.children.length ? 'italic' : null,
-          'color': this.active ? 'black' : '#666'
+          'font-size': Math.round(100 * this.scale) + '%',
+          'color': this.isActive() ? this.activeColor : this.fontColor,
+          'background-color': this.$data.hover ? this.hoverColor : null 
+        }
+      },
+      ulStyle: function () {
+        return {
+          'border-left': `3px solid ${this.borderColor}`,
+          'margin-left': `${(this.level + 1) * 10}px`
         }
       }
     }
@@ -56,11 +94,26 @@
   <li class="tree_nav_item">
     <a
       @click="run"
+      @mouseenter="hover = true"
+      @mouseleave="hover = false"
       :href="url()"
-      :style="style()"
+      :style="aStyle()"
     >
-      <icon v-if="icon" :name="icon"/> {{label}}
+      <icon v-if="icon" :scale="0.9 * scale" :name="icon"/> {{label}}
     </a>
+    <ul v-if="open" :style="ulStyle()">
+      <item
+        v-for="child in children"
+        v-bind="child"
+        :level="level + 1"
+        :path="path"
+        :scale="scale"
+        :fontColor="fontColor"
+        :borderColor="borderColor"
+        :hoverColor="hoverColor"
+        :activeColor="activeColor"
+      />
+    </ul>
     <slot></slot>
   </li>
 </template>
@@ -73,9 +126,8 @@
     display:block;
   }
 
-  .tree_nav_item a:hover:not(.tree_nav_label) {
+  .tree_nav_item a:hover {
     text-decoration: none;
     cursor: pointer;
-    background-color: #ddd;
   }
 </style>

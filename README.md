@@ -11,7 +11,6 @@ npm install --save vue-tree-nav
 
 ### Usage 
 
-##### without vue router
 ```javascript
   import Vue from 'vue'
   import treeNav from 'vue-tree-nav'
@@ -21,7 +20,7 @@ npm install --save vue-tree-nav
       'vue-tree-nav': treeNav
     },
     data: {
-      routes: [
+      side: [
         {
           label: 'pi',
           href: '#/numbers/3/14'
@@ -48,142 +47,103 @@ npm install --save vue-tree-nav
             }
           ]
         }
+      ],
+      left: [
+        {
+          label: 'Home',
+          icon: 'home',
+          href: '#/home'
+        }
+      ],
+      right: [
+        {
+          href: 'https://github.com/marcodpt/vue-tree-nav',
+          icon: 'brands/github',
+          label: 'Fork me at GitHub'
+        }
       ]
     }
   }).$mount('#app')
 ```
 
-##### with vue router
-  It will do some magic but will ignore routes with :variable or with redirect for obvious reasons
-
-```javascript
-  import Vue from 'vue'
-  import VueRouter from 'vue-router'
-
-  import treeNav from 'vue-tree-nav'
-
-  Vue.use(VueRouter)
-
-  var routes = [
-    {
-      path: '/colors',
-      component: {
-        template: '<div><h1>Color</h1><router-view></router-view></div>'
-      },
-      children: [
-        {
-          path: 'blue',
-          component: {
-            template: '<h3>Blue</h3>'
-          }
-        }, {
-          path: 'yellow',
-          component: {
-            template: '<h3>Yellow</h3>'
-          }
-        }, {
-          path: 'red',
-          component: {
-            template: '<h3>Red</h3>'
-          }
-        }, {
-          path: 'green',
-          component: {
-            template: '<h3>Green</h3>'
-          }
-        }
-      ]
-    }, {
-      path: '/pets',
-      component: {
-        template: '<div><h1>Pet</h1><router-view></router-view></div>'
-      },
-      children: [
-        {
-          path: 'dog',
-          component: {
-            template: '<h3>Dog</h3>'
-          }
-        }, {
-          path: 'cat',
-          component: {
-            template: '<h3>Cat</h3>'
-          }
-        }, {
-          path: 'bird',
-          component: {
-            template: '<h3>Bird</h3>'
-          }
-        }, {
-          path: 'horse',
-          component: {
-            template: '<h3>Horse</h3>'
-          }
-        }
-      ]
-    }
-  ]
-
-  const router = new VueRouter({
-    routes: routes
-  })
-
-  new Vue({
-    router: router,
-    components: {
-      'vue-tree-nav': treeNav
-    },
-    data: {
-      routes: routes 
-    }
-  }).$mount('#app')
-```
-
-##### HTML usage
-  If you are not using vue router you should pass a string with the current location
-  maybe window.location.href do the job
-  
 ```html
-  <vue-tree-nav :routes="routes" :location="$route.fullPath">
-    <h3 slot-scope="{path}">
-      Vue Tree Nav <small>{{path}}</small>
-    </h3>
-    <template slot="right">
-      <a href="https://github.com/marcodpt/vue-tree-nav">
-        GitHub
-      </a>
-    </template>
-  </vue-tree-nav>
+  <vue-tree-nav
+    :side="side"
+    :left="left"
+    :right="right"
+    :location="$route.fullPath"
+  ></vue-tree-nav>
 ```
-
-### Slots
- - left
- - right
- - default (center)
-
-### Slot scope
- - path
-   - type: String
-   - description: Path of the current state based on label of the state
+   - If you pass directly your vue-router routes in **side**, **left** or **right** prop it will do some magic, ignoring routes with :variable and redirect for obvious reasons
 
 ### Props
- - routes
+ - side
    - type: Array
    - default: []
-   - items (Object):
-     - children
-       - type: Array
-       - default: []
-     - label
-       - type: String
-       - default: ""
-     - href
-       - type: String
-       - default: ""
+   - description: Side navigation menu, see section **Items** below
+ - left
+   - type: Array
+   - default: []
+   - description: Top bar on the left, see section **Items** below
+ - right
+   - type: Array
+   - default: []
+   - description: Top bar on the right, see section **Items** below
  - location
    - type: String
    - default: ""
    - description: Current location use $route.fullPath with vue-router or window.location.href without, it is useful for highlight current state in the menu side bar and create current path variable for slot
+ - showPath
+   - type: Boolean
+   - default: true
+   - description: show current path near hamburguer menu
+ - barScale
+   - type: Number
+   - default: 1
+   - description: scale of icons and font in top bar
+ - sideScale
+   - type: Number
+   - default: 1
+   - description: scale of icons and font in side bar
+ - bgColor
+   - type: String
+   - default: '#f3f3f3'
+   - description: background color of top and side bar
+ - fontColor
+   - type: String
+   - default: '#666666'
+   - description: font color of top and side bar
+ - borderColor
+   - type: String
+   - default: '#e7e7e7'
+   - description: border color and nasted tree levels border
+ - hoverColor
+   - type: String
+   - default: '#dddddd'
+   - description: background color in case of hovering any link
+ - activeColor
+   - type: String
+   - default: '#000000'
+   - description: active font color of top and side bar, active items will change font color
+
+### Items of side, left, right
+   - items (Object):
+     - label
+       - type: String
+       - default: ""
+       - description: label that appear in the screen
+     - href
+       - type: String, Function
+       - default: ""
+       - description: string it will be a normal link, otherwise it will call the function
+     - icon
+       - type: String
+       - default: ""
+       - description: One of [Font Awesome Icons](https://fontawesome.com/icons?d=gallery&s=solid&m=free)
+     - children
+       - type: Array
+       - default: []
+       - description: Again it is an array of items, in the side menu you can go infinity depth, in the top bar it will ignore, soon we will create a dropdown
 
 ### Contribute
 We need help! Our goals are:

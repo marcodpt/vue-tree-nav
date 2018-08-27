@@ -1,19 +1,15 @@
 <script type="text/babel">
-  import tree from './tree.vue'
   import item from './item.vue'
   import overBody from 'vue-over-body'
-  import icon from 'vue-awesome'
 
   module.exports = {
     name: 'vue-tree-nav',
     components: {
-      'icon': icon,
       'item': item,
-      'tree': tree,
       'vue-over-body': overBody
     },
     props: {
-      routes: {
+      side: {
         type: Array,
         default: () => []
       },
@@ -25,21 +21,41 @@
         type: Array,
         default: () => []
       },
-      label: {
+      location: {
         type: String,
         default: ''
       },
       showPath: {
         type: Boolean,
-        default: true
+        default: true 
       },
-      offset: {
-        type: String,
-        default: '95px'
+      barScale: {
+        type: Number,
+        default: 1
       },
-      location: {
+      sideScale: {
+        type: Number,
+        default: 1
+      },
+      bgColor: {
         type: String,
-        default: ''
+        default: '#f3f3f3'
+      },
+      fontColor: {
+        type: String,
+        default: '#666666'
+      },
+      borderColor: {
+        type: String,
+        default: '#e7e7e7'
+      },
+      hoverColor: {
+        type: String,
+        default: '#dddddd'
+      },
+      activeColor: {
+        type: String,
+        default: '#000000'
       }
     },
     data: function () {
@@ -48,7 +64,7 @@
         path: '',
         tree: [],
         links: {},
-        Path: null
+        Path: []
       }
     },
     mounted: function () {
@@ -74,7 +90,9 @@
       setRoutes: function () {
         this.$data.tree = []
         this.$data.links = {}
-        this.transverse(this.routes, this.$data.tree, '', '#')
+        this.transverse(this.side, this.$data.tree, '', '#')
+        this.transverse(this.left, [], '', '#')
+        this.transverse(this.right, [], '', '#')
         this.setLocation ()
       },
       transverse: function (Input, Output, label, path) {
@@ -105,7 +123,13 @@
       location: function () {
         this.setLocation()
       },
-      routes: function () {
+      side: function () {
+        this.setRoutes()
+      },
+      left: function () {
+        this.setRoutes()
+      },
+      right: function () {
         this.setRoutes()
       }
     }
@@ -114,31 +138,78 @@
 
 <template>
   <div class="tree_nav_bar">
-    <ul class="tree_nav_ul">
-      <item icon="bars" :href="open" style="float:left"></item>
+    <ul :style="'border-bottom: 1px solid '+borderColor+';background-color:'+bgColor">
+      <item
+        icon="bars"
+        :label="showPath ? path : ''"
+        :href="open"
+        style="float:left"
+        :scale="barScale"
+        :fontColor="fontColor"
+        :borderColor="borderColor"
+        :hoverColor="hoverColor"
+        :activeColor="activeColor"
+      ></item>
       <item
         v-for="item in left"
         v-bind="item"
         style="float:left"
+        :path="Path"
+        :scale="barScale"
+        :fontColor="fontColor"
+        :borderColor="borderColor"
+        :hoverColor="hoverColor"
+        :activeColor="activeColor"
       />
-      <li class="tree_nav_item">
-        <a class="tree_nav_label">
-          <b v-if="label">{{label}}</b>
-          <span v-if="showPath">{{path}}</span>
-        </a>
-      </li>
       <item
         v-for="item in right"
         v-bind="item"
         style="float:right"
+        :path="Path"
+        :scale="barScale"
+        :fontColor="fontColor"
+        :borderColor="borderColor"
+        :hoverColor="hoverColor"
+        :activeColor="activeColor"
       />
     </ul>
-    <vue-over-body v-if="tree.length" :open="sideBar" before="tree_nav_before" after="tree_nav_after">
-      <ul>
-        <tree :close="close"/>
-        <tree v-for="leaf in tree" v-bind="leaf" :path="Path"/>
-      </ul>
-      <div style="height:20px"></div>
+    <vue-over-body
+      v-if="tree.length"
+      :open="sideBar"
+      :dialog-style="{'position': 'absolute'}"
+      before="tree_nav_before"
+      after="tree_nav_after"
+    >
+      <div :style="{
+        'min-width': '300px',
+        'height': '100%',
+        'background-color': bgColor,
+        'border-right': '1px solid '+borderColor,
+        'overflow-y': 'auto'
+      }">
+        <ul>
+          <item
+            style="text-align:right;"
+            icon="times" :href="close"
+            :scale="sideScale"
+            :fontColor="fontColor"
+            :borderColor="borderColor"
+            :hoverColor="hoverColor"
+            :activeColor="activeColor"
+          />
+          <item
+            v-for="item in tree"
+            v-bind="item"
+            :path="Path"
+            :scale="sideScale"
+            :fontColor="fontColor"
+            :borderColor="borderColor"
+            :hoverColor="hoverColor"
+            :activeColor="activeColor"
+          />
+        </ul>
+        <div style="height:20px"></div>
+      </div>
     </vue-over-body>
   </div>
 </template>
@@ -149,29 +220,15 @@
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: #f3f3f3;
-  }
-
-  .tree_nav_ul {
-    border: 1px solid #e7e7e7;
   }
 
   .tree_nav_before {
     height: 100%;
-    min-width: 300px;
     top: 0;
     left: -300px;
-    overflow-y:auto;
-    background-color: #f3f3f3;
   }
 
   .tree_nav_after {
     left: 0;
-  }
-
-  .tree_nav_label {
-    position: absolute;
-    left: 40%;
-    margin-left: -95px !important;
   }
 </style>

@@ -8,17 +8,55 @@
 </head>
 <body style="margin:0px">
   <div id="app">
+    <div style="color:#f3f3f3;background-color:#666666;padding:20px">
+      <h1 style="margin:0;">Vue Tree Nav</h1>
+    </div>
     <vue-tree-nav
       :location="$route.fullPath"
-      :routes="routes"
+      :side="side"
       :left="left"
-      label="Vue Tree Nav"
       :right="right"
+      v-bind="treeNav"
     >
     </vue-tree-nav>
-    <div style="text-align:center">
-      <router-view></router-view>
-    </div>
+    <form style="margin:40px">
+      <div style="margin:10px">
+        <label>showPath:</label>
+        <input type="checkbox" v-model="treeNav.showPath">
+      </div>
+      <div style="margin:10px">
+        <label>barScale:</label>
+        <input type="number" step="0.1" v-model.number="treeNav.barScale">
+      </div>
+      <div>
+        <label>sideScale:</label>
+        <input type="number" step="0.1" v-model.number="treeNav.sideScale">
+      </div>
+      <div>
+        <label>bgColor:</label>
+        <input type="color" v-model="treeNav.bgColor">
+      </div>
+      <div>
+        <label>fontColor:</label>
+        <input type="color" v-model="treeNav.fontColor">
+      </div>
+      <div>
+        <label>borderColor:</label>
+        <input type="color" v-model="treeNav.borderColor">
+      </div>
+      <div>
+        <label>hoverColor:</label>
+        <input type="color" v-model="treeNav.hoverColor">
+      </div>
+      <div>
+        <label>activeColor:</label>
+        <input type="color" v-model="treeNav.activeColor">
+      </div>
+      <div>
+        <button @click="reset">Reset default</button>
+      </div>
+      <div style="white-space:pre-line">{{feedback()}}</div>
+    </form>
   </div>
   <script src="app.js"></script>
 </body>

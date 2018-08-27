@@ -56,6 +56,11 @@ module.exports = [
       }
     ]
   }, {
+    path: '/home',
+    component: {
+      template: '<h1>Home</h1>'
+    }
+  }, {
     path: '/numbers/:n1/:n2',
     component: {
       template: '<div><h1>Numbers</h1><p>{{$route.params.n1}}</p><p>{{$route.params.n2}}</p></div>'

@@ -14,7 +14,7 @@
   new Vue({
     router: router,
     data: {
-      routes: routes.concat([
+      side: routes.concat([
         {
           label: 'pi',
           href: '#/numbers/3/14'
@@ -47,23 +47,37 @@
           label: 'Home',
           icon: 'home',
           href: '#/home'
-        }, {
-          label: 'News',
-          href: '#/news'
-        }, {
-          label: 'Contact',
-          href: '#/contact'
         }
       ],
       right: [
         {
           href: 'https://github.com/marcodpt/vue-tree-nav',
-          icon: 'brands/github'
+          icon: 'brands/github',
+          label: 'Fork me at GitHub'
         }
-      ]
+      ],
+      treeNav: {}
     },
     components: {
       'vue-tree-nav': treeNav
+    },
+    mounted: function () {
+      this.reset()
+    },
+    methods: {
+      reset: function () {
+        this.$set(this.$data.treeNav, 'showPath', true)
+        this.$set(this.$data.treeNav, 'sideScale', 1)
+        this.$set(this.$data.treeNav, 'barScale', 1)
+        this.$set(this.$data.treeNav, 'bgColor', '#f3f3f3')
+        this.$set(this.$data.treeNav, 'fontColor', '#666666')
+        this.$set(this.$data.treeNav, 'borderColor', '#e7e7e7')
+        this.$set(this.$data.treeNav, 'hoverColor', '#dddddd')
+        this.$set(this.$data.treeNav, 'activeColor', '#000000')
+      },
+      feedback: function () {
+        return JSON.stringify(this.$data.treeNav, undefined, 2)
+      }
     }
   }).$mount('#app')
 </script>
