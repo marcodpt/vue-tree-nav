@@ -2,14 +2,14 @@
  Navigation tree menu component with nice integration with vue-router 
  - Ready out of the box! 
 
-### [Live Demo](http://marcodpt.github.io/vue-tree-nav)
+## [Live Demo](http://marcodpt.github.io/vue-tree-nav)
 
-### Install
+## Install
 ```
 npm install --save vue-tree-nav
 ```
 
-### Usage 
+## Usage 
 
 ```javascript
   import Vue from 'vue'
@@ -144,7 +144,7 @@ npm install --save vue-tree-nav
        - default: []
        - description: Again it is an array of items, in the side menu you can go infinity depth, in the top bar it will ignore, soon we will create a dropdown
 
-### Contribute
+## Contribute
 We need help! Our goals are:
  - CSS Themes out of the box
  - CSS transitions
