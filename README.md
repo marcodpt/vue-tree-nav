@@ -58,8 +58,7 @@ npm install --save vue-tree-nav
       right: [
         {
           href: 'https://github.com/marcodpt/vue-tree-nav',
-          icon: 'brands/github',
-          label: 'Fork me at GitHub'
+          icon: 'brands/github'
         }
       ]
     }

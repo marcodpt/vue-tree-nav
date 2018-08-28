@@ -21648,8 +21648,7 @@ new _vue2.default({
     }],
     right: [{
       href: 'https://github.com/marcodpt/vue-tree-nav',
-      icon: 'brands/github',
-      label: 'Fork me at GitHub'
+      icon: 'brands/github'
     }],
     treeNav: {}
   },
