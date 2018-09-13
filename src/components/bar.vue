@@ -70,6 +70,20 @@
     mounted: function () {
       this.setRoutes()
     },
+    watch: {
+      location: function () {
+        this.setLocation()
+      },
+      side: function () {
+        this.setRoutes()
+      },
+      left: function () {
+        this.setRoutes()
+      },
+      right: function () {
+        this.setRoutes()
+      }
+    },
     methods: {
       open: function () {
         this.$data.sideBar += 1;
@@ -88,7 +102,11 @@
         this.close()
       },
       setRoutes: function () {
-        this.$data.tree = []
+        this.$data.tree = [{
+          style: 'text-align:right;',
+          icon: 'times',
+          href: this.close
+        }]
         this.$data.links = {}
         this.transverse(this.side, this.$data.tree, '', '#')
         this.transverse(this.left, [], '', '#')
@@ -100,10 +118,11 @@
           var abs = input.path && input.path.substr(0, 1) === '/'
 
           var newLabel = input.label || input.name || (abs ? input.path.substr(1) : input.path)
-          if (newLabel && (input.path || '').indexOf(':') === -1 && !input.redirect) {
+          if ((newLabel || input.icon) && (input.path || '').indexOf(':') === -1 && !input.redirect) {
             Output.push({})
             var i = Output.length - 1
 
+            Output[i].icon = input.icon
             Output[i].label = newLabel
             newLabel = (label ? `${label} / ` : '') + newLabel
 
@@ -117,20 +136,14 @@
             }
           }
         })
-      }
-    },
-    watch: {
-      location: function () {
-        this.setLocation()
       },
-      side: function () {
-        this.setRoutes()
-      },
-      left: function () {
-        this.setRoutes()
-      },
-      right: function () {
-        this.setRoutes()
+      getRight: function () {
+        var R = []
+        this.right.forEach(r => {
+          R.push(r)
+        })
+        R.reverse()
+        return R
       }
     }
   }
@@ -140,6 +153,7 @@
   <div class="tree_nav_bar">
     <ul :style="'border-bottom: 1px solid '+borderColor+';background-color:'+bgColor">
       <item
+        v-if="tree.length > 1"
         icon="bars"
         :label="showPath ? path : ''"
         :href="open"
@@ -162,7 +176,7 @@
         :activeColor="activeColor"
       />
       <item
-        v-for="item in right"
+        v-for="item in getRight()"
         v-bind="item"
         style="float:right"
         :path="Path"
@@ -174,7 +188,6 @@
       />
     </ul>
     <vue-over-body
-      v-if="tree.length"
       :open="sideBar"
       :dialog-style="{'position': 'absolute'}"
       before="tree_nav_before"
@@ -188,15 +201,6 @@
         'overflow-y': 'auto'
       }">
         <ul>
-          <item
-            style="text-align:right;"
-            icon="times" :href="close"
-            :scale="sideScale"
-            :fontColor="fontColor"
-            :borderColor="borderColor"
-            :hoverColor="hoverColor"
-            :activeColor="activeColor"
-          />
           <item
             v-for="item in tree"
             v-bind="item"

@@ -902,7 +902,7 @@ exports.reload = tryWrap(function (id, options) {
 })
 
 },{}],43:[function(require,module,exports){
-var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".over_body_mask {\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  position:fixed; \n  overflow-x: hidden;\n  overflow-y: auto;\n}\n\n.over_body_mask_after {\n  background-color:rgba(0, 0, 0, 0.5); \n}\n\n.over_body_dialog {\n  position:relative; \n}")
+var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".over_body_open {\n  overflow: hidden;\n}\n\n.over_body_mask {\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  position:fixed; \n  overflow-x: hidden;\n  overflow-y: auto;\n}\n\n.over_body_mask_after {\n  background-color:rgba(0, 0, 0, 0.5); \n}\n\n.over_body_dialog {\n  position:relative; \n}")
 ;(function(){
 'use strict';
 
@@ -943,7 +943,9 @@ module.exports = {
     };
   },
   mounted: function mounted() {
-    this.toogle(this.open);
+    if (this.open) {
+      this.toogle(this.open);
+    }
   },
   watch: {
     open: function open() {
@@ -959,6 +961,7 @@ module.exports = {
 
       var t = 50;
       if (open) {
+        document.body.className += ' over_body_open';
         this.$data.start = true;
         setTimeout(function () {
           return _this.$data.finish = true;
@@ -966,7 +969,8 @@ module.exports = {
       } else {
         this.$data.finish = false;
         setTimeout(function () {
-          return _this.$data.start = false;
+          _this.$data.start = false;
+          document.body.className = document.body.className.replace(" over_body_open", "");
         }, this.transition * 1000 + t);
       }
     },
@@ -21619,37 +21623,7 @@ var router = new _vueRouter2.default({
 new _vue2.default({
   router: router,
   data: {
-    side: _routes2.default.concat([{
-      label: 'pi',
-      href: '#/numbers/3/14'
-    }, {
-      label: 'e',
-      href: '#/numbers/2/7'
-    }, {
-      label: 'integer',
-      children: [{
-        label: 'natural',
-        children: [{
-          label: 'even',
-          href: '#/numbers/4/6'
-        }, {
-          label: 'prime',
-          href: '#/numbers/5/7'
-        }]
-      }, {
-        label: 'minus three',
-        href: '#/numbers/_/3'
-      }]
-    }]),
-    left: [{
-      label: 'Home',
-      icon: 'home',
-      href: '#/home'
-    }],
-    right: [{
-      href: 'https://github.com/marcodpt/vue-tree-nav',
-      icon: 'brands/github'
-    }],
+    f: {},
     treeNav: {}
   },
   components: {
@@ -21657,6 +21631,9 @@ new _vue2.default({
   },
   mounted: function mounted() {
     this.reset();
+    this.$data.f.side = (0, _stringify2.default)(this.$data.treeNav.side, undefined, 2);
+    this.$data.f.left = (0, _stringify2.default)(this.$data.treeNav.left, undefined, 2);
+    this.$data.f.right = (0, _stringify2.default)(this.$data.treeNav.right, undefined, 2);
   },
   methods: {
     reset: function reset() {
@@ -21668,6 +21645,69 @@ new _vue2.default({
       this.$set(this.$data.treeNav, 'borderColor', '#e7e7e7');
       this.$set(this.$data.treeNav, 'hoverColor', '#dddddd');
       this.$set(this.$data.treeNav, 'activeColor', '#000000');
+      this.$set(this.$data.treeNav, 'left', [{
+        label: 'Home',
+        icon: 'home',
+        href: '#/home'
+      }]);
+      this.$set(this.$data.treeNav, 'right', [{
+        href: 'https://github.com/marcodpt/vue-tree-nav',
+        icon: 'brands/github'
+      }]);
+      this.$set(this.$data.treeNav, 'side', [{
+        label: 'Home',
+        icon: 'home',
+        href: '#/home'
+      }, {
+        label: 'Colors',
+        children: [{
+          label: 'Red',
+          href: '#/colors/red'
+        }, {
+          label: 'Green',
+          href: '#/colors/green'
+        }, {
+          label: 'Blue',
+          href: '#/colors/blue'
+        }]
+      }, {
+        label: 'Scientists',
+        children: [{
+          label: 'Mathematicians',
+          href: '',
+          children: [{
+            label: 'Euler',
+            href: '#/science/math/euler'
+          }, {
+            label: 'Gauss',
+            href: '#/science/math/gauss'
+          }, {
+            label: 'Riemann',
+            href: '#/science/math/riemann'
+          }]
+        }, {
+          label: 'Physicists',
+          children: [{
+            label: 'Einstein',
+            href: '#/science/physics/einstein'
+          }, {
+            label: 'Newton',
+            href: '#/science/physics/newton'
+          }, {
+            label: 'Dirac',
+            href: '#/science/physics/dirac'
+          }]
+        }]
+      }, {
+        icon: 'brands/github',
+        label: 'Fork me at GitHub',
+        href: 'https://github.com/marcodpt/vue-tree-nav'
+      }]);
+    },
+    parse: function parse() {
+      this.$data.treeNav.side = JSON.parse(this.$data.f.side);
+      this.$data.treeNav.left = JSON.parse(this.$data.f.left);
+      this.$data.treeNav.right = JSON.parse(this.$data.f.right);
     },
     feedback: function feedback() {
       return (0, _stringify2.default)(this.$data.treeNav, undefined, 2);
@@ -21780,6 +21820,20 @@ module.exports = {
   mounted: function mounted() {
     this.setRoutes();
   },
+  watch: {
+    location: function location() {
+      this.setLocation();
+    },
+    side: function side() {
+      this.setRoutes();
+    },
+    left: function left() {
+      this.setRoutes();
+    },
+    right: function right() {
+      this.setRoutes();
+    }
+  },
   methods: {
     open: function open() {
       this.$data.sideBar += 1;
@@ -21800,7 +21854,11 @@ module.exports = {
       this.close();
     },
     setRoutes: function setRoutes() {
-      this.$data.tree = [];
+      this.$data.tree = [{
+        style: 'text-align:right;',
+        icon: 'times',
+        href: this.close
+      }];
       this.$data.links = {};
       this.transverse(this.side, this.$data.tree, '', '#');
       this.transverse(this.left, [], '', '#');
@@ -21814,10 +21872,11 @@ module.exports = {
         var abs = input.path && input.path.substr(0, 1) === '/';
 
         var newLabel = input.label || input.name || (abs ? input.path.substr(1) : input.path);
-        if (newLabel && (input.path || '').indexOf(':') === -1 && !input.redirect) {
+        if ((newLabel || input.icon) && (input.path || '').indexOf(':') === -1 && !input.redirect) {
           Output.push({});
           var i = Output.length - 1;
 
+          Output[i].icon = input.icon;
           Output[i].label = newLabel;
           newLabel = (label ? label + ' / ' : '') + newLabel;
 
@@ -21831,20 +21890,14 @@ module.exports = {
           }
         }
       });
-    }
-  },
-  watch: {
-    location: function location() {
-      this.setLocation();
     },
-    side: function side() {
-      this.setRoutes();
-    },
-    left: function left() {
-      this.setRoutes();
-    },
-    right: function right() {
-      this.setRoutes();
+    getRight: function getRight() {
+      var R = [];
+      this.right.forEach(function (r) {
+        R.push(r);
+      });
+      R.reverse();
+      return R;
     }
   }
 };
@@ -21852,13 +21905,13 @@ module.exports = {
 if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"tree_nav_bar"},[_c('ul',{style:('border-bottom: 1px solid '+_vm.borderColor+';background-color:'+_vm.bgColor)},[_c('item',{staticStyle:{"float":"left"},attrs:{"icon":"bars","label":_vm.showPath ? _vm.path : '',"href":_vm.open,"scale":_vm.barScale,"fontColor":_vm.fontColor,"borderColor":_vm.borderColor,"hoverColor":_vm.hoverColor,"activeColor":_vm.activeColor}}),_vm._v(" "),_vm._l((_vm.left),function(item){return _c('item',_vm._b({staticStyle:{"float":"left"},attrs:{"path":_vm.Path,"scale":_vm.barScale,"fontColor":_vm.fontColor,"borderColor":_vm.borderColor,"hoverColor":_vm.hoverColor,"activeColor":_vm.activeColor}},'item',item,false))}),_vm._v(" "),_vm._l((_vm.right),function(item){return _c('item',_vm._b({staticStyle:{"float":"right"},attrs:{"path":_vm.Path,"scale":_vm.barScale,"fontColor":_vm.fontColor,"borderColor":_vm.borderColor,"hoverColor":_vm.hoverColor,"activeColor":_vm.activeColor}},'item',item,false))})],2),_vm._v(" "),(_vm.tree.length)?_c('vue-over-body',{attrs:{"open":_vm.sideBar,"dialog-style":{'position': 'absolute'},"before":"tree_nav_before","after":"tree_nav_after"}},[_c('div',{style:({
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"tree_nav_bar"},[_c('ul',{style:('border-bottom: 1px solid '+_vm.borderColor+';background-color:'+_vm.bgColor)},[(_vm.tree.length > 1)?_c('item',{staticStyle:{"float":"left"},attrs:{"icon":"bars","label":_vm.showPath ? _vm.path : '',"href":_vm.open,"scale":_vm.barScale,"fontColor":_vm.fontColor,"borderColor":_vm.borderColor,"hoverColor":_vm.hoverColor,"activeColor":_vm.activeColor}}):_vm._e(),_vm._v(" "),_vm._l((_vm.left),function(item){return _c('item',_vm._b({staticStyle:{"float":"left"},attrs:{"path":_vm.Path,"scale":_vm.barScale,"fontColor":_vm.fontColor,"borderColor":_vm.borderColor,"hoverColor":_vm.hoverColor,"activeColor":_vm.activeColor}},'item',item,false))}),_vm._v(" "),_vm._l((_vm.getRight()),function(item){return _c('item',_vm._b({staticStyle:{"float":"right"},attrs:{"path":_vm.Path,"scale":_vm.barScale,"fontColor":_vm.fontColor,"borderColor":_vm.borderColor,"hoverColor":_vm.hoverColor,"activeColor":_vm.activeColor}},'item',item,false))})],2),_vm._v(" "),_c('vue-over-body',{attrs:{"open":_vm.sideBar,"dialog-style":{'position': 'absolute'},"before":"tree_nav_before","after":"tree_nav_after"}},[_c('div',{style:({
       'min-width': '300px',
       'height': '100%',
       'background-color': _vm.bgColor,
       'border-right': '1px solid '+_vm.borderColor,
       'overflow-y': 'auto'
-    })},[_c('ul',[_c('item',{staticStyle:{"text-align":"right"},attrs:{"icon":"times","href":_vm.close,"scale":_vm.sideScale,"fontColor":_vm.fontColor,"borderColor":_vm.borderColor,"hoverColor":_vm.hoverColor,"activeColor":_vm.activeColor}}),_vm._v(" "),_vm._l((_vm.tree),function(item){return _c('item',_vm._b({attrs:{"path":_vm.Path,"scale":_vm.sideScale,"fontColor":_vm.fontColor,"borderColor":_vm.borderColor,"hoverColor":_vm.hoverColor,"activeColor":_vm.activeColor}},'item',item,false))})],2),_vm._v(" "),_c('div',{staticStyle:{"height":"20px"}})])]):_vm._e()],1)}
+    })},[_c('ul',_vm._l((_vm.tree),function(item){return _c('item',_vm._b({attrs:{"path":_vm.Path,"scale":_vm.sideScale,"fontColor":_vm.fontColor,"borderColor":_vm.borderColor,"hoverColor":_vm.hoverColor,"activeColor":_vm.activeColor}},'item',item,false))})),_vm._v(" "),_c('div',{staticStyle:{"height":"20px"}})])])],1)}
 __vue__options__.staticRenderFns = []
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
@@ -22016,70 +22069,28 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
 })()}
 },{"./components/bar.vue":49,"vue":46,"vue-hot-reload-api":42}],52:[function(require,module,exports){
 module.exports = [{
-  path: '/colors',
-  component: {
-    template: '<div><h1>Color</h1><router-view></router-view></div>'
-  },
-  children: [{
-    path: 'blue',
-    component: {
-      template: '<h3>Blue</h3>'
-    }
-  }, {
-    path: 'yellow',
-    component: {
-      template: '<h3>Yellow</h3>'
-    }
-  }, {
-    path: 'red',
-    component: {
-      template: '<h3>Red</h3>'
-    }
-  }, {
-    path: 'green',
-    component: {
-      template: '<h3>Green</h3>'
-    }
-  }]
-}, {
-  path: '/pets',
-  component: {
-    template: '<div><h1>Pet</h1><router-view></router-view></div>'
-  },
-  children: [{
-    path: 'dog',
-    component: {
-      template: '<h3>Dog</h3>'
-    }
-  }, {
-    path: 'cat',
-    component: {
-      template: '<h3>Cat</h3>'
-    }
-  }, {
-    path: 'bird',
-    component: {
-      template: '<h3>Bird</h3>'
-    }
-  }, {
-    path: 'horse',
-    component: {
-      template: '<h3>Horse</h3>'
-    }
-  }]
-}, {
   path: '/home',
   component: {
-    template: '<h1>Home</h1>'
+    template: '<h3>Edit fields below and see the result in navbar</h3>'
   }
 }, {
-  path: '/numbers/:n1/:n2',
+  path: '/:section',
   component: {
-    template: '<div><h1>Numbers</h1><p>{{$route.params.n1}}</p><p>{{$route.params.n2}}</p></div>'
+    template: '<div><h1>{{$route.params.section}}</h1></div>'
+  }
+}, {
+  path: '/:section/:page',
+  component: {
+    template: '<div><h1>{{$route.params.section}}</h1><h3>{{$route.params.page}}</h3></div>'
+  }
+}, {
+  path: '/:section/:page/:subpage',
+  component: {
+    template: '<div><h1>{{$route.params.section}}</h1><h3>{{$route.params.page}}</h3><h5>{{$route.params.subpage}}</h5></div>'
   }
 }, {
   path: '*',
-  redirect: '/colors/blue'
+  redirect: '/home'
 }];
 
 },{}]},{},[48]);
