@@ -960,8 +960,9 @@ module.exports = {
       var _this = this;
 
       var t = 50;
+      var cls = ' over_body_open';
       if (open) {
-        document.body.className += ' over_body_open';
+        document.body.className += cls;
         this.$data.start = true;
         setTimeout(function () {
           return _this.$data.finish = true;
@@ -970,7 +971,7 @@ module.exports = {
         this.$data.finish = false;
         setTimeout(function () {
           _this.$data.start = false;
-          document.body.className = document.body.className.replace(" over_body_open", "");
+          document.body.className = document.body.className.split(cls).join('');
         }, this.transition * 1000 + t);
       }
     },
