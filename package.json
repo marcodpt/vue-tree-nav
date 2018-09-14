@@ -32,7 +32,7 @@
   },
   "dependencies": {
     "vue-awesome": "^3.1.0",
-    "vue-over-body": "0.0.4"
+    "vue-over-body": "0.0.5"
   },
   "browserify": {
     "transform": [
