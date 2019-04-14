@@ -1002,9 +1002,9 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   module.hot.accept()
   module.hot.dispose(__vueify_style_dispose__)
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-5c3f2ffa", __vue__options__)
+    hotAPI.createRecord("data-v-b88f1e44", __vue__options__)
   } else {
-    hotAPI.reload("data-v-5c3f2ffa", __vue__options__)
+    hotAPI.reload("data-v-b88f1e44", __vue__options__)
   }
 })()}
 },{"vue":46,"vue-hot-reload-api":42,"vueify/lib/insert-css":47}],44:[function(require,module,exports){
@@ -21597,6 +21597,10 @@ var _stringify = require('babel-runtime/core-js/json/stringify');
 
 var _stringify2 = _interopRequireDefault(_stringify);
 
+var _keys = require('babel-runtime/core-js/object/keys');
+
+var _keys2 = _interopRequireDefault(_keys);
+
 var _vue = require('../node_modules/vue/dist/vue.js');
 
 var _vue2 = _interopRequireDefault(_vue);
@@ -21613,6 +21617,10 @@ var _routes = require('./routes.js');
 
 var _routes2 = _interopRequireDefault(_routes);
 
+var _colorschema = require('./colorschema.json');
+
+var _colorschema2 = _interopRequireDefault(_colorschema);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 _vue2.default.use(_vueRouter2.default);
@@ -21625,27 +21633,30 @@ new _vue2.default({
   router: router,
   data: {
     f: {},
-    treeNav: {}
+    treeNav: {},
+    buttons: (0, _keys2.default)(_colorschema2.default)
   },
   components: {
     'vue-tree-nav': _index2.default
   },
   mounted: function mounted() {
-    this.reset();
+    this.reset('Reset default');
     this.$data.f.side = (0, _stringify2.default)(this.$data.treeNav.side, undefined, 2);
     this.$data.f.left = (0, _stringify2.default)(this.$data.treeNav.left, undefined, 2);
     this.$data.f.right = (0, _stringify2.default)(this.$data.treeNav.right, undefined, 2);
   },
   methods: {
-    reset: function reset() {
+    reset: function reset(schema) {
+      var _this = this;
+
+      var b = _colorschema2.default[schema];
+      (0, _keys2.default)(b).forEach(function (key) {
+        _this.$set(_this.$data.treeNav, key, b[key]);
+      });
+
       this.$set(this.$data.treeNav, 'showPath', true);
       this.$set(this.$data.treeNav, 'sideScale', 1);
       this.$set(this.$data.treeNav, 'barScale', 1);
-      this.$set(this.$data.treeNav, 'bgColor', '#f3f3f3');
-      this.$set(this.$data.treeNav, 'fontColor', '#666666');
-      this.$set(this.$data.treeNav, 'borderColor', '#e7e7e7');
-      this.$set(this.$data.treeNav, 'hoverColor', '#dddddd');
-      this.$set(this.$data.treeNav, 'activeColor', '#000000');
       this.$set(this.$data.treeNav, 'left', [{
         label: 'Home',
         icon: 'home',
@@ -21660,43 +21671,55 @@ new _vue2.default({
         icon: 'home',
         href: '#/home'
       }, {
-        label: 'Colors',
+        label: 'Animals',
         children: [{
-          label: 'Red',
-          href: '#/colors/red'
+          label: 'Elephant',
+          href: '#/animals/elephant'
         }, {
-          label: 'Green',
-          href: '#/colors/green'
+          label: 'Lion',
+          href: '#/animals/lion'
         }, {
-          label: 'Blue',
-          href: '#/colors/blue'
+          label: 'Bear',
+          href: '#/animals/bear'
+        }, {
+          label: 'Eagle',
+          href: '#/animals/eagle'
+        }, {
+          label: 'Wolf',
+          href: '#/animals/wolf'
         }]
       }, {
-        label: 'Scientists',
+        label: 'Other',
         children: [{
-          label: 'Mathematicians',
+          label: 'Vehicles',
           href: '',
           children: [{
-            label: 'Euler',
-            href: '#/science/math/euler'
+            label: 'Car',
+            href: '#/other/vehicles/car'
           }, {
-            label: 'Gauss',
-            href: '#/science/math/gauss'
+            label: 'Bike',
+            href: '#/other/vehicles/bike'
           }, {
-            label: 'Riemann',
-            href: '#/science/math/riemann'
+            label: 'Plane',
+            href: '#/other/vehicles/plane'
+          }, {
+            label: 'Boat',
+            href: '#/other/vehicles/boat'
           }]
         }, {
-          label: 'Physicists',
+          label: 'Landscape',
           children: [{
-            label: 'Einstein',
-            href: '#/science/physics/einstein'
+            label: 'Mountain',
+            href: '#/other/landscape/mountain'
           }, {
-            label: 'Newton',
-            href: '#/science/physics/newton'
+            label: 'Desert',
+            href: '#/other/landscape/desert'
           }, {
-            label: 'Dirac',
-            href: '#/science/physics/dirac'
+            label: 'Ocean',
+            href: '#/other/landscape/ocean'
+          }, {
+            label: 'Forest',
+            href: '#/other/landscape/forest'
           }]
         }]
       }, {
@@ -21723,12 +21746,58 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-c65e70da", __vue__options__)
+    hotAPI.createRecord("data-v-79109c2f", __vue__options__)
   } else {
-    hotAPI.reload("data-v-c65e70da", __vue__options__)
+    hotAPI.reload("data-v-79109c2f", __vue__options__)
   }
 })()}
-},{"../node_modules/vue/dist/vue.js":45,"./index.vue":51,"./routes.js":52,"babel-runtime/core-js/json/stringify":1,"vue":46,"vue-hot-reload-api":42,"vue-router":44}],49:[function(require,module,exports){
+},{"../node_modules/vue/dist/vue.js":45,"./colorschema.json":49,"./index.vue":52,"./routes.js":53,"babel-runtime/core-js/json/stringify":1,"babel-runtime/core-js/object/keys":2,"vue":46,"vue-hot-reload-api":42,"vue-router":44}],49:[function(require,module,exports){
+module.exports={
+  "Reset default": {
+    "activeColor": "#000000",
+    "fontColor": "#666666",
+    "hoverColor": "#dddddd",
+    "borderColor": "#e7e7e7",
+    "bgColor": "#f3f3f3"
+  },
+  "Facebook": {
+    "activeColor": "#3b5998",
+    "fontColor": "#8b9dc3",
+    "borderColor": "#dfe3ee",
+    "hoverColor": "#f7f7f7",
+    "bgColor": "#ffffff"
+  },
+  "Material Design": {
+    "activeColor": "#ff5722",
+    "fontColor": "#000000",
+    "borderColor": "#607d8b",
+    "hoverColor": "#9e9e9e",
+    "bgColor": "#ffffff"
+  },
+  "Mickey Mouse": {
+    "activeColor": "#f20505",
+    "fontColor": "#000000",
+    "borderColor": "#f0e046",
+    "hoverColor": "#f9d70b",
+    "bgColor": "#ffffff"
+  },
+  "Green Theme": {
+    "activeColor": "#234d20",
+    "fontColor": "#36802d",
+    "borderColor": "#77ab59",
+    "hoverColor": "#c9df8a",
+    "bgColor": "#f0f7da"
+  },
+  "YouTube": {
+    "activeColor": "#90030c",
+    "fontColor": "#bf2626",
+    "borderColor": "#878787",
+    "hoverColor": "#cbcbcb",
+    "bgColor": "#f1f1f1"
+  }
+}
+
+},{}],50:[function(require,module,exports){
 var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".tree_nav_bar {\n   margin-bottom:20px;\n}\n\n.tree_nav_bar ul {\n  list-style-type: none;\n  margin: 0;\n  padding: 0;\n  overflow: hidden;\n}\n\n.tree_nav_before {\n  height: 100%;\n  top: 0;\n  left: -300px;\n}\n\n.tree_nav_after {\n  left: 0;\n}")
 ;(function(){
 'use strict';
@@ -21920,12 +21989,12 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   module.hot.accept()
   module.hot.dispose(__vueify_style_dispose__)
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-1415e798", __vue__options__)
+    hotAPI.createRecord("data-v-37aa597c", __vue__options__)
   } else {
-    hotAPI.reload("data-v-1415e798", __vue__options__)
+    hotAPI.reload("data-v-37aa597c", __vue__options__)
   }
 })()}
-},{"./item.vue":50,"babel-runtime/core-js/object/keys":2,"vue":46,"vue-hot-reload-api":42,"vue-over-body":43,"vueify/lib/insert-css":47}],50:[function(require,module,exports){
+},{"./item.vue":51,"babel-runtime/core-js/object/keys":2,"vue":46,"vue-hot-reload-api":42,"vue-over-body":43,"vueify/lib/insert-css":47}],51:[function(require,module,exports){
 var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".tree_nav_item a {\n  text-decoration: none;\n  padding: 14px 16px;\n  transition: 0.3s;\n  display:block;\n}\n\n.tree_nav_item a:hover {\n  text-decoration: none;\n  cursor: pointer;\n}")
 ;(function(){
 'use strict';
@@ -22039,12 +22108,12 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   module.hot.accept()
   module.hot.dispose(__vueify_style_dispose__)
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-200dbf5e", __vue__options__)
+    hotAPI.createRecord("data-v-6f0789fa", __vue__options__)
   } else {
-    hotAPI.reload("data-v-200dbf5e", __vue__options__)
+    hotAPI.reload("data-v-6f0789fa", __vue__options__)
   }
 })()}
-},{"vue":46,"vue-awesome":41,"vue-hot-reload-api":42,"vueify/lib/insert-css":47}],51:[function(require,module,exports){
+},{"vue":46,"vue-awesome":41,"vue-hot-reload-api":42,"vueify/lib/insert-css":47}],52:[function(require,module,exports){
 ;(function(){
 'use strict';
 
@@ -22063,31 +22132,54 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-612a4744", __vue__options__)
+    hotAPI.createRecord("data-v-2cc764e0", __vue__options__)
   } else {
-    hotAPI.reload("data-v-612a4744", __vue__options__)
+    hotAPI.reload("data-v-2cc764e0", __vue__options__)
   }
 })()}
-},{"./components/bar.vue":49,"vue":46,"vue-hot-reload-api":42}],52:[function(require,module,exports){
+},{"./components/bar.vue":50,"vue":46,"vue-hot-reload-api":42}],53:[function(require,module,exports){
+template = function (P) {
+  view = '<fieldset>';
+  view += '<legend>Current View: ';
+  P.forEach(p => {
+    view += '/{{$route.params.' + p + '}}';
+  });
+  view += '</legend>';
+  view += '<img :src="\'https://source.unsplash.com/300x300/?\' + $route.params.x">';
+  view += '</fieldset>';
+
+  return view;
+};
+
+home = '<fieldset>';
+home += '<legend>Current View: /home</legend>';
+home += '<h3>Vue tree nav home</h3>';
+home += '<p>Change menu page and see a random nice image!</p>';
+home += '<p>Pay attention to menu top bar when change page!</p>';
+home += '<p>You can complete customize the menu bar and side bar changing the parameters down!</p>';
+home += '<p>If you like your result just copy the json at the end of the page and use it in vue-tree-nav</p>';
+home += '<p>Please if you did something beautiful share with us! Send a pull request in file <b>colorschema.json</b></p>';
+home += '</fieldset>';
+
 module.exports = [{
   path: '/home',
   component: {
-    template: '<h3>Edit fields below and see the result in navbar</h3>'
+    template: home
   }
 }, {
-  path: '/:section',
+  path: '/:x',
   component: {
-    template: '<div><h1>{{$route.params.section}}</h1></div>'
+    template: template(['x'])
   }
 }, {
-  path: '/:section/:page',
+  path: '/:y/:x',
   component: {
-    template: '<div><h1>{{$route.params.section}}</h1><h3>{{$route.params.page}}</h3></div>'
+    template: template(['y', 'x'])
   }
 }, {
-  path: '/:section/:page/:subpage',
+  path: '/:z/:y/:x',
   component: {
-    template: '<div><h1>{{$route.params.section}}</h1><h3>{{$route.params.page}}</h3><h5>{{$route.params.subpage}}</h5></div>'
+    template: template(['z', 'y', 'x'])
   }
 }, {
   path: '*',

@@ -4,6 +4,7 @@
 
   import treeNav from './index.vue'
   import routes from './routes.js'
+  import colorschema from './colorschema.json'
 
   Vue.use(VueRouter)
 
@@ -15,27 +16,28 @@
     router: router,
     data: {
       f: {},
-      treeNav: {}
+      treeNav: {},
+      buttons: Object.keys(colorschema)
     },
     components: {
       'vue-tree-nav': treeNav
     },
     mounted: function () {
-      this.reset()
+      this.reset('Reset default')
       this.$data.f.side = JSON.stringify(this.$data.treeNav.side, undefined, 2)
       this.$data.f.left = JSON.stringify(this.$data.treeNav.left, undefined, 2)
       this.$data.f.right = JSON.stringify(this.$data.treeNav.right, undefined, 2)
     },
     methods: {
-      reset: function () {
+      reset: function (schema) {
+        var b = colorschema[schema]
+        Object.keys(b).forEach(key => {
+          this.$set(this.$data.treeNav, key, b[key])
+        })
+
         this.$set(this.$data.treeNav, 'showPath', true)
         this.$set(this.$data.treeNav, 'sideScale', 1)
         this.$set(this.$data.treeNav, 'barScale', 1)
-        this.$set(this.$data.treeNav, 'bgColor', '#f3f3f3')
-        this.$set(this.$data.treeNav, 'fontColor', '#666666')
-        this.$set(this.$data.treeNav, 'borderColor', '#e7e7e7')
-        this.$set(this.$data.treeNav, 'hoverColor', '#dddddd')
-        this.$set(this.$data.treeNav, 'activeColor', '#000000')
         this.$set(this.$data.treeNav, 'left', [
           {
             label: 'Home',
@@ -55,49 +57,61 @@
             icon: 'home',
             href: '#/home'
           }, {
-            label: 'Colors',
+            label: 'Animals',
             children: [
               {
-                label: 'Red',
-                href: '#/colors/red'
+                label: 'Elephant',
+                href: '#/animals/elephant'
               }, {
-                label: 'Green',
-                href: '#/colors/green'
+                label: 'Lion',
+                href: '#/animals/lion'
               }, {
-                label: 'Blue',
-                href: '#/colors/blue'
+                label: 'Bear',
+                href: '#/animals/bear'
+              }, {
+                label: 'Eagle',
+                href: '#/animals/eagle'
+              }, {
+                label: 'Wolf',
+                href: '#/animals/wolf'
               }
             ]
           }, {
-            label: 'Scientists',
+            label: 'Other',
             children: [
               {
-                label: 'Mathematicians',
+                label: 'Vehicles',
                 href: '',
                 children: [
                   {
-                    label: 'Euler',
-                    href: '#/science/math/euler'
+                    label: 'Car',
+                    href: '#/other/vehicles/car'
                   }, {
-                    label: 'Gauss',
-                    href: '#/science/math/gauss'
+                    label: 'Bike',
+                    href: '#/other/vehicles/bike'
                   }, {
-                    label: 'Riemann',
-                    href: '#/science/math/riemann'
+                    label: 'Plane',
+                    href: '#/other/vehicles/plane'
+                  }, {
+                    label: 'Boat',
+                    href: '#/other/vehicles/boat'
                   }
                 ]
               }, {
-                label: 'Physicists',
+                label: 'Landscape',
                 children: [
                   {
-                    label: 'Einstein',
-                    href: '#/science/physics/einstein'
+                    label: 'Mountain',
+                    href: '#/other/landscape/mountain'
                   }, {
-                    label: 'Newton',
-                    href: '#/science/physics/newton'
+                    label: 'Desert',
+                    href: '#/other/landscape/desert'
                   }, {
-                    label: 'Dirac',
-                    href: '#/science/physics/dirac'
+                    label: 'Ocean',
+                    href: '#/other/landscape/ocean'
+                  }, {
+                    label: 'Forest',
+                    href: '#/other/landscape/forest'
                   }
                 ]
               }

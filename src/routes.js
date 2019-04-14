@@ -1,23 +1,47 @@
+template = function (P) {
+  view = '<fieldset>'
+  view += '<legend>Current View: '
+  P.forEach(p => {
+    view += '/{{$route.params.'+p+'}}'
+  })
+  view += '</legend>'
+  view += '<img :src="\'https://source.unsplash.com/300x300/?\' + $route.params.x">'
+  view += '</fieldset>'
+
+  return view
+} 
+
+home = '<fieldset>'
+home += '<legend>Current View: /home</legend>'
+home += '<h3>Vue tree nav home</h3>'
+home += '<p>Change menu page and see a random nice image!</p>'
+home += '<p>Pay attention to menu top bar when change page!</p>'
+home += '<p>You can complete customize the menu bar and side bar changing the parameters down!</p>'
+home += '<p>If you like your result just copy the json at the end of the page and use it in vue-tree-nav</p>'
+home += '<p>Please if you did something beautiful share with us! Send a pull request in file <b>colorschema.json</b></p>'
+home += '</fieldset>'
+
+
 module.exports = [
   {
     path: '/home',
     component: {
-      template: '<h3>Edit fields below and see the result in navbar</h3>'
+      template: home
     }
   }, {
-    path: '/:section',
+    path: '/:x',
     component: {
-      template: '<div><h1>{{$route.params.section}}</h1></div>'
+      template: template(['x'])
     }
   }, {
-    path: '/:section/:page',
+    path: '/:y/:x',
     component: {
-      template: '<div><h1>{{$route.params.section}}</h1><h3>{{$route.params.page}}</h3></div>'
+      template: template(['y', 'x'])
     }
   }, {
-    path: '/:section/:page/:subpage',
+    path: '/:z/:y/:x',
     component: {
-      template: '<div><h1>{{$route.params.section}}</h1><h3>{{$route.params.page}}</h3><h5>{{$route.params.subpage}}</h5></div>'
+      template: template(['z', 'y', 'x'])
     }
   }, {
     path: '*',
