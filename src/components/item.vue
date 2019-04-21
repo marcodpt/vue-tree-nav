@@ -57,6 +57,10 @@
       activeColor: {
         type: String,
         required: true
+      },
+      callback: {
+        type: Function,
+        default: () => {}
       }
     },
     data: function () {
@@ -69,11 +73,11 @@
       run: function () {
         if (typeof this.href === 'function') {
           this.href()
-          if (this.position) {
-            this.$data.open = false
-          }
         } else if (this.children.length && !this.position){
           this.$data.open = !this.$data.open
+        }
+        if (this.position && !this.children.length) {
+          this.callback()
         }
       },
       enter: function () {
@@ -85,6 +89,10 @@
         if (this.position && this.children.length) {
           this.$data.open = false
         }
+      },
+      close: function () {
+        this.leave();
+        this.callback();
       },
       url: function () {
         return typeof this.href === 'string' ? this.href : null
@@ -130,7 +138,16 @@
       :style="aStyle()"
     >
       <icon v-if="icon" :scale="0.9 * scale" :name="icon"/> {{label}}
-      <icon v-if="position && children.length" :scale="0.9 * scale" name="caret-down"/>
+      <icon 
+        v-if="position && children.length && !open"
+        :scale="0.9 * scale"
+        name="caret-down"
+      />
+      <icon
+        v-if="position && children.length && open"
+        :scale="0.9 * scale"
+        name="caret-up"
+      />
     </a>
     <ul v-if="open" :style="ulStyle()">
       <item
@@ -145,6 +162,7 @@
         :borderColor="borderColor"
         :hoverColor="hoverColor"
         :activeColor="activeColor"
+        :callback="close"
       />
     </ul>
     <slot></slot>

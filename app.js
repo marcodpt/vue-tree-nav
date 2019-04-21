@@ -21708,7 +21708,7 @@ new _vue2.default({
         _this.$set(_this.$data.treeNav, key, b[key]);
       });
 
-      this.$set(this.$data.treeNav, 'showPath', true);
+      this.$set(this.$data.treeNav, 'showPath', false);
       this.$set(this.$data.treeNav, 'sideScale', 1);
       this.$set(this.$data.treeNav, 'barScale', 1);
       this.$set(this.$data.treeNav, 'left', [{
@@ -21732,39 +21732,20 @@ new _vue2.default({
         }, {
           label: 'Wolf',
           href: '#/animals/wolf'
-        }]
-      }, {
-        label: 'Other',
-        children: [{
-          label: 'Vehicles',
-          href: '',
-          children: [{
-            label: 'Car',
-            href: '#/other/vehicles/car'
-          }, {
-            label: 'Bike',
-            href: '#/other/vehicles/bike'
-          }, {
-            label: 'Plane',
-            href: '#/other/vehicles/plane'
-          }, {
-            label: 'Boat',
-            href: '#/other/vehicles/boat'
-          }]
         }, {
-          label: 'Landscape',
+          label: 'More',
           children: [{
-            label: 'Mountain',
-            href: '#/other/landscape/mountain'
+            label: 'Tiger',
+            href: '#/animals/tiger'
           }, {
-            label: 'Desert',
-            href: '#/other/landscape/desert'
+            label: 'Shark',
+            href: '#/animals/shark'
           }, {
-            label: 'Ocean',
-            href: '#/other/landscape/ocean'
-          }, {
-            label: 'Forest',
-            href: '#/other/landscape/forest'
+            label: 'Even More',
+            children: [{
+              label: 'Monkey',
+              href: '#/animals/monkey'
+            }]
           }]
         }]
       }]);
@@ -22188,6 +22169,10 @@ module.exports = {
     activeColor: {
       type: String,
       required: true
+    },
+    callback: {
+      type: Function,
+      default: function _default() {}
     }
   },
   data: function data() {
@@ -22200,11 +22185,11 @@ module.exports = {
     run: function run() {
       if (typeof this.href === 'function') {
         this.href();
-        if (this.position) {
-          this.$data.open = false;
-        }
       } else if (this.children.length && !this.position) {
         this.$data.open = !this.$data.open;
+      }
+      if (this.position && !this.children.length) {
+        this.callback();
       }
     },
     enter: function enter() {
@@ -22216,6 +22201,10 @@ module.exports = {
       if (this.position && this.children.length) {
         this.$data.open = false;
       }
+    },
+    close: function close() {
+      this.leave();
+      this.callback();
     },
     url: function url() {
       return typeof this.href === 'string' ? this.href : null;
@@ -22249,7 +22238,7 @@ module.exports = {
 if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('li',{staticClass:"tree_nav_item",on:{"mouseenter":function($event){_vm.enter()},"mouseleave":function($event){_vm.leave()}}},[_c('a',{style:(_vm.aStyle()),attrs:{"href":_vm.url()},on:{"click":function($event){_vm.run()},"mouseenter":function($event){_vm.hover = true},"mouseleave":function($event){_vm.hover = false}}},[(_vm.icon)?_c('icon',{attrs:{"scale":0.9 * _vm.scale,"name":_vm.icon}}):_vm._e(),_vm._v(" "+_vm._s(_vm.label)+"\n    "),(_vm.position && _vm.children.length)?_c('icon',{attrs:{"scale":0.9 * _vm.scale,"name":"caret-down"}}):_vm._e()],1),_vm._v(" "),(_vm.open)?_c('ul',{style:(_vm.ulStyle())},_vm._l((_vm.children),function(child){return _c('item',_vm._b({attrs:{"level":_vm.level + 1,"position":_vm.position,"path":_vm.path,"scale":_vm.scale,"bgColor":_vm.bgColor,"fontColor":_vm.fontColor,"borderColor":_vm.borderColor,"hoverColor":_vm.hoverColor,"activeColor":_vm.activeColor}},'item',child,false))})):_vm._e(),_vm._v(" "),_vm._t("default")],2)}
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('li',{staticClass:"tree_nav_item",on:{"mouseenter":function($event){_vm.enter()},"mouseleave":function($event){_vm.leave()}}},[_c('a',{style:(_vm.aStyle()),attrs:{"href":_vm.url()},on:{"click":function($event){_vm.run()},"mouseenter":function($event){_vm.hover = true},"mouseleave":function($event){_vm.hover = false}}},[(_vm.icon)?_c('icon',{attrs:{"scale":0.9 * _vm.scale,"name":_vm.icon}}):_vm._e(),_vm._v(" "+_vm._s(_vm.label)+"\n    "),(_vm.position && _vm.children.length && !_vm.open)?_c('icon',{attrs:{"scale":0.9 * _vm.scale,"name":"caret-down"}}):_vm._e(),_vm._v(" "),(_vm.position && _vm.children.length && _vm.open)?_c('icon',{attrs:{"scale":0.9 * _vm.scale,"name":"caret-up"}}):_vm._e()],1),_vm._v(" "),(_vm.open)?_c('ul',{style:(_vm.ulStyle())},_vm._l((_vm.children),function(child){return _c('item',_vm._b({attrs:{"level":_vm.level + 1,"position":_vm.position,"path":_vm.path,"scale":_vm.scale,"bgColor":_vm.bgColor,"fontColor":_vm.fontColor,"borderColor":_vm.borderColor,"hoverColor":_vm.hoverColor,"activeColor":_vm.activeColor,"callback":_vm.close}},'item',child,false))})):_vm._e(),_vm._v(" "),_vm._t("default")],2)}
 __vue__options__.staticRenderFns = []
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
