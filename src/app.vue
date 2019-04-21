@@ -43,6 +43,66 @@
             label: 'Home',
             icon: 'home',
             href: '#/home'
+          }, {
+            label: 'Animals',
+            children: [
+              {
+                label: 'Elephant',
+                href: '#/animals/elephant'
+              }, {
+                label: 'Lion',
+                href: '#/animals/lion'
+              }, {
+                label: 'Bear',
+                href: '#/animals/bear'
+              }, {
+                label: 'Eagle',
+                href: '#/animals/eagle'
+              }, {
+                label: 'Wolf',
+                href: '#/animals/wolf'
+              }
+            ]
+          }, {
+            label: 'Other',
+            children: [
+              {
+                label: 'Vehicles',
+                href: '',
+                children: [
+                  {
+                    label: 'Car',
+                    href: '#/other/vehicles/car'
+                  }, {
+                    label: 'Bike',
+                    href: '#/other/vehicles/bike'
+                  }, {
+                    label: 'Plane',
+                    href: '#/other/vehicles/plane'
+                  }, {
+                    label: 'Boat',
+                    href: '#/other/vehicles/boat'
+                  }
+                ]
+              }, {
+                label: 'Landscape',
+                children: [
+                  {
+                    label: 'Mountain',
+                    href: '#/other/landscape/mountain'
+                  }, {
+                    label: 'Desert',
+                    href: '#/other/landscape/desert'
+                  }, {
+                    label: 'Ocean',
+                    href: '#/other/landscape/ocean'
+                  }, {
+                    label: 'Forest',
+                    href: '#/other/landscape/forest'
+                  }
+                ]
+              }
+            ]
           }
         ])
         this.$set(this.$data.treeNav, 'right', [

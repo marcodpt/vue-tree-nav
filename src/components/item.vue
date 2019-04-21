@@ -26,12 +26,20 @@
       href: {
         type: [String, Function]
       },
+      position: {
+        type: Number,
+        default: 0
+      },
       level: {
         type: Number,
         default: 0
       },
       scale: {
         type: Number,
+        required: true
+      },
+      bgColor: {
+        type: String,
         required: true
       },
       fontColor: {
@@ -53,7 +61,7 @@
     },
     data: function () {
       return {
-        open: this.isActive() && this.children.length,
+        open: this.isActive() && this.children.length && !this.position,
         hover: false
       }
     },
@@ -61,8 +69,21 @@
       run: function () {
         if (typeof this.href === 'function') {
           this.href()
-        } else if (this.children.length){
+          if (this.position) {
+            this.$data.open = false
+          }
+        } else if (this.children.length && !this.position){
           this.$data.open = !this.$data.open
+        }
+      },
+      enter: function () {
+        if (this.position && this.children.length) {
+          this.$data.open = true
+        }
+      },
+      leave: function () {
+        if (this.position && this.children.length) {
+          this.$data.open = false
         }
       },
       url: function () {
@@ -81,9 +102,14 @@
         }
       },
       ulStyle: function () {
-        return {
+        return !this.position ? {
           'border-left': `3px solid ${this.borderColor}`,
           'margin-left': `${(this.level + 1) * 10}px`
+        } : {
+          'position': this.level === 0 ? 'absolute' : null,
+          'z-index': 999,
+          'background-color': this.bgColor,
+          'border': `1px solid ${this.borderColor}`,
         }
       }
     }
@@ -91,23 +117,30 @@
 </script>
 
 <template>
-  <li class="tree_nav_item">
+  <li
+    class="tree_nav_item"
+    @mouseenter="enter()"
+    @mouseleave="leave()"
+  >
     <a
-      @click="run"
+      @click="run()"
       @mouseenter="hover = true"
       @mouseleave="hover = false"
       :href="url()"
       :style="aStyle()"
     >
       <icon v-if="icon" :scale="0.9 * scale" :name="icon"/> {{label}}
+      <icon v-if="position && children.length" :scale="0.9 * scale" name="caret-down"/>
     </a>
     <ul v-if="open" :style="ulStyle()">
       <item
         v-for="child in children"
         v-bind="child"
         :level="level + 1"
+        :position="position"
         :path="path"
         :scale="scale"
+        :bgColor="bgColor"
         :fontColor="fontColor"
         :borderColor="borderColor"
         :hoverColor="hoverColor"
