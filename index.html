@@ -5,73 +5,96 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Vue Tree Nav</title>
+  <style>
+    fieldset {
+      margin: 40px;
+    }
+    th, td {
+      padding: 5px;
+    }
+    textarea {
+      width: 100%;
+    }
+    img {
+      margin: auto;
+    }
+    button {
+      margin-left: 10px;
+    }
+  </style>
 </head>
 <body style="margin:0px">
   <div id="app">
-    <div style="color:#f3f3f3;background-color:#666666;padding:20px">
+    <div
+      :style="{'color': treeNav.bgColor, 'background-color': treeNav.fontColor}"
+      style="position:fixed;width:100%;top:0;padding:20px"
+    >
       <h1 style="margin:0;">Vue Tree Nav</h1>
     </div>
     <vue-tree-nav
       :location="$route.fullPath"
       v-bind="treeNav"
+      style="position:fixed;width:100%;top:77px;"
     >
     </vue-tree-nav>
-    <div style="margin:40px">
-      <router-view></router-view>
-    </div>
-    <div style="margin:40px">
-      <div style="margin:10px;float:left">
-        <div>
-          <label>showPath:</label>
-          <input type="checkbox" v-model="treeNav.showPath">
-        </div>
-        <div>
-          <label>barScale:</label>
-          <input type="number" step="0.1" v-model.number="treeNav.barScale">
-        </div>
-        <div>
-          <label>sideScale:</label>
-          <input type="number" step="0.1" v-model.number="treeNav.sideScale">
-        </div>
-        <div>
-          <label>bgColor:</label>
-          <input type="color" v-model="treeNav.bgColor">
-        </div>
-        <div>
-          <label>fontColor:</label>
-          <input type="color" v-model="treeNav.fontColor">
-        </div>
-        <div>
-          <label>borderColor:</label>
-          <input type="color" v-model="treeNav.borderColor">
-        </div>
-        <div>
-          <label>hoverColor:</label>
-          <input type="color" v-model="treeNav.hoverColor">
-        </div>
-        <div>
-          <label>activeColor:</label>
-          <input type="color" v-model="treeNav.activeColor">
-        </div>
-        <div>
-          <button @click="reset">Reset default</button>
-        </div>
-      </div>
-      <div style="margin:10px;float:left">
-        <div style="white-space:pre-wrap">{{feedback()}}</div>
-      </div>
-      <div style="margin:10px;float:left">
-        <div>
-          <textarea rows="8" cols="60" v-model="f.left" @blur="parse"></textarea>
-        </div>
-        <div>
-          <textarea rows="8" cols="60" v-model="f.right" @blur="parse"></textarea>
-        </div>
-        <div>
-          <textarea rows="8" cols="60" v-model="f.side" @blur="parse"></textarea>
-        </div>
-      </div>
-    </div>
+    <div style="height:150px"></div>
+    <router-view></router-view>
+    <fieldset>
+      <legend>vue-tree-nav settings</legend>
+      <table>
+        <tr>
+          <th>showPath:</th>
+          <td><input type="checkbox" v-model="treeNav.showPath"></td> 
+        </tr>
+        <tr>
+          <th>barScale:</th>
+          <td><input type="number" step="0.1" v-model.number="treeNav.barScale"></td> 
+        </tr>
+        <tr>
+          <th><label>sideScale:</label></th>
+          <td><input type="number" step="0.1" v-model.number="treeNav.sideScale"></td> 
+        </tr>
+        <tr>
+          <th>bgColor:</th>
+          <td><input type="color" v-model="treeNav.bgColor"></td> 
+        </tr>
+        <tr>
+          <th>fontColor:</th>
+          <td><input type="color" v-model="treeNav.fontColor"></td> 
+        </tr>
+        <tr>
+          <th>borderColor:</th>
+          <td><input type="color" v-model="treeNav.borderColor"></td> 
+        </tr>
+        <tr>
+          <th>hoverColor:</th>
+          <td><input type="color" v-model="treeNav.hoverColor"></td> 
+        </tr>
+        <tr>
+          <th>activeColor:</th>
+          <td><input type="color" v-model="treeNav.activeColor"></td> 
+        </tr>
+        <tr>
+          <td colspan="100%"><button v-for="b in buttons" @click="reset(b)">{{b}}</button></td> 
+        </tr>
+      </table>
+    </fieldset>
+    <fieldset>
+      <legend>Top Bar Left</legend>
+      <textarea rows="8" v-model="f.left" @blur="parse"></textarea>
+    </fieldset>
+    <fieldset>
+      <legend>Top Bar Right</legend>
+      <textarea rows="8" v-model="f.right" @blur="parse"></textarea>
+    </fieldset>
+    <fieldset>
+      <legend>Side Bar</legend>
+      <textarea rows="8" v-model="f.side" @blur="parse"></textarea>
+    </fieldset>
+    <fieldset>
+      <legend>Result Json</legend>
+      <div style="white-space:pre-wrap">{{feedback()}}</div>
+    </fieldset>
   </div>
   <script src="app.js"></script>
 </body>

@@ -1,0 +1,44 @@
+{
+  "Reset default": {
+    "activeColor": "#000000",
+    "fontColor": "#666666",
+    "hoverColor": "#dddddd",
+    "borderColor": "#e7e7e7",
+    "bgColor": "#f3f3f3"
+  },
+  "Facebook": {
+    "activeColor": "#3b5998",
+    "fontColor": "#8b9dc3",
+    "borderColor": "#dfe3ee",
+    "hoverColor": "#f7f7f7",
+    "bgColor": "#ffffff"
+  },
+  "Material Design": {
+    "activeColor": "#ff5722",
+    "fontColor": "#000000",
+    "borderColor": "#607d8b",
+    "hoverColor": "#9e9e9e",
+    "bgColor": "#ffffff"
+  },
+  "Mickey Mouse": {
+    "activeColor": "#f20505",
+    "fontColor": "#000000",
+    "borderColor": "#f0e046",
+    "hoverColor": "#f9d70b",
+    "bgColor": "#ffffff"
+  },
+  "Green Theme": {
+    "activeColor": "#234d20",
+    "fontColor": "#36802d",
+    "borderColor": "#77ab59",
+    "hoverColor": "#c9df8a",
+    "bgColor": "#f0f7da"
+  },
+  "YouTube": {
+    "activeColor": "#90030c",
+    "fontColor": "#bf2626",
+    "borderColor": "#878787",
+    "hoverColor": "#cbcbcb",
+    "bgColor": "#f1f1f1"
+  }
+}

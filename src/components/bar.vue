@@ -61,6 +61,8 @@
     data: function () {
       return {
         sideBar: 0,
+        rightDrop: 0,
+        leftDrop: 0,
         path: '',
         tree: [],
         links: {},
@@ -144,6 +146,19 @@
         })
         R.reverse()
         return R
+      },
+      getItem: function (item) {
+        return Object.assign({
+          scale: this.barScale,
+          bgColor: this.bgColor,
+          fontColor: this.fontColor,
+          borderColor: this.borderColor,
+          hoverColor: this.hoverColor,
+          activeColor: this.activeColor,
+          path: this.$data.Path
+        }, item, {
+          path: this.$data.Path
+        })
       }
     }
   }
@@ -154,37 +169,23 @@
     <ul :style="'border-bottom: 1px solid '+borderColor+';background-color:'+bgColor">
       <item
         v-if="tree.length > 1"
+        v-bind="getItem({})"
         icon="bars"
         :label="showPath ? path : ''"
         :href="open"
         style="float:left"
-        :scale="barScale"
-        :fontColor="fontColor"
-        :borderColor="borderColor"
-        :hoverColor="hoverColor"
-        :activeColor="activeColor"
       ></item>
       <item
         v-for="item in left"
-        v-bind="item"
+        v-bind="getItem(item)"
         style="float:left"
-        :path="Path"
-        :scale="barScale"
-        :fontColor="fontColor"
-        :borderColor="borderColor"
-        :hoverColor="hoverColor"
-        :activeColor="activeColor"
+        :position="-1"
       />
       <item
         v-for="item in getRight()"
-        v-bind="item"
+        v-bind="getItem(item)"
         style="float:right"
-        :path="Path"
-        :scale="barScale"
-        :fontColor="fontColor"
-        :borderColor="borderColor"
-        :hoverColor="hoverColor"
-        :activeColor="activeColor"
+        :position="1"
       />
     </ul>
     <vue-over-body
@@ -203,13 +204,7 @@
         <ul>
           <item
             v-for="item in tree"
-            v-bind="item"
-            :path="Path"
-            :scale="sideScale"
-            :fontColor="fontColor"
-            :borderColor="borderColor"
-            :hoverColor="hoverColor"
-            :activeColor="activeColor"
+            v-bind="getItem(item)"
           />
         </ul>
         <div style="height:20px"></div>
@@ -220,7 +215,7 @@
 
 <style>
   .tree_nav_bar {
-     margin-bottom:20px;
+    margin-bottom:20px;
   }
 
   .tree_nav_bar ul {
