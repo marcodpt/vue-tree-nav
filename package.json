@@ -1,6 +1,6 @@
 {
   "name": "vue-tree-nav",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "description": "Navigation tree menu component with nice integration with vue-router",
   "main": "src/index.vue",
   "repository": {
