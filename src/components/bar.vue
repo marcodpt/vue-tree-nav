@@ -45,10 +45,6 @@
         type: String,
         default: '#666666'
       },
-      borderColor: {
-        type: String,
-        default: '#e7e7e7'
-      },
       hoverColor: {
         type: String,
         default: '#dddddd'
@@ -152,7 +148,6 @@
           scale: this.barScale,
           bgColor: this.bgColor,
           fontColor: this.fontColor,
-          borderColor: this.borderColor,
           hoverColor: this.hoverColor,
           activeColor: this.activeColor,
           path: this.$data.Path
@@ -166,7 +161,7 @@
 
 <template>
   <div class="tree_nav_bar">
-    <ul :style="'border-bottom: 1px solid '+borderColor+';background-color:'+bgColor">
+    <ul :style="'box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);background-color:'+bgColor">
       <item
         v-if="tree.length > 1"
         v-bind="getItem({})"
@@ -198,7 +193,7 @@
         'min-width': '300px',
         'height': '100%',
         'background-color': bgColor,
-        'border-right': '1px solid '+borderColor,
+        'box-shadow': '0px 8px 16px 0px rgba(0,0,0,0.2)',
         'overflow-y': 'auto'
       }">
         <ul>

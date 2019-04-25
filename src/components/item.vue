@@ -46,10 +46,6 @@
         type: String,
         required: true
       },
-      borderColor: {
-        type: String,
-        required: true
-      },
       hoverColor: {
         type: String,
         required: true
@@ -103,7 +99,6 @@
       aStyle: function () {
         return {
           'font-weight': this.isActive() ? 'bold' : null,
-          'font-style': this.children.length ? 'italic' : null,
           'font-size': Math.round(100 * this.scale) + '%',
           'color': this.isActive() ? this.activeColor : this.fontColor,
           'background-color': this.$data.hover ? this.hoverColor : null 
@@ -111,13 +106,14 @@
       },
       ulStyle: function () {
         return !this.position ? {
-          'border-left': `3px solid ${this.borderColor}`,
-          'margin-left': `${(this.level + 1) * 10}px`
+          'margin': `0px 10px 10px 10px`,
+          'box-shadow': '0px 8px 16px 0px rgba(0,0,0,0.2)'
         } : {
           'position': this.level === 0 ? 'absolute' : null,
+          'box-shadow': '0px 8px 16px 0px rgba(0,0,0,0.2)',
           'z-index': 999,
           'background-color': this.bgColor,
-          'border': `1px solid ${this.borderColor}`,
+          'margin': `0px 10px 10px 10px`
         }
       }
     }
@@ -139,32 +135,29 @@
     >
       <icon v-if="icon" :scale="0.9 * scale" :name="icon"/> {{label}}
       <icon 
-        v-if="position && children.length && !open"
+        v-if="children.length"
         :scale="0.9 * scale"
+        :class="['tree_nav_item_transition', open ? 'tree_nav_item_down' : '']"
         name="caret-down"
       />
-      <icon
-        v-if="position && children.length && open"
-        :scale="0.9 * scale"
-        name="caret-up"
-      />
     </a>
-    <ul v-if="open" :style="ulStyle()">
-      <item
-        v-for="child in children"
-        v-bind="child"
-        :level="level + 1"
-        :position="position"
-        :path="path"
-        :scale="scale"
-        :bgColor="bgColor"
-        :fontColor="fontColor"
-        :borderColor="borderColor"
-        :hoverColor="hoverColor"
-        :activeColor="activeColor"
-        :callback="close"
-      />
-    </ul>
+    <transition name="tree_nav_item">
+      <ul v-if="open" :style="ulStyle()">
+        <item
+          v-for="child in children"
+          v-bind="child"
+          :level="level + 1"
+          :position="position"
+          :path="path"
+          :scale="scale"
+          :bgColor="bgColor"
+          :fontColor="fontColor"
+          :hoverColor="hoverColor"
+          :activeColor="activeColor"
+          :callback="close"
+        />
+      </ul>
+    </transition>
     <slot></slot>
   </li>
 </template>
@@ -180,5 +173,27 @@
   .tree_nav_item a:hover {
     text-decoration: none;
     cursor: pointer;
+  }
+
+  .tree_nav_item-enter-active, .tree_nav_item-leave-active {
+    -moz-transition: all 0.3s;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+  }
+  .tree_nav_item-enter, .tree_nav_item-leave-to {
+    opacity: 0;
+  }
+
+  .tree_nav_item_transition {
+    -moz-transition: all 0.3s linear;
+    -webkit-transition: all 0.3s linear;
+    transition: all 0.3s linear;
+  }
+
+  .tree_nav_item_transition.tree_nav_item_down{
+    -ms-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
   }
 </style>

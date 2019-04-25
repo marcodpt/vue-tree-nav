@@ -23,7 +23,7 @@
       'vue-tree-nav': treeNav
     },
     mounted: function () {
-      this.reset('Reset default')
+      this.reset('Default')
       this.$data.f.side = JSON.stringify(this.$data.treeNav.side, undefined, 2)
       this.$data.f.left = JSON.stringify(this.$data.treeNav.left, undefined, 2)
       this.$data.f.right = JSON.stringify(this.$data.treeNav.right, undefined, 2)
@@ -40,7 +40,7 @@
         this.$set(this.$data.treeNav, 'barScale', 1)
         this.$set(this.$data.treeNav, 'left', [
           {
-            label: 'Home',
+            label: 'Vue Tree Nav',
             icon: 'home',
             href: '#/home'
           }, {
@@ -92,7 +92,7 @@
         ])
         this.$set(this.$data.treeNav, 'side', [
           {
-            label: 'Home',
+            label: 'Vue Tree Nav',
             icon: 'home',
             href: '#/home'
           }, {

@@ -21699,7 +21699,7 @@ new _vue2.default({
     'vue-tree-nav': _index2.default
   },
   mounted: function mounted() {
-    this.reset('Reset default');
+    this.reset('Default');
     this.$data.f.side = (0, _stringify2.default)(this.$data.treeNav.side, undefined, 2);
     this.$data.f.left = (0, _stringify2.default)(this.$data.treeNav.left, undefined, 2);
     this.$data.f.right = (0, _stringify2.default)(this.$data.treeNav.right, undefined, 2);
@@ -21717,7 +21717,7 @@ new _vue2.default({
       this.$set(this.$data.treeNav, 'sideScale', 1);
       this.$set(this.$data.treeNav, 'barScale', 1);
       this.$set(this.$data.treeNav, 'left', [{
-        label: 'Home',
+        label: 'Vue Tree Nav',
         icon: 'home',
         href: '#/home'
       }, {
@@ -21759,7 +21759,7 @@ new _vue2.default({
         icon: 'brands/github'
       }]);
       this.$set(this.$data.treeNav, 'side', [{
-        label: 'Home',
+        label: 'Vue Tree Nav',
         icon: 'home',
         href: '#/home'
       }, {
@@ -21845,47 +21845,17 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
 })()}
 },{"../node_modules/vue/dist/vue.js":51,"./colorschema.json":55,"./index.vue":58,"./routes.js":59,"babel-runtime/core-js/json/stringify":1,"babel-runtime/core-js/object/keys":3,"vue":52,"vue-hot-reload-api":48,"vue-router":50}],55:[function(require,module,exports){
 module.exports={
-  "Reset default": {
+  "Default": {
     "activeColor": "#000000",
     "fontColor": "#666666",
     "hoverColor": "#dddddd",
-    "borderColor": "#e7e7e7",
     "bgColor": "#f3f3f3"
   },
-  "Facebook": {
-    "activeColor": "#3b5998",
-    "fontColor": "#8b9dc3",
-    "borderColor": "#dfe3ee",
-    "hoverColor": "#f7f7f7",
-    "bgColor": "#ffffff"
-  },
-  "Material Design": {
-    "activeColor": "#ff5722",
-    "fontColor": "#000000",
-    "borderColor": "#607d8b",
-    "hoverColor": "#9e9e9e",
-    "bgColor": "#ffffff"
-  },
-  "Mickey Mouse": {
-    "activeColor": "#f20505",
-    "fontColor": "#000000",
-    "borderColor": "#f0e046",
-    "hoverColor": "#f9d70b",
-    "bgColor": "#ffffff"
-  },
-  "Green Theme": {
-    "activeColor": "#234d20",
-    "fontColor": "#36802d",
-    "borderColor": "#77ab59",
-    "hoverColor": "#c9df8a",
-    "bgColor": "#f0f7da"
-  },
-  "YouTube": {
-    "activeColor": "#90030c",
-    "fontColor": "#bf2626",
-    "borderColor": "#878787",
-    "hoverColor": "#cbcbcb",
-    "bgColor": "#f1f1f1"
+  "Sample 1": {
+    "activeColor": "#16a085",
+    "fontColor": "#2c3e50",
+    "hoverColor": "#bdc3c7",
+    "bgColor": "#ecf0f1"
   }
 }
 
@@ -21960,10 +21930,6 @@ module.exports = {
     fontColor: {
       type: String,
       default: '#666666'
-    },
-    borderColor: {
-      type: String,
-      default: '#e7e7e7'
     },
     hoverColor: {
       type: String,
@@ -22072,7 +22038,6 @@ module.exports = {
         scale: this.barScale,
         bgColor: this.bgColor,
         fontColor: this.fontColor,
-        borderColor: this.borderColor,
         hoverColor: this.hoverColor,
         activeColor: this.activeColor,
         path: this.$data.Path
@@ -22086,11 +22051,11 @@ module.exports = {
 if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"tree_nav_bar"},[_c('ul',{style:('border-bottom: 1px solid '+_vm.borderColor+';background-color:'+_vm.bgColor)},[(_vm.tree.length > 1)?_c('item',_vm._b({staticStyle:{"float":"left"},attrs:{"icon":"bars","label":_vm.showPath ? _vm.path : '',"href":_vm.open}},'item',_vm.getItem({}),false)):_vm._e(),_vm._v(" "),_vm._l((_vm.left),function(item){return _c('item',_vm._b({staticStyle:{"float":"left"},attrs:{"position":-1}},'item',_vm.getItem(item),false))}),_vm._v(" "),_vm._l((_vm.getRight()),function(item){return _c('item',_vm._b({staticStyle:{"float":"right"},attrs:{"position":1}},'item',_vm.getItem(item),false))})],2),_vm._v(" "),_c('vue-over-body',{attrs:{"open":_vm.sideBar,"dialog-style":{'position': 'absolute'},"before":"tree_nav_before","after":"tree_nav_after"}},[_c('div',{style:({
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"tree_nav_bar"},[_c('ul',{style:('box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);background-color:'+_vm.bgColor)},[(_vm.tree.length > 1)?_c('item',_vm._b({staticStyle:{"float":"left"},attrs:{"icon":"bars","label":_vm.showPath ? _vm.path : '',"href":_vm.open}},'item',_vm.getItem({}),false)):_vm._e(),_vm._v(" "),_vm._l((_vm.left),function(item){return _c('item',_vm._b({staticStyle:{"float":"left"},attrs:{"position":-1}},'item',_vm.getItem(item),false))}),_vm._v(" "),_vm._l((_vm.getRight()),function(item){return _c('item',_vm._b({staticStyle:{"float":"right"},attrs:{"position":1}},'item',_vm.getItem(item),false))})],2),_vm._v(" "),_c('vue-over-body',{attrs:{"open":_vm.sideBar,"dialog-style":{'position': 'absolute'},"before":"tree_nav_before","after":"tree_nav_after"}},[_c('div',{style:({
       'min-width': '300px',
       'height': '100%',
       'background-color': _vm.bgColor,
-      'border-right': '1px solid '+_vm.borderColor,
+      'box-shadow': '0px 8px 16px 0px rgba(0,0,0,0.2)',
       'overflow-y': 'auto'
     })},[_c('ul',_vm._l((_vm.tree),function(item){return _c('item',_vm._b({},'item',_vm.getItem(item),false))})),_vm._v(" "),_c('div',{staticStyle:{"height":"20px"}})])])],1)}
 __vue__options__.staticRenderFns = []
@@ -22106,7 +22071,7 @@ if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   }
 })()}
 },{"./item.vue":57,"babel-runtime/core-js/object/assign":2,"babel-runtime/core-js/object/keys":3,"vue":52,"vue-hot-reload-api":48,"vue-over-body":49,"vueify/lib/insert-css":53}],57:[function(require,module,exports){
-var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".tree_nav_item a {\n  text-decoration: none;\n  padding: 14px 16px;\n  transition: 0.3s;\n  display:block;\n}\n\n.tree_nav_item a:hover {\n  text-decoration: none;\n  cursor: pointer;\n}")
+var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert(".tree_nav_item a {\n  text-decoration: none;\n  padding: 14px 16px;\n  transition: 0.3s;\n  display:block;\n}\n\n.tree_nav_item a:hover {\n  text-decoration: none;\n  cursor: pointer;\n}\n\n.tree_nav_item-enter-active, .tree_nav_item-leave-active {\n  -moz-transition: all 0.3s;\n  -webkit-transition: all 0.3s;\n  transition: all 0.3s;\n}\n.tree_nav_item-enter, .tree_nav_item-leave-to {\n  opacity: 0;\n}\n\n.tree_nav_item_transition {\n  -moz-transition: all 0.3s linear;\n  -webkit-transition: all 0.3s linear;\n  transition: all 0.3s linear;\n}\n\n.tree_nav_item_transition.tree_nav_item_down{\n  -ms-transform: rotate(180deg);\n  -moz-transform: rotate(180deg);\n  -webkit-transform: rotate(180deg);\n  transform: rotate(180deg);\n}")
 ;(function(){
 'use strict';
 
@@ -22165,10 +22130,6 @@ module.exports = {
       type: String,
       required: true
     },
-    borderColor: {
-      type: String,
-      required: true
-    },
     hoverColor: {
       type: String,
       required: true
@@ -22222,7 +22183,6 @@ module.exports = {
     aStyle: function aStyle() {
       return {
         'font-weight': this.isActive() ? 'bold' : null,
-        'font-style': this.children.length ? 'italic' : null,
         'font-size': Math.round(100 * this.scale) + '%',
         'color': this.isActive() ? this.activeColor : this.fontColor,
         'background-color': this.$data.hover ? this.hoverColor : null
@@ -22230,13 +22190,14 @@ module.exports = {
     },
     ulStyle: function ulStyle() {
       return !this.position ? {
-        'border-left': '3px solid ' + this.borderColor,
-        'margin-left': (this.level + 1) * 10 + 'px'
+        'margin': '0px 10px 10px 10px',
+        'box-shadow': '0px 8px 16px 0px rgba(0,0,0,0.2)'
       } : {
         'position': this.level === 0 ? 'absolute' : null,
+        'box-shadow': '0px 8px 16px 0px rgba(0,0,0,0.2)',
         'z-index': 999,
         'background-color': this.bgColor,
-        'border': '1px solid ' + this.borderColor
+        'margin': '0px 10px 10px 10px'
       };
     }
   }
@@ -22245,7 +22206,7 @@ module.exports = {
 if (module.exports.__esModule) module.exports = module.exports.default
 var __vue__options__ = (typeof module.exports === "function"? module.exports.options: module.exports)
 if (__vue__options__.functional) {console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.")}
-__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('li',{staticClass:"tree_nav_item",on:{"mouseenter":function($event){_vm.enter()},"mouseleave":function($event){_vm.leave()}}},[_c('a',{style:(_vm.aStyle()),attrs:{"href":_vm.url()},on:{"click":function($event){_vm.run()},"mouseenter":function($event){_vm.hover = true},"mouseleave":function($event){_vm.hover = false}}},[(_vm.icon)?_c('icon',{attrs:{"scale":0.9 * _vm.scale,"name":_vm.icon}}):_vm._e(),_vm._v(" "+_vm._s(_vm.label)+"\n    "),(_vm.position && _vm.children.length && !_vm.open)?_c('icon',{attrs:{"scale":0.9 * _vm.scale,"name":"caret-down"}}):_vm._e(),_vm._v(" "),(_vm.position && _vm.children.length && _vm.open)?_c('icon',{attrs:{"scale":0.9 * _vm.scale,"name":"caret-up"}}):_vm._e()],1),_vm._v(" "),(_vm.open)?_c('ul',{style:(_vm.ulStyle())},_vm._l((_vm.children),function(child){return _c('item',_vm._b({attrs:{"level":_vm.level + 1,"position":_vm.position,"path":_vm.path,"scale":_vm.scale,"bgColor":_vm.bgColor,"fontColor":_vm.fontColor,"borderColor":_vm.borderColor,"hoverColor":_vm.hoverColor,"activeColor":_vm.activeColor,"callback":_vm.close}},'item',child,false))})):_vm._e(),_vm._v(" "),_vm._t("default")],2)}
+__vue__options__.render = function render () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('li',{staticClass:"tree_nav_item",on:{"mouseenter":function($event){_vm.enter()},"mouseleave":function($event){_vm.leave()}}},[_c('a',{style:(_vm.aStyle()),attrs:{"href":_vm.url()},on:{"click":function($event){_vm.run()},"mouseenter":function($event){_vm.hover = true},"mouseleave":function($event){_vm.hover = false}}},[(_vm.icon)?_c('icon',{attrs:{"scale":0.9 * _vm.scale,"name":_vm.icon}}):_vm._e(),_vm._v(" "+_vm._s(_vm.label)+"\n    "),(_vm.children.length)?_c('icon',{class:['tree_nav_item_transition', _vm.open ? 'tree_nav_item_down' : ''],attrs:{"scale":0.9 * _vm.scale,"name":"caret-down"}}):_vm._e()],1),_vm._v(" "),_c('transition',{attrs:{"name":"tree_nav_item"}},[(_vm.open)?_c('ul',{style:(_vm.ulStyle())},_vm._l((_vm.children),function(child){return _c('item',_vm._b({attrs:{"level":_vm.level + 1,"position":_vm.position,"path":_vm.path,"scale":_vm.scale,"bgColor":_vm.bgColor,"fontColor":_vm.fontColor,"hoverColor":_vm.hoverColor,"activeColor":_vm.activeColor,"callback":_vm.close}},'item',child,false))})):_vm._e()]),_vm._v(" "),_vm._t("default")],2)}
 __vue__options__.staticRenderFns = []
 if (module.hot) {(function () {  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)

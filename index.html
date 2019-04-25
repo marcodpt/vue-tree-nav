@@ -25,19 +25,13 @@
 </head>
 <body style="margin:0px">
   <div id="app">
-    <div
-      :style="{'color': treeNav.bgColor, 'background-color': treeNav.fontColor}"
-      style="position:fixed;width:100%;top:0;padding:20px"
-    >
-      <h1 style="margin:0;">Vue Tree Nav</h1>
-    </div>
     <vue-tree-nav
       :location="$route.fullPath"
       v-bind="treeNav"
-      style="position:fixed;width:100%;top:77px;"
+      style="position:fixed;width:100%;top:0;"
     >
     </vue-tree-nav>
-    <div style="height:150px"></div>
+    <div style="height:70px"></div>
     <router-view></router-view>
     <fieldset>
       <legend>vue-tree-nav settings</legend>
@@ -55,24 +49,20 @@
           <td><input type="number" step="0.1" v-model.number="treeNav.sideScale"></td> 
         </tr>
         <tr>
-          <th>bgColor:</th>
-          <td><input type="color" v-model="treeNav.bgColor"></td> 
+          <th>activeColor:</th>
+          <td><input type="color" v-model="treeNav.activeColor"></td> 
         </tr>
         <tr>
           <th>fontColor:</th>
           <td><input type="color" v-model="treeNav.fontColor"></td> 
         </tr>
         <tr>
-          <th>borderColor:</th>
-          <td><input type="color" v-model="treeNav.borderColor"></td> 
-        </tr>
-        <tr>
           <th>hoverColor:</th>
           <td><input type="color" v-model="treeNav.hoverColor"></td> 
         </tr>
         <tr>
-          <th>activeColor:</th>
-          <td><input type="color" v-model="treeNav.activeColor"></td> 
+          <th>bgColor:</th>
+          <td><input type="color" v-model="treeNav.bgColor"></td> 
         </tr>
         <tr>
           <td colspan="100%"><button v-for="b in buttons" @click="reset(b)">{{b}}</button></td> 
