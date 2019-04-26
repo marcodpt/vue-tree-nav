@@ -21691,9 +21691,9 @@ var router = new _vueRouter2.default({
 new _vue2.default({
   router: router,
   data: {
-    f: {},
+    f: { schema: 'Default' },
     treeNav: {},
-    buttons: (0, _keys2.default)(_colorschema2.default)
+    schemas: (0, _keys2.default)(_colorschema2.default)
   },
   components: {
     'vue-tree-nav': _index2.default
@@ -21717,7 +21717,7 @@ new _vue2.default({
       this.$set(this.$data.treeNav, 'sideScale', 1);
       this.$set(this.$data.treeNav, 'barScale', 1);
       this.$set(this.$data.treeNav, 'left', [{
-        label: 'Vue Tree Nav',
+        label: 'vue-tree-nav',
         icon: 'home',
         href: '#/home'
       }, {
@@ -21759,7 +21759,7 @@ new _vue2.default({
         icon: 'brands/github'
       }]);
       this.$set(this.$data.treeNav, 'side', [{
-        label: 'Vue Tree Nav',
+        label: 'vue-tree-nav',
         icon: 'home',
         href: '#/home'
       }, {
@@ -22153,7 +22153,7 @@ module.exports = {
     run: function run() {
       if (typeof this.href === 'function') {
         this.href();
-      } else if (this.children.length && !this.position) {
+      } else if (this.children.length) {
         this.$data.open = !this.$data.open;
       }
       if (this.position && !this.children.length) {
@@ -22259,12 +22259,15 @@ template = function (P) {
 
 home = '<fieldset>';
 home += '<legend>Current View: /home</legend>';
-home += '<h3>Vue tree nav home</h3>';
-home += '<p>Change menu page and see a random nice image!</p>';
-home += '<p>Pay attention to menu top bar when change page!</p>';
-home += '<p>You can complete customize the menu bar and side bar changing the parameters down!</p>';
-home += '<p>If you like your result just copy the json at the end of the page and use it in vue-tree-nav</p>';
+home += '<h3>vue-tree-nav</h3>';
+home += '<p>This is a live demo of what you can do with <b>vue-tree-nav</b></p>';
+home += '<p>If you change the state you will see a random image just as an example</p>';
+home += '<p>There are some themes to choose below!</p>';
+home += '<p>You can complete customize the color and scale of the <b>vue-tree-nav</b> in the <b>settings</b> form</p>';
+home += '<p>You can customize <b>vue-tree-nav</b> left, right and side panel links and dropdowns</p>';
+home += '<p>At the end of the page you see the result json of you did that you can directly use <b>v-bind</b> prop in <b>vue-tree-nav</b></p>';
 home += '<p>Please if you did something beautiful share with us! Send a pull request in file <b>colorschema.json</b></p>';
+home += '<p>Any suggestion, help, bug fix, feature is deeply appreciate! Hope you enjoy it!</p>';
 home += '</fieldset>';
 
 module.exports = [{

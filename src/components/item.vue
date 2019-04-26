@@ -69,7 +69,7 @@
       run: function () {
         if (typeof this.href === 'function') {
           this.href()
-        } else if (this.children.length && !this.position){
+        } else if (this.children.length){
           this.$data.open = !this.$data.open
         }
         if (this.position && !this.children.length) {

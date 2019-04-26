@@ -15,9 +15,9 @@
   new Vue({
     router: router,
     data: {
-      f: {},
+      f: {schema: 'Default'},
       treeNav: {},
-      buttons: Object.keys(colorschema)
+      schemas: Object.keys(colorschema)
     },
     components: {
       'vue-tree-nav': treeNav
@@ -40,7 +40,7 @@
         this.$set(this.$data.treeNav, 'barScale', 1)
         this.$set(this.$data.treeNav, 'left', [
           {
-            label: 'Vue Tree Nav',
+            label: 'vue-tree-nav',
             icon: 'home',
             href: '#/home'
           }, {
@@ -92,7 +92,7 @@
         ])
         this.$set(this.$data.treeNav, 'side', [
           {
-            label: 'Vue Tree Nav',
+            label: 'vue-tree-nav',
             icon: 'home',
             href: '#/home'
           }, {

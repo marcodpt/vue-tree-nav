@@ -1,6 +1,12 @@
 # vue-tree-nav
  Navigation tree menu component with nice integration with vue-router 
  - Ready out of the box! 
+ - Side bar with infinite depth
+ - Links and dropdows with infinite depth on both right and left side
+ - Font Awesome icons
+ - Css transitions
+ - Beautiful themes to choose
+ - Complete customizable
 
 ### [Live Demo](http://marcodpt.github.io/vue-tree-nav)
 
@@ -20,39 +26,32 @@ npm install --save vue-tree-nav
       'vue-tree-nav': treeNav
     },
     data: {
-      side: [
-        {
-          label: 'pi',
-          href: '#/numbers/3/14'
-        }, {
-          label: 'e',
-          href: '#/numbers/2/7'
-        }, {
-          label: 'integer',
-          children: [
-            {
-              label: 'natural',
-              children: [
-                {
-                  label: 'even',
-                  href: '#/numbers/4/6'
-                }, {
-                  label: 'prime',
-                  href: '#/numbers/5/7'
-                }
-              ]
-            }, {
-              label: 'minus three',
-              href: '#/numbers/_/3'
-            }
-          ]
-        }
-      ],
       left: [
         {
           label: 'Home',
           icon: 'home',
           href: '#/home'
+        }, {
+          label: 'Animals',
+          children: [
+            {
+              label: 'Elephant',
+              href: '#/animals/elephant'
+            }, {
+              label: 'Lion',
+              href: '#/animals/lion'
+            }, {
+              label: 'Bear',
+              href: '#/animals/bear'
+            }, {
+              label: 'Eagle',
+              href: '#/animals/eagle'
+            }, {
+              label: 'Wolf',
+              href: '#/animals/wolf'
+            }
+
+          ]
         }
       ],
       right: [
@@ -111,10 +110,6 @@ npm install --save vue-tree-nav
    - type: String
    - default: '#666666'
    - description: font color of top and side bar
- - borderColor
-   - type: String
-   - default: '#e7e7e7'
-   - description: border color and nasted tree levels border
  - hoverColor
    - type: String
    - default: '#dddddd'
@@ -145,8 +140,8 @@ npm install --save vue-tree-nav
 
 ## Contribute
 We need help! Our goals are:
- - CSS Themes out of the box
- - CSS transitions
+ - Beautiful CSS Themes created by users
+ - Beautiful CSS transitions and animations
  - Add tests
  - More usage examples and better home page
  - Add support to most browsers and devices

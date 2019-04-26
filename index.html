@@ -34,7 +34,22 @@
     <div style="height:70px"></div>
     <router-view></router-view>
     <fieldset>
-      <legend>vue-tree-nav settings</legend>
+      <legend>Samples</legend>
+      <p>Change color schema of the <b>vue-tree-nav</b> with one of our pre build themes</p>
+      <table>
+        <tr>
+          <td>
+            <select v-model="f.schema">
+              <option v-for="s in schemas">{{s}}</option>
+            </select>
+          </td> 
+          <td><button @click="reset(f.schema)">Change Color Schema</button></td> 
+        </tr>
+      </table>
+    </fieldset>
+    <fieldset>
+      <legend>Settings</legend>
+      <p>Customize <b>vue-tree-nav</b> layout</p>
       <table>
         <tr>
           <th>showPath:</th>
@@ -64,25 +79,26 @@
           <th>bgColor:</th>
           <td><input type="color" v-model="treeNav.bgColor"></td> 
         </tr>
-        <tr>
-          <td colspan="100%"><button v-for="b in buttons" @click="reset(b)">{{b}}</button></td> 
-        </tr>
       </table>
     </fieldset>
     <fieldset>
       <legend>Top Bar Left</legend>
+      <p>Change links and dropdowns on the left side of <b>vue-tree-nav</b></p>
       <textarea rows="8" v-model="f.left" @blur="parse"></textarea>
     </fieldset>
     <fieldset>
       <legend>Top Bar Right</legend>
+      <p>Change links and dropdowns on the right side of <b>vue-tree-nav</b></p>
       <textarea rows="8" v-model="f.right" @blur="parse"></textarea>
     </fieldset>
     <fieldset>
       <legend>Side Bar</legend>
+      <p>Change links and dropdowns on the side panel of <b>vue-tree-nav</b></p>
       <textarea rows="8" v-model="f.side" @blur="parse"></textarea>
     </fieldset>
     <fieldset>
       <legend>Result Json</legend>
+      <p>If you like the result you can use directly this json with <b>v-bind</b> prop inside the <b>vue-tree-nav</b> tag</p>
       <div style="white-space:pre-wrap">{{feedback()}}</div>
     </fieldset>
   </div>
