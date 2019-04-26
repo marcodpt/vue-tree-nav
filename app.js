@@ -22157,7 +22157,7 @@ module.exports = {
       } else if (this.children.length && !this.$data.prevent) {
         this.$data.open = !this.$data.open;
       }
-      if (this.position && !this.children.length) {
+      if (this.position && !this.children.length && !this.$data.prevent) {
         this.callback();
       }
     },
