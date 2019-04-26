@@ -62,14 +62,15 @@
     data: function () {
       return {
         open: this.isActive() && this.children.length && !this.position,
-        hover: false
+        hover: false,
+        prevent: false
       }
     },
     methods: {
       run: function () {
         if (typeof this.href === 'function') {
           this.href()
-        } else if (this.children.length){
+        } else if (this.children.length && !this.$data.prevent){
           this.$data.open = !this.$data.open
         }
         if (this.position && !this.children.length) {
@@ -79,6 +80,8 @@
       enter: function () {
         if (this.position && this.children.length) {
           this.$data.open = true
+          this.$data.prevent = true
+          setTimeout(() => this.$data.prevent = false, 100)
         }
       },
       leave: function () {

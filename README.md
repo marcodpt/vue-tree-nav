@@ -66,7 +66,6 @@ npm install --save vue-tree-nav
 
 ```html
   <vue-tree-nav
-    :side="side"
     :left="left"
     :right="right"
   ></vue-tree-nav>

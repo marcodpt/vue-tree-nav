@@ -22146,14 +22146,15 @@ module.exports = {
   data: function data() {
     return {
       open: this.isActive() && this.children.length && !this.position,
-      hover: false
+      hover: false,
+      prevent: false
     };
   },
   methods: {
     run: function run() {
       if (typeof this.href === 'function') {
         this.href();
-      } else if (this.children.length) {
+      } else if (this.children.length && !this.$data.prevent) {
         this.$data.open = !this.$data.open;
       }
       if (this.position && !this.children.length) {
@@ -22161,8 +22162,14 @@ module.exports = {
       }
     },
     enter: function enter() {
+      var _this = this;
+
       if (this.position && this.children.length) {
         this.$data.open = true;
+        this.$data.prevent = true;
+        setTimeout(function () {
+          return _this.$data.prevent = false;
+        }, 100);
       }
     },
     leave: function leave() {
