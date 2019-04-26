@@ -36,16 +36,12 @@
     <fieldset>
       <legend>Samples</legend>
       <p>Change color schema of the <b>vue-tree-nav</b> with one of our pre build themes</p>
-      <table>
-        <tr>
-          <td>
-            <select v-model="f.schema">
-              <option v-for="s in schemas">{{s}}</option>
-            </select>
-          </td> 
-          <td><button @click="reset(f.schema)">Change Color Schema</button></td> 
-        </tr>
-      </table>
+      <div>
+        <select v-model="f.schema">
+          <option v-for="s in schemas">{{s}}</option>
+        </select>
+        <button @click="reset(f.schema)">Change Color Schema</button> 
+      </div>
     </fieldset>
     <fieldset>
       <legend>Settings</legend>

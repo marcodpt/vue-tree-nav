@@ -73,7 +73,7 @@
         } else if (this.children.length && !this.$data.prevent){
           this.$data.open = !this.$data.open
         }
-        if (this.position && !this.children.length && !this.$data.prevent) {
+        if (this.position && !this.children.length) {
           this.callback()
         }
       },
@@ -81,7 +81,7 @@
         if (this.position && this.children.length) {
           this.$data.open = true
           this.$data.prevent = true
-          setTimeout(() => this.$data.prevent = false, 100)
+          setTimeout(() => this.$data.prevent = false, 600)
         }
       },
       leave: function () {

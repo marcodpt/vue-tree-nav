@@ -21856,6 +21856,78 @@ module.exports={
     "fontColor": "#2c3e50",
     "hoverColor": "#bdc3c7",
     "bgColor": "#ecf0f1"
+  }, 
+  "Flaty 1": {
+    "activeColor": "#18BC9C",
+    "fontColor": "#ffffff",
+    "hoverColor": "#1a252f",
+    "bgColor": "#2C3E50"
+  },
+  "Flaty 2": {
+    "activeColor": "#2C3E50",
+    "fontColor": "#ffffff",
+    "hoverColor": "#128f76",
+    "bgColor": "#18BC9C"
+  },
+  "Flaty 3": {
+    "activeColor": "#2C3E50",
+    "fontColor": "#343a40",
+    "hoverColor": "#798d8f",
+    "bgColor": "#ecf0f1"
+  },
+  "Solar 1": {
+    "activeColor": "#ffffff",
+    "fontColor": "#dac47f",
+    "hoverColor": "#8f6c00",
+    "bgColor": "#b58900"
+  },
+  "Solar 2": {
+    "activeColor": "#ffffff",
+    "fontColor": "#839aa0",
+    "hoverColor": "#031a1f",
+    "bgColor": "#073642"
+  },
+  "Solar 3": {
+    "activeColor": "#4f4c46",
+    "fontColor": "#9e998d",
+    "hoverColor": "#fae7b3",
+    "bgColor": "#fdf6e3"
+  },
+  "Lux 1": {
+    "activeColor": "#ffffff",
+    "fontColor": "#919aa1",
+    "hoverColor": "#010000",
+    "bgColor": "#1a1a1a"
+  },
+  "Lux 2": {
+    "activeColor": "#ffffff",
+    "fontColor": "#919aa1",
+    "hoverColor": "#23272b",
+    "bgColor": "#343a40"
+  },
+  "Lux 3": {
+    "activeColor": "#1a1a1a",
+    "fontColor": "#343a40",
+    "hoverColor": "#e6e5e5",
+    "bgColor": "#ffffff"
+  },
+  "SpaceLab 1": {
+    "activeColor": "#ffffff",
+    "fontColor": "#eeeeee",
+    "hoverColor": "#385b80",
+    "bgColor": "#446E9B"
+  },
+  "SpaceLab 2": {
+    "activeColor": "#ffffff",
+    "fontColor": "#eeeeee",
+    "hoverColor": "#868686",
+    "bgColor": "#999999"
+  },
+  "SpaceLab 3": {
+    "activeColor": "#3399F3",
+    "fontColor": "#999999",
+    "hoverColor": "#dbdbdb",
+    "bgColor": "#eeeeee"
   }
 }
 
@@ -22157,7 +22229,7 @@ module.exports = {
       } else if (this.children.length && !this.$data.prevent) {
         this.$data.open = !this.$data.open;
       }
-      if (this.position && !this.children.length && !this.$data.prevent) {
+      if (this.position && !this.children.length) {
         this.callback();
       }
     },
@@ -22169,7 +22241,7 @@ module.exports = {
         this.$data.prevent = true;
         setTimeout(function () {
           return _this.$data.prevent = false;
-        }, 100);
+        }, 600);
       }
     },
     leave: function leave() {
