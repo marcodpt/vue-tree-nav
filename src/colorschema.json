@@ -3,84 +3,98 @@
     "activeColor": "#000000",
     "fontColor": "#666666",
     "hoverColor": "#dddddd",
-    "bgColor": "#f3f3f3"
+    "bgColor": "#f3f3f3",
+    "style": ""
   },
   "Sample 1": {
     "activeColor": "#16a085",
     "fontColor": "#2c3e50",
     "hoverColor": "#bdc3c7",
-    "bgColor": "#ecf0f1"
+    "bgColor": "#ecf0f1",
+    "style": ""
   }, 
   "Flaty 1": {
     "activeColor": "#18BC9C",
     "fontColor": "#ffffff",
     "hoverColor": "#1a252f",
-    "bgColor": "#2C3E50"
+    "bgColor": "#2C3E50",
+    "style": ""
   },
   "Flaty 2": {
     "activeColor": "#2C3E50",
     "fontColor": "#ffffff",
     "hoverColor": "#128f76",
-    "bgColor": "#18BC9C"
+    "bgColor": "#18BC9C",
+    "style": ""
   },
   "Flaty 3": {
     "activeColor": "#2C3E50",
     "fontColor": "#343a40",
     "hoverColor": "#798d8f",
-    "bgColor": "#ecf0f1"
+    "bgColor": "#ecf0f1",
+    "style": ""
   },
   "Solar 1": {
     "activeColor": "#ffffff",
-    "fontColor": "#dac47f",
+    "fontColor": "#FDF6E3",
     "hoverColor": "#8f6c00",
-    "bgColor": "#b58900"
+    "bgColor": "#b58900",
+    "style": "font-family:Arial;"
   },
   "Solar 2": {
     "activeColor": "#ffffff",
-    "fontColor": "#839aa0",
+    "fontColor": "#839496",
     "hoverColor": "#031a1f",
-    "bgColor": "#073642"
+    "bgColor": "#073642",
+    "style": "font-family:Arial;"
   },
   "Solar 3": {
     "activeColor": "#4f4c46",
     "fontColor": "#9e998d",
     "hoverColor": "#fae7b3",
-    "bgColor": "#fdf6e3"
+    "bgColor": "#fdf6e3",
+    "style": "font-family:Arial;"
   },
   "Lux 1": {
     "activeColor": "#ffffff",
     "fontColor": "#919aa1",
     "hoverColor": "#010000",
-    "bgColor": "#1a1a1a"
+    "bgColor": "#1a1a1a",
+    "style": "font-family:sans-serif;"
   },
   "Lux 2": {
     "activeColor": "#ffffff",
     "fontColor": "#919aa1",
     "hoverColor": "#23272b",
-    "bgColor": "#343a40"
+    "bgColor": "#343a40",
+    "style": "font-family:sans-serif;"
   },
   "Lux 3": {
     "activeColor": "#1a1a1a",
     "fontColor": "#343a40",
     "hoverColor": "#e6e5e5",
-    "bgColor": "#ffffff"
+    "bgColor": "#ffffff",
+    "style": "font-family:sans-serif;"
   },
   "SpaceLab 1": {
     "activeColor": "#ffffff",
     "fontColor": "#eeeeee",
     "hoverColor": "#385b80",
-    "bgColor": "#446E9B"
+    "bgColor": "#446E9B",
+    "style": ""
   },
   "SpaceLab 2": {
     "activeColor": "#ffffff",
     "fontColor": "#eeeeee",
     "hoverColor": "#868686",
-    "bgColor": "#999999"
+    "bgColor": "#999999",
+    "style": ""
   },
   "SpaceLab 3": {
     "activeColor": "#3399F3",
     "fontColor": "#999999",
     "hoverColor": "#dbdbdb",
-    "bgColor": "#eeeeee"
+    "bgColor": "#eeeeee",
+    "style": ""
   }
 }

@@ -31,6 +31,7 @@
     methods: {
       reset: function (schema) {
         var b = colorschema[schema]
+        b['style'] = 'position:fixed;width:100%;top:0;'+(b['style'] ? b['style'] : '')
         Object.keys(b).forEach(key => {
           this.$set(this.$data.treeNav, key, b[key])
         })

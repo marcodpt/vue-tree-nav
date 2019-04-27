@@ -52,6 +52,10 @@
       activeColor: {
         type: String,
         default: '#000000'
+      },
+      zIndex: {
+        type: Number,
+        default: 1
       }
     },
     data: function () {
@@ -150,6 +154,7 @@
           fontColor: this.fontColor,
           hoverColor: this.hoverColor,
           activeColor: this.activeColor,
+          zIndex: this.zIndex,
           path: this.$data.Path
         }, item, {
           path: this.$data.Path
@@ -161,7 +166,7 @@
 
 <template>
   <div class="tree_nav_bar">
-    <ul :style="'box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);background-color:'+bgColor">
+    <ul :style="'background-color:'+bgColor">
       <item
         v-if="tree.length > 1"
         v-bind="getItem({})"
@@ -193,10 +198,9 @@
         'min-width': '300px',
         'height': '100%',
         'background-color': bgColor,
-        'box-shadow': '0px 8px 16px 0px rgba(0,0,0,0.2)',
         'overflow-y': 'auto'
       }">
-        <ul>
+        <ul style="box-shadow:none;">
           <item
             v-for="item in tree"
             v-bind="getItem(item)"
@@ -218,6 +222,7 @@
     margin: 0;
     padding: 0;
     overflow: hidden;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
   }
 
   .tree_nav_before {

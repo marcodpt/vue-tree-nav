@@ -28,7 +28,6 @@
     <vue-tree-nav
       :location="$route.fullPath"
       v-bind="treeNav"
-      style="position:fixed;width:100%;top:0;"
     >
     </vue-tree-nav>
     <div style="height:70px"></div>
@@ -74,6 +73,10 @@
         <tr>
           <th>bgColor:</th>
           <td><input type="color" v-model="treeNav.bgColor"></td> 
+        </tr>
+        <tr>
+          <th>Style:</th>
+          <td><input type="text" v-model="treeNav.style"></td> 
         </tr>
       </table>
     </fieldset>

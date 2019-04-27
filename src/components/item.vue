@@ -57,6 +57,10 @@
       callback: {
         type: Function,
         default: () => {}
+      },
+      zIndex: {
+        type: Number,
+        required: true
       }
     },
     data: function () {
@@ -109,14 +113,12 @@
       },
       ulStyle: function () {
         return !this.position ? {
-          'margin': `0px 10px 10px 10px`,
-          'box-shadow': '0px 8px 16px 0px rgba(0,0,0,0.2)'
+          'margin': `0 10px 10px 10px`
         } : {
           'position': this.level === 0 ? 'absolute' : null,
-          'box-shadow': '0px 8px 16px 0px rgba(0,0,0,0.2)',
-          'z-index': 999,
+          'z-index': this.zIndex,
           'background-color': this.bgColor,
-          'margin': `0px 10px 10px 10px`
+          'margin': this.level === 0 ? null : `0 10px 10px 10px`
         }
       }
     }
@@ -158,6 +160,7 @@
           :hoverColor="hoverColor"
           :activeColor="activeColor"
           :callback="close"
+          :zIndex="zIndex"
         />
       </ul>
     </transition>
