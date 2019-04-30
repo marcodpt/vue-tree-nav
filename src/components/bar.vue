@@ -52,10 +52,6 @@
       activeColor: {
         type: String,
         default: '#000000'
-      },
-      zIndex: {
-        type: Number,
-        default: 1
       }
     },
     data: function () {
@@ -154,7 +150,6 @@
           fontColor: this.fontColor,
           hoverColor: this.hoverColor,
           activeColor: this.activeColor,
-          zIndex: this.zIndex,
           path: this.$data.Path
         }, item, {
           path: this.$data.Path

@@ -57,10 +57,6 @@
       callback: {
         type: Function,
         default: () => {}
-      },
-      zIndex: {
-        type: Number,
-        required: true
       }
     },
     data: function () {
@@ -116,7 +112,6 @@
           'margin': `0 10px 10px 10px`
         } : {
           'position': this.level === 0 ? 'absolute' : null,
-          'z-index': this.zIndex,
           'background-color': this.bgColor,
           'margin': this.level === 0 ? null : `0 10px 10px 10px`
         }
@@ -160,7 +155,6 @@
           :hoverColor="hoverColor"
           :activeColor="activeColor"
           :callback="close"
-          :zIndex="zIndex"
         />
       </ul>
     </transition>

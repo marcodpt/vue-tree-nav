@@ -117,10 +117,6 @@ npm install --save vue-tree-nav
    - type: String
    - default: '#000000'
    - description: active font color of top and side bar, active items will change font color
- - zIndex
-   - type: Number
-   - default: 1
-   - description: z-index in case of dropdown
 
 ### Items of side, left, right
    - items (Object):
